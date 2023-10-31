@@ -23,7 +23,7 @@ namespace microservice
         m_completed_queue = builder.AddCompletionQueue();
         // Finally assemble the server.
         m_server = builder.BuildAndStart();
-        std::cout << "Server listening on " << server_address << std::endl;
+        LOG(INFO) << "Server listening on " << server_address;
 
         // Proceed to the server's main loop.
         this->handle();
