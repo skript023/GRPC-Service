@@ -34,7 +34,9 @@
 #include <grpcpp/health_check_service_interface.h>
 
 using grpc::Server;
+using grpc::ServerAsyncResponseWriter;
 using grpc::ServerBuilder;
+using grpc::ServerCompletionQueue;
 using grpc::ServerContext;
 using grpc::Status;
 // GRPC Dependencies End
