@@ -33,6 +33,10 @@
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
 
+using grpc::Server;
+using grpc::ServerBuilder;
+using grpc::ServerContext;
+using grpc::Status;
 // GRPC Dependencies End
 
 #define NODISCARD [[nodiscard]]

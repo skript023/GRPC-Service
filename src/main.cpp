@@ -17,35 +17,13 @@
  */
 
 #include "common.hpp"
-
-#ifdef BAZEL_BUILD
-#include "examples/protos/helloworld.grpc.pb.h"
-#else
-#include "services/helloworld.grpc.pb.h"
-#endif
-
-using grpc::Server;
-using grpc::ServerBuilder;
-using grpc::ServerContext;
-using grpc::Status;
-using helloworld::Greeter;
-using helloworld::HelloReply;
-using helloworld::HelloRequest;
+#include "greeter/greeter.service.hpp"
 
 ABSL_FLAG(uint16_t, port, 50051, "Server port for the service");
 
-// Logic and data behind the server's behavior.
-class GreeterServiceImpl final : public Greeter::Service {
-    Status SayHello(ServerContext* context, const HelloRequest* request,
-        HelloReply* reply) override {
-        std::string prefix("Hello ");
-        reply->set_message(prefix + request->name());
-        return Status::OK;
-    }
-};
-
 void RunServer(uint16_t port) 
 {
+    using namespace microservice;
     std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
     GreeterServiceImpl service;
 

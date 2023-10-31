@@ -38,18 +38,20 @@ file(GLOB_RECURSE SRC_MAIN
 set(PROTOC "J:/database/Tools/vcpkg/installed/x64-windows/tools/protobuf/protoc.exe")
 set(GRPC_CPP_PLUGIN "J:/database/Tools/vcpkg/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
 
+file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")
+
 add_custom_command(
-      OUTPUT "${SRC_DIR}/services"
+      OUTPUT "${SRC_DIR}/protobuf"
       COMMAND ${PROTOC}
-      ARGS --grpc_out ${SRC_DIR}/services
-        --cpp_out ${SRC_DIR}/services
+      ARGS --grpc_out ${SRC_DIR}/protobuf
+        --cpp_out ${SRC_DIR}/protobuf
         -I "${SRC_DIR}/proto"
         --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}"
         "${SRC_DIR}/proto/helloworld.proto"
       DEPENDS "${SRC_DIR}/proto/helloworld.proto")
 
 # Define a custom target to associate with the custom command
-add_custom_target(proto DEPENDS "${SRC_DIR}/services")
+add_custom_target(proto DEPENDS "${SRC_DIR}/protobuf")
 
 add_executable(Microservice "${SRC_DIR}/main.cpp")
 add_dependencies(Microservice proto)
