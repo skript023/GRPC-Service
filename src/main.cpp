@@ -16,17 +16,7 @@
  *
  */
 
-#include <iostream>
-#include <memory>
-#include <string>
-
-#include "absl/flags/flag.h"
-#include "absl/flags/parse.h"
-#include "absl/strings/str_format.h"
-
-#include <grpcpp/ext/proto_server_reflection_plugin.h>
-#include <grpcpp/grpcpp.h>
-#include <grpcpp/health_check_service_interface.h>
+#include "common.hpp"
 
 #ifdef BAZEL_BUILD
 #include "examples/protos/helloworld.grpc.pb.h"
@@ -54,7 +44,8 @@ class GreeterServiceImpl final : public Greeter::Service {
     }
 };
 
-void RunServer(uint16_t port) {
+void RunServer(uint16_t port) 
+{
     std::string server_address = absl::StrFormat("0.0.0.0:%d", port);
     GreeterServiceImpl service;
 
@@ -68,15 +59,39 @@ void RunServer(uint16_t port) {
     builder.RegisterService(&service);
     // Finally assemble the server.
     std::unique_ptr<Server> server(builder.BuildAndStart());
-    std::cout << "Server listening on " << server_address << std::endl;
+    LOG(INFO) << "Server listening on " << server_address;
 
     // Wait for the server to shutdown. Note that some other thread must be
     // responsible for shutting down the server for this call to ever return.
     server->Wait();
 }
 
-int main(int argc, char** argv) {
-    absl::ParseCommandLine(argc, argv);
-    RunServer(absl::GetFlag(FLAGS_port));
+int main(int argc, char** argv) 
+{
+    using namespace microservice;
+    auto logger_instance = std::make_unique<logger>("GRPC Console");
+
+    try
+    {
+        LOG(RAW_GREEN_TO_CONSOLE) << R"kek(
+  _____                            _____                   _             
+ / ____|                          |  __ \                 (_)            
+| (___   ___ _ ____   _____ _ __  | |__) |   _ _ __  _ __  _ _ __   __ _ 
+ \___ \ / _ \ '__\ \ / / _ \ '__| |  _  / | | | '_ \| '_ \| | '_ \ / _` |
+ ____) |  __/ |   \ V /  __/ |    | | \ \ |_| | | | | | | | | | | | (_| |
+|_____/ \___|_|    \_/ \___|_|    |_|  \_\__,_|_| |_|_| |_|_|_| |_|\__, |
+                                                                    __/ |
+                                                                   |___/ 
+)kek";
+        absl::ParseCommandLine(argc, argv);
+        RunServer(absl::GetFlag(FLAGS_port));
+    }
+    catch (const std::exception&)
+    {
+
+    }
+
+    logger_instance.reset();
+
     return 0;
 }

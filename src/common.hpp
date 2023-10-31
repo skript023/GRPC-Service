@@ -1,25 +1,43 @@
 #pragma once
 
 #include <iostream>
-#include <Windows.h>
-#include <chrono>
-#include <TlHelp32.h>
-#include <filesystem>
+#include <string>
 #include <thread>
-#include <fstream>
 #include <stack>
 #include <regex>
 #include <array>
+#include <chrono>
+#include <fstream>
+#include <optional>
+#include <exception>
+#include <functional>
+#include <filesystem>
+#include <algorithm>
+#include <cstdio>
+#include <cstdint>
+
+#ifdef __linux__
+
+#elif _WIN32
+#include <Windows.h>
+#endif
 
 #include "logger.hpp"
-#include <d3d9.h>
-#pragma comment(lib, "d3d9.lib")
 
-#define SECRET "CPP GOTTVERGESSEN"
+// GRPC Dependencies Begin
+#include "absl/flags/flag.h"
+#include "absl/flags/parse.h"
+#include "absl/strings/str_format.h"
+
+#include <grpcpp/ext/proto_server_reflection_plugin.h>
+#include <grpcpp/grpcpp.h>
+#include <grpcpp/health_check_service_interface.h>
+
+// GRPC Dependencies End
+
 #define NODISCARD [[nodiscard]]
-#define API "/api/v1"
 
-namespace cms
+namespace microservice
 {
 	using namespace std::chrono_literals;
 	inline std::atomic_bool g_running{ true };
