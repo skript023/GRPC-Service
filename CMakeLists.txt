@@ -10,7 +10,7 @@ if (MSVC)
     if("${CMAKE_MAKE_PROGRAM}" MATCHES "ninja")
         message("Ninja build system is being used.")
     else()
-        include("J:/database/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake")
+        include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
         message("Ninja build system is not being used.")
     endif()
 else()
@@ -35,8 +35,8 @@ file(GLOB_RECURSE SRC_MAIN
     "${SRC_DIR}/**.asm"
 )
 
-set(PROTOC "J:/database/Tools/vcpkg/installed/x64-windows/tools/protobuf/protoc.exe")
-set(GRPC_CPP_PLUGIN "J:/database/Tools/vcpkg/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
+set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
+set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
 
 file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")
 
@@ -47,8 +47,8 @@ add_custom_command(
         --cpp_out ${SRC_DIR}/protobuf
         -I "${SRC_DIR}/proto"
         --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}"
-        "${SRC_DIR}/proto/helloworld.proto"
-      DEPENDS "${SRC_DIR}/proto/helloworld.proto")
+        "${SRC_DIR}/proto/product.proto"
+      DEPENDS "${SRC_DIR}/proto/product.proto")
 
 # Define a custom target to associate with the custom command
 add_custom_target(proto DEPENDS "${SRC_DIR}/protobuf")
