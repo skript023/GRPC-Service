@@ -564,4 +564,3 @@ CMakebackup1.txt
 src/util/version.cpp
 out/
 docker/
-src/protobuf

@@ -28,6 +28,8 @@ include(package/grpc.cmake)
 message(STATUS "Microservice")
 file(GLOB_RECURSE SRC_MAIN
     "${SRC_DIR}/**.hpp"
+    "${SRC_DIR}/**.hxx"
+    "${SRC_DIR}/**.hh"
     "${SRC_DIR}/**.h"
     "${SRC_DIR}/**.cpp"
     "${SRC_DIR}/**.cc"
@@ -35,20 +37,26 @@ file(GLOB_RECURSE SRC_MAIN
     "${SRC_DIR}/**.asm"
 )
 
+file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
+
 set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
 set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
 
 file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")
 
-add_custom_command(
-      OUTPUT "${SRC_DIR}/protobuf"
-      COMMAND ${PROTOC}
-      ARGS --grpc_out ${SRC_DIR}/protobuf
-        --cpp_out ${SRC_DIR}/protobuf
-        -I "${SRC_DIR}/proto"
-        --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}"
-        "${SRC_DIR}/proto/product.proto"
-      DEPENDS "${SRC_DIR}/proto/product.proto")
+message(STATUS "Compiling proto")
+foreach(protos ${DATAMODEL_PROTOS})
+    message(STATUS "Execute ${PROTOC} --grpc_out="${SRC_DIR}/protobuf" --cpp_out="${SRC_DIR}/protobuf" -I "${SRC_DIR}/proto" --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}" "${proto_path}"")
+    execute_process(
+      COMMAND ${PROTOC} --grpc_out=${SRC_DIR}/protobuf --cpp_out=${SRC_DIR}/protobuf -I ${SRC_DIR}/proto --plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN} ${protos}
+        RESULT_VARIABLE GRPC_RESULT)
+    if (GRPC_RESULT)
+        message(FATAL_ERROR "grpc generate failed with error code: ${GRPC_RESULT}")
+    else()
+        message(STATUS "${protos} compiled")
+    endif()
+endforeach(protos)
+
 
 # Define a custom target to associate with the custom command
 add_custom_target(proto DEPENDS "${SRC_DIR}/protobuf")
@@ -63,8 +71,7 @@ set_property(TARGET Microservice PROPERTY CXX_STANDARD 23) # 23 Because std::for
 source_group(TREE ${SRC_DIR} PREFIX "src" FILES ${SRC_MAIN})
 
 target_include_directories(Microservice PRIVATE 
-  ${SRC_DIR},
-  ${gRPC_INCLUDE_DIRS}
+  ${SRC_DIR}
 )
 
 target_precompile_headers(Microservice PRIVATE "${SRC_DIR}/common.hpp")

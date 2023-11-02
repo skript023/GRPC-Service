@@ -1,13 +1,14 @@
-#include "service_invoker.hpp"
+#include "product.service.hpp"
 
 namespace microservice
 {
-    register_service::register_service(Greeter::AsyncService* service, ServerCompletionQueue* cq) : m_service(service), m_completed_queue(cq), m_responder(&m_context), m_status(CREATE)
+    product_service::product_service(Product::AsyncService* service, ServerCompletionQueue* cq) :
+        m_service(service), m_completed_queue(cq), m_responder(&m_context), m_status(CREATE)
     {
         // Invoke the serving logic right away.
         this->proceed();
     }
-    void register_service::proceed()
+    void product_service::proceed()
     {
         if (m_status == CREATE)
         {
@@ -19,19 +20,20 @@ namespace microservice
             // the tag uniquely identifying the request (so that different register_service
             // instances can serve different requests concurrently), in this case
             // the memory address of this register_service instance.
-            m_service->RequestSayHello(&m_context, &m_request, &m_responder, m_completed_queue, m_completed_queue,
-                this);
+            m_service->RequestFindOneProduct(&m_context, &m_request, &m_responder, m_completed_queue, m_completed_queue, this);
         }
         else if (m_status == PROCESS)
         {
             // Spawn a new register_service instance to serve new clients while we process
             // the one for this register_service. The instance will deallocate itself as
             // part of its FINISH state.
-            new register_service(m_service, m_completed_queue);
+            new product_service(m_service, m_completed_queue);
 
             // The actual processing.
+            std::vector<std::string> data = { "Product A", "Product B"};
             std::string prefix("Hello ");
-            m_reply.set_message(prefix + m_request.name());
+            m_reply.set_id(m_request.id());
+            m_reply.set_name(data[m_request.id()]);
 
             // And we are done! Let the gRPC runtime know we've finished, using the
             // memory address of this instance as the uniquely identifying tag for

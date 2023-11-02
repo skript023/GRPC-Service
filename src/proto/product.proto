@@ -1,41 +1,46 @@
 syntax = "proto3";
 
+option java_multiple_files = true;
+option java_package = "io.grpc.product";
+option java_outer_classname = "ProductProto";
+option objc_class_prefix = "HLW";
+
 package product;
 
-message Product {
+message ProductReply {
     int32 id = 1;
     string name = 2;
 }
 
-message Products {
-    repeated Product products = 1;
+message ProductsReply {
+    repeated ProductReply products = 1;
 }
 
-message CreateProductDTO {
+message CreateRequest {
     string supplierName = 1;
 }
 
-message UpdateProductDTO {
+message UpdateRequest {
     int32 id = 1;
     string supplierName = 2;
 }
 
-message FindOneProductDTO {
+message FindByIdRequest {
     int32 id = 1;
 }
 
-message PaginationDTO {
+message PaginationRequest {
     int32 page = 1;
     int32 skip = 2;
 }
 
 message Empty {}
 
-service ProductService {
-    rpc FindAllProduct (Empty) returns (Products) {}
-    rpc FindOneProduct (FindOneProductDTO) returns (Product) {}
-    rpc CreateProduct (CreateProductDTO) returns (Product) {}
-    rpc UpdateProduct (UpdateProductDTO) returns (Product) {}
-    rpc RemoveProduct (FindOneProductDTO) returns (Product) {}
-    rpc QueryProduct (stream PaginationDTO) returns (stream Products) {}
+service Product {
+    rpc FindAllProduct (Empty) returns (ProductsReply) {}
+    rpc FindOneProduct (FindByIdRequest) returns (ProductReply) {}
+    rpc CreateProduct (CreateRequest) returns (ProductReply) {}
+    rpc UpdateProduct (UpdateRequest) returns (ProductReply) {}
+    rpc RemoveProduct (FindByIdRequest) returns (ProductReply) {}
+    rpc QueryProduct (stream PaginationRequest) returns (stream ProductReply) {}
 }

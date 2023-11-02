@@ -17,7 +17,8 @@ namespace microservice
         builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
         // Register "m_service" as the instance through which we'll communicate with
         // clients. In this case it corresponds to an *asynchronous* service.
-        builder.RegisterService(&m_service);
+        builder.RegisterService(&m_greeter_service);
+        builder.RegisterService(&m_product_service);
         // Get hold of the completion queue used for the asynchronous communication
         // with the gRPC runtime.
         m_completed_queue = builder.AddCompletionQueue();
@@ -31,7 +32,8 @@ namespace microservice
     void server::handle()
     {
         // Spawn a new register_service instance to serve new clients.
-        new register_service(&m_service, m_completed_queue.get());
+        new greeter_service(&m_greeter_service, m_completed_queue.get());
+        new product_service(&m_product_service, m_completed_queue.get());
         void* tag;  // uniquely identifies a request.
         bool ok;
         while (true)
@@ -43,7 +45,7 @@ namespace microservice
             // tells us whether there is any kind of event or m_completed_queue is shutting down.
             GPR_ASSERT(m_completed_queue->Next(&tag, &ok));
             GPR_ASSERT(ok);
-            static_cast<register_service*>(tag)->proceed();
+            static_cast<service_invoker*>(tag)->proceed();
         }
     }
 }
