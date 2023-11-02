@@ -1,10 +1,5 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "io.grpc.product";
-option java_outer_classname = "ProductProto";
-option objc_class_prefix = "HLW";
-
 package product;
 
 message ProductReply {
@@ -13,16 +8,16 @@ message ProductReply {
 }
 
 message ProductsReply {
-    repeated ProductReply products = 1;
+    repeated string products = 1;
 }
 
 message CreateRequest {
-    string supplierName = 1;
+    string name = 1;
 }
 
 message UpdateRequest {
     int32 id = 1;
-    string supplierName = 2;
+    string name = 2;
 }
 
 message FindByIdRequest {
@@ -34,10 +29,10 @@ message PaginationRequest {
     int32 skip = 2;
 }
 
-message Empty {}
+message EmptyRequest {}
 
 service Product {
-    rpc FindAllProduct (Empty) returns (ProductsReply) {}
+    rpc FindAllProduct (EmptyRequest) returns (ProductsReply) {}
     rpc FindOneProduct (FindByIdRequest) returns (ProductReply) {}
     rpc CreateProduct (CreateRequest) returns (ProductReply) {}
     rpc UpdateProduct (UpdateRequest) returns (ProductReply) {}

@@ -49,9 +49,9 @@ namespace product {
 class CreateRequest;
 struct CreateRequestDefaultTypeInternal;
 extern CreateRequestDefaultTypeInternal _CreateRequest_default_instance_;
-class Empty;
-struct EmptyDefaultTypeInternal;
-extern EmptyDefaultTypeInternal _Empty_default_instance_;
+class EmptyRequest;
+struct EmptyRequestDefaultTypeInternal;
+extern EmptyRequestDefaultTypeInternal _EmptyRequest_default_instance_;
 class FindByIdRequest;
 struct FindByIdRequestDefaultTypeInternal;
 extern FindByIdRequestDefaultTypeInternal _FindByIdRequest_default_instance_;
@@ -61,20 +61,20 @@ extern PaginationRequestDefaultTypeInternal _PaginationRequest_default_instance_
 class ProductReply;
 struct ProductReplyDefaultTypeInternal;
 extern ProductReplyDefaultTypeInternal _ProductReply_default_instance_;
-class ProductsRequest;
-struct ProductsRequestDefaultTypeInternal;
-extern ProductsRequestDefaultTypeInternal _ProductsRequest_default_instance_;
+class ProductsReply;
+struct ProductsReplyDefaultTypeInternal;
+extern ProductsReplyDefaultTypeInternal _ProductsReply_default_instance_;
 class UpdateRequest;
 struct UpdateRequestDefaultTypeInternal;
 extern UpdateRequestDefaultTypeInternal _UpdateRequest_default_instance_;
 }  // namespace product
 PROTOBUF_NAMESPACE_OPEN
 template<> ::product::CreateRequest* Arena::CreateMaybeMessage<::product::CreateRequest>(Arena*);
-template<> ::product::Empty* Arena::CreateMaybeMessage<::product::Empty>(Arena*);
+template<> ::product::EmptyRequest* Arena::CreateMaybeMessage<::product::EmptyRequest>(Arena*);
 template<> ::product::FindByIdRequest* Arena::CreateMaybeMessage<::product::FindByIdRequest>(Arena*);
 template<> ::product::PaginationRequest* Arena::CreateMaybeMessage<::product::PaginationRequest>(Arena*);
 template<> ::product::ProductReply* Arena::CreateMaybeMessage<::product::ProductReply>(Arena*);
-template<> ::product::ProductsRequest* Arena::CreateMaybeMessage<::product::ProductsRequest>(Arena*);
+template<> ::product::ProductsReply* Arena::CreateMaybeMessage<::product::ProductsReply>(Arena*);
 template<> ::product::UpdateRequest* Arena::CreateMaybeMessage<::product::UpdateRequest>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace product {
@@ -245,24 +245,24 @@ class ProductReply final :
 };
 // -------------------------------------------------------------------
 
-class ProductsRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:product.ProductsRequest) */ {
+class ProductsReply final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:product.ProductsReply) */ {
  public:
-  inline ProductsRequest() : ProductsRequest(nullptr) {}
-  ~ProductsRequest() override;
-  explicit PROTOBUF_CONSTEXPR ProductsRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline ProductsReply() : ProductsReply(nullptr) {}
+  ~ProductsReply() override;
+  explicit PROTOBUF_CONSTEXPR ProductsReply(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ProductsRequest(const ProductsRequest& from);
-  ProductsRequest(ProductsRequest&& from) noexcept
-    : ProductsRequest() {
+  ProductsReply(const ProductsReply& from);
+  ProductsReply(ProductsReply&& from) noexcept
+    : ProductsReply() {
     *this = ::std::move(from);
   }
 
-  inline ProductsRequest& operator=(const ProductsRequest& from) {
+  inline ProductsReply& operator=(const ProductsReply& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ProductsRequest& operator=(ProductsRequest&& from) noexcept {
+  inline ProductsReply& operator=(ProductsReply&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -285,20 +285,20 @@ class ProductsRequest final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const ProductsRequest& default_instance() {
+  static const ProductsReply& default_instance() {
     return *internal_default_instance();
   }
-  static inline const ProductsRequest* internal_default_instance() {
-    return reinterpret_cast<const ProductsRequest*>(
-               &_ProductsRequest_default_instance_);
+  static inline const ProductsReply* internal_default_instance() {
+    return reinterpret_cast<const ProductsReply*>(
+               &_ProductsReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(ProductsRequest& a, ProductsRequest& b) {
+  friend void swap(ProductsReply& a, ProductsReply& b) {
     a.Swap(&b);
   }
-  inline void Swap(ProductsRequest* other) {
+  inline void Swap(ProductsReply* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -311,7 +311,7 @@ class ProductsRequest final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(ProductsRequest* other) {
+  void UnsafeArenaSwap(ProductsReply* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -319,14 +319,14 @@ class ProductsRequest final :
 
   // implements Message ----------------------------------------------
 
-  ProductsRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ProductsRequest>(arena);
+  ProductsReply* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ProductsReply>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ProductsRequest& from);
+  void CopyFrom(const ProductsReply& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const ProductsRequest& from) {
-    ProductsRequest::MergeImpl(*this, from);
+  void MergeFrom( const ProductsReply& from) {
+    ProductsReply::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -344,15 +344,15 @@ class ProductsRequest final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ProductsRequest* other);
+  void InternalSwap(ProductsReply* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "product.ProductsRequest";
+    return "product.ProductsReply";
   }
   protected:
-  explicit ProductsRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit ProductsReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -368,25 +368,31 @@ class ProductsRequest final :
   enum : int {
     kProductsFieldNumber = 1,
   };
-  // repeated .product.ProductReply products = 1;
+  // repeated string products = 1;
   int products_size() const;
   private:
   int _internal_products_size() const;
   public:
   void clear_products();
-  ::product::ProductReply* mutable_products(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >*
-      mutable_products();
+  const std::string& products(int index) const;
+  std::string* mutable_products(int index);
+  void set_products(int index, const std::string& value);
+  void set_products(int index, std::string&& value);
+  void set_products(int index, const char* value);
+  void set_products(int index, const char* value, size_t size);
+  std::string* add_products();
+  void add_products(const std::string& value);
+  void add_products(std::string&& value);
+  void add_products(const char* value);
+  void add_products(const char* value, size_t size);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& products() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_products();
   private:
-  const ::product::ProductReply& _internal_products(int index) const;
-  ::product::ProductReply* _internal_add_products();
+  const std::string& _internal_products(int index) const;
+  std::string* _internal_add_products();
   public:
-  const ::product::ProductReply& products(int index) const;
-  ::product::ProductReply* add_products();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >&
-      products() const;
 
-  // @@protoc_insertion_point(class_scope:product.ProductsRequest)
+  // @@protoc_insertion_point(class_scope:product.ProductsReply)
  private:
   class _Internal;
 
@@ -394,7 +400,7 @@ class ProductsRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply > products_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> products_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -523,20 +529,20 @@ class CreateRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSupplierNameFieldNumber = 1,
+    kNameFieldNumber = 1,
   };
-  // string supplierName = 1;
-  void clear_suppliername();
-  const std::string& suppliername() const;
+  // string name = 1;
+  void clear_name();
+  const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_suppliername(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_suppliername();
-  PROTOBUF_NODISCARD std::string* release_suppliername();
-  void set_allocated_suppliername(std::string* suppliername);
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
   private:
-  const std::string& _internal_suppliername() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_suppliername(const std::string& value);
-  std::string* _internal_mutable_suppliername();
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
   public:
 
   // @@protoc_insertion_point(class_scope:product.CreateRequest)
@@ -547,7 +553,7 @@ class CreateRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr suppliername_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -676,21 +682,21 @@ class UpdateRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSupplierNameFieldNumber = 2,
+    kNameFieldNumber = 2,
     kIdFieldNumber = 1,
   };
-  // string supplierName = 2;
-  void clear_suppliername();
-  const std::string& suppliername() const;
+  // string name = 2;
+  void clear_name();
+  const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_suppliername(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_suppliername();
-  PROTOBUF_NODISCARD std::string* release_suppliername();
-  void set_allocated_suppliername(std::string* suppliername);
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
   private:
-  const std::string& _internal_suppliername() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_suppliername(const std::string& value);
-  std::string* _internal_mutable_suppliername();
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
   public:
 
   // int32 id = 1;
@@ -710,7 +716,7 @@ class UpdateRequest final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr suppliername_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     int32_t id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1026,23 +1032,23 @@ class PaginationRequest final :
 };
 // -------------------------------------------------------------------
 
-class Empty final :
-    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:product.Empty) */ {
+class EmptyRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:product.EmptyRequest) */ {
  public:
-  inline Empty() : Empty(nullptr) {}
-  explicit PROTOBUF_CONSTEXPR Empty(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline EmptyRequest() : EmptyRequest(nullptr) {}
+  explicit PROTOBUF_CONSTEXPR EmptyRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Empty(const Empty& from);
-  Empty(Empty&& from) noexcept
-    : Empty() {
+  EmptyRequest(const EmptyRequest& from);
+  EmptyRequest(EmptyRequest&& from) noexcept
+    : EmptyRequest() {
     *this = ::std::move(from);
   }
 
-  inline Empty& operator=(const Empty& from) {
+  inline EmptyRequest& operator=(const EmptyRequest& from) {
     CopyFrom(from);
     return *this;
   }
-  inline Empty& operator=(Empty&& from) noexcept {
+  inline EmptyRequest& operator=(EmptyRequest&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -1065,20 +1071,20 @@ class Empty final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Empty& default_instance() {
+  static const EmptyRequest& default_instance() {
     return *internal_default_instance();
   }
-  static inline const Empty* internal_default_instance() {
-    return reinterpret_cast<const Empty*>(
-               &_Empty_default_instance_);
+  static inline const EmptyRequest* internal_default_instance() {
+    return reinterpret_cast<const EmptyRequest*>(
+               &_EmptyRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     6;
 
-  friend void swap(Empty& a, Empty& b) {
+  friend void swap(EmptyRequest& a, EmptyRequest& b) {
     a.Swap(&b);
   }
-  inline void Swap(Empty* other) {
+  inline void Swap(EmptyRequest* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -1091,7 +1097,7 @@ class Empty final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(Empty* other) {
+  void UnsafeArenaSwap(EmptyRequest* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -1099,15 +1105,15 @@ class Empty final :
 
   // implements Message ----------------------------------------------
 
-  Empty* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Empty>(arena);
+  EmptyRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<EmptyRequest>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const Empty& from) {
+  inline void CopyFrom(const EmptyRequest& from) {
     ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl(*this, from);
   }
   using ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const Empty& from) {
+  void MergeFrom(const EmptyRequest& from) {
     ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
   }
   public:
@@ -1115,10 +1121,10 @@ class Empty final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "product.Empty";
+    return "product.EmptyRequest";
   }
   protected:
-  explicit Empty(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit EmptyRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -1131,7 +1137,7 @@ class Empty final :
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:product.Empty)
+  // @@protoc_insertion_point(class_scope:product.EmptyRequest)
  private:
   class _Internal;
 
@@ -1225,100 +1231,135 @@ inline void ProductReply::set_allocated_name(std::string* name) {
 
 // -------------------------------------------------------------------
 
-// ProductsRequest
+// ProductsReply
 
-// repeated .product.ProductReply products = 1;
-inline int ProductsRequest::_internal_products_size() const {
+// repeated string products = 1;
+inline int ProductsReply::_internal_products_size() const {
   return _impl_.products_.size();
 }
-inline int ProductsRequest::products_size() const {
+inline int ProductsReply::products_size() const {
   return _internal_products_size();
 }
-inline void ProductsRequest::clear_products() {
+inline void ProductsReply::clear_products() {
   _impl_.products_.Clear();
 }
-inline ::product::ProductReply* ProductsRequest::mutable_products(int index) {
-  // @@protoc_insertion_point(field_mutable:product.ProductsRequest.products)
-  return _impl_.products_.Mutable(index);
+inline std::string* ProductsReply::add_products() {
+  std::string* _s = _internal_add_products();
+  // @@protoc_insertion_point(field_add_mutable:product.ProductsReply.products)
+  return _s;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >*
-ProductsRequest::mutable_products() {
-  // @@protoc_insertion_point(field_mutable_list:product.ProductsRequest.products)
-  return &_impl_.products_;
-}
-inline const ::product::ProductReply& ProductsRequest::_internal_products(int index) const {
+inline const std::string& ProductsReply::_internal_products(int index) const {
   return _impl_.products_.Get(index);
 }
-inline const ::product::ProductReply& ProductsRequest::products(int index) const {
-  // @@protoc_insertion_point(field_get:product.ProductsRequest.products)
+inline const std::string& ProductsReply::products(int index) const {
+  // @@protoc_insertion_point(field_get:product.ProductsReply.products)
   return _internal_products(index);
 }
-inline ::product::ProductReply* ProductsRequest::_internal_add_products() {
+inline std::string* ProductsReply::mutable_products(int index) {
+  // @@protoc_insertion_point(field_mutable:product.ProductsReply.products)
+  return _impl_.products_.Mutable(index);
+}
+inline void ProductsReply::set_products(int index, const std::string& value) {
+  _impl_.products_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set:product.ProductsReply.products)
+}
+inline void ProductsReply::set_products(int index, std::string&& value) {
+  _impl_.products_.Mutable(index)->assign(std::move(value));
+  // @@protoc_insertion_point(field_set:product.ProductsReply.products)
+}
+inline void ProductsReply::set_products(int index, const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.products_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:product.ProductsReply.products)
+}
+inline void ProductsReply::set_products(int index, const char* value, size_t size) {
+  _impl_.products_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:product.ProductsReply.products)
+}
+inline std::string* ProductsReply::_internal_add_products() {
   return _impl_.products_.Add();
 }
-inline ::product::ProductReply* ProductsRequest::add_products() {
-  ::product::ProductReply* _add = _internal_add_products();
-  // @@protoc_insertion_point(field_add:product.ProductsRequest.products)
-  return _add;
+inline void ProductsReply::add_products(const std::string& value) {
+  _impl_.products_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:product.ProductsReply.products)
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >&
-ProductsRequest::products() const {
-  // @@protoc_insertion_point(field_list:product.ProductsRequest.products)
+inline void ProductsReply::add_products(std::string&& value) {
+  _impl_.products_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:product.ProductsReply.products)
+}
+inline void ProductsReply::add_products(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _impl_.products_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:product.ProductsReply.products)
+}
+inline void ProductsReply::add_products(const char* value, size_t size) {
+  _impl_.products_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:product.ProductsReply.products)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
+ProductsReply::products() const {
+  // @@protoc_insertion_point(field_list:product.ProductsReply.products)
   return _impl_.products_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+ProductsReply::mutable_products() {
+  // @@protoc_insertion_point(field_mutable_list:product.ProductsReply.products)
+  return &_impl_.products_;
 }
 
 // -------------------------------------------------------------------
 
 // CreateRequest
 
-// string supplierName = 1;
-inline void CreateRequest::clear_suppliername() {
-  _impl_.suppliername_.ClearToEmpty();
+// string name = 1;
+inline void CreateRequest::clear_name() {
+  _impl_.name_.ClearToEmpty();
 }
-inline const std::string& CreateRequest::suppliername() const {
-  // @@protoc_insertion_point(field_get:product.CreateRequest.supplierName)
-  return _internal_suppliername();
+inline const std::string& CreateRequest::name() const {
+  // @@protoc_insertion_point(field_get:product.CreateRequest.name)
+  return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void CreateRequest::set_suppliername(ArgT0&& arg0, ArgT... args) {
+void CreateRequest::set_name(ArgT0&& arg0, ArgT... args) {
  
- _impl_.suppliername_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:product.CreateRequest.supplierName)
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:product.CreateRequest.name)
 }
-inline std::string* CreateRequest::mutable_suppliername() {
-  std::string* _s = _internal_mutable_suppliername();
-  // @@protoc_insertion_point(field_mutable:product.CreateRequest.supplierName)
+inline std::string* CreateRequest::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:product.CreateRequest.name)
   return _s;
 }
-inline const std::string& CreateRequest::_internal_suppliername() const {
-  return _impl_.suppliername_.Get();
+inline const std::string& CreateRequest::_internal_name() const {
+  return _impl_.name_.Get();
 }
-inline void CreateRequest::_internal_set_suppliername(const std::string& value) {
+inline void CreateRequest::_internal_set_name(const std::string& value) {
   
-  _impl_.suppliername_.Set(value, GetArenaForAllocation());
+  _impl_.name_.Set(value, GetArenaForAllocation());
 }
-inline std::string* CreateRequest::_internal_mutable_suppliername() {
+inline std::string* CreateRequest::_internal_mutable_name() {
   
-  return _impl_.suppliername_.Mutable(GetArenaForAllocation());
+  return _impl_.name_.Mutable(GetArenaForAllocation());
 }
-inline std::string* CreateRequest::release_suppliername() {
-  // @@protoc_insertion_point(field_release:product.CreateRequest.supplierName)
-  return _impl_.suppliername_.Release();
+inline std::string* CreateRequest::release_name() {
+  // @@protoc_insertion_point(field_release:product.CreateRequest.name)
+  return _impl_.name_.Release();
 }
-inline void CreateRequest::set_allocated_suppliername(std::string* suppliername) {
-  if (suppliername != nullptr) {
+inline void CreateRequest::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
     
   } else {
     
   }
-  _impl_.suppliername_.SetAllocated(suppliername, GetArenaForAllocation());
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.suppliername_.IsDefault()) {
-    _impl_.suppliername_.Set("", GetArenaForAllocation());
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:product.CreateRequest.supplierName)
+  // @@protoc_insertion_point(field_set_allocated:product.CreateRequest.name)
 }
 
 // -------------------------------------------------------------------
@@ -1345,54 +1386,54 @@ inline void UpdateRequest::set_id(int32_t value) {
   // @@protoc_insertion_point(field_set:product.UpdateRequest.id)
 }
 
-// string supplierName = 2;
-inline void UpdateRequest::clear_suppliername() {
-  _impl_.suppliername_.ClearToEmpty();
+// string name = 2;
+inline void UpdateRequest::clear_name() {
+  _impl_.name_.ClearToEmpty();
 }
-inline const std::string& UpdateRequest::suppliername() const {
-  // @@protoc_insertion_point(field_get:product.UpdateRequest.supplierName)
-  return _internal_suppliername();
+inline const std::string& UpdateRequest::name() const {
+  // @@protoc_insertion_point(field_get:product.UpdateRequest.name)
+  return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void UpdateRequest::set_suppliername(ArgT0&& arg0, ArgT... args) {
+void UpdateRequest::set_name(ArgT0&& arg0, ArgT... args) {
  
- _impl_.suppliername_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:product.UpdateRequest.supplierName)
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:product.UpdateRequest.name)
 }
-inline std::string* UpdateRequest::mutable_suppliername() {
-  std::string* _s = _internal_mutable_suppliername();
-  // @@protoc_insertion_point(field_mutable:product.UpdateRequest.supplierName)
+inline std::string* UpdateRequest::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:product.UpdateRequest.name)
   return _s;
 }
-inline const std::string& UpdateRequest::_internal_suppliername() const {
-  return _impl_.suppliername_.Get();
+inline const std::string& UpdateRequest::_internal_name() const {
+  return _impl_.name_.Get();
 }
-inline void UpdateRequest::_internal_set_suppliername(const std::string& value) {
+inline void UpdateRequest::_internal_set_name(const std::string& value) {
   
-  _impl_.suppliername_.Set(value, GetArenaForAllocation());
+  _impl_.name_.Set(value, GetArenaForAllocation());
 }
-inline std::string* UpdateRequest::_internal_mutable_suppliername() {
+inline std::string* UpdateRequest::_internal_mutable_name() {
   
-  return _impl_.suppliername_.Mutable(GetArenaForAllocation());
+  return _impl_.name_.Mutable(GetArenaForAllocation());
 }
-inline std::string* UpdateRequest::release_suppliername() {
-  // @@protoc_insertion_point(field_release:product.UpdateRequest.supplierName)
-  return _impl_.suppliername_.Release();
+inline std::string* UpdateRequest::release_name() {
+  // @@protoc_insertion_point(field_release:product.UpdateRequest.name)
+  return _impl_.name_.Release();
 }
-inline void UpdateRequest::set_allocated_suppliername(std::string* suppliername) {
-  if (suppliername != nullptr) {
+inline void UpdateRequest::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
     
   } else {
     
   }
-  _impl_.suppliername_.SetAllocated(suppliername, GetArenaForAllocation());
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.suppliername_.IsDefault()) {
-    _impl_.suppliername_.Set("", GetArenaForAllocation());
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:product.UpdateRequest.supplierName)
+  // @@protoc_insertion_point(field_set_allocated:product.UpdateRequest.name)
 }
 
 // -------------------------------------------------------------------
@@ -1465,7 +1506,7 @@ inline void PaginationRequest::set_skip(int32_t value) {
 
 // -------------------------------------------------------------------
 
-// Empty
+// EmptyRequest
 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
