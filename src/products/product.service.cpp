@@ -16,6 +16,7 @@ namespace microservice
 			std::this_thread::sleep_for(1s);
 		}
 
+		replies.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
 		reply->WriteLast(replies, opt.set_last_message());
 
 		return Status::OK;
