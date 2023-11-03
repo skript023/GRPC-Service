@@ -20,6 +20,7 @@ namespace microservice
     {
         Status FindAllProduct(ServerContext* context, const EmptyRequest* request, ProductsReply* reply) override;
         Status FindOneProduct(ServerContext* context, const FindByIdRequest* request, ProductReply* reply) override;
+        Status CreateProduct(ServerContext* context, const CreateRequest* request, ProductReply* reply) override;
         Status UpdateProduct(ServerContext* context, const UpdateRequest* request, ProductReply* reply) override;
         Status RemoveProduct(ServerContext* context, const FindByIdRequest* request, ProductReply* reply) override;
 

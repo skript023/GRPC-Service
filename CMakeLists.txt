@@ -22,6 +22,7 @@ endif()
 
 message("\nFetching modules")
 include(package/g3log.cmake)
+include(package/fmtlib.cmake)
 include(package/grpc.cmake)
 
 # Microservice
@@ -39,8 +40,13 @@ file(GLOB_RECURSE SRC_MAIN
 
 file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
 
+if (MSVC)
 set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
 set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
+else()
+set(PROTOC "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/protobuf/protoc")
+set(GRPC_CPP_PLUGIN "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/grpc/grpc_cpp_plugin")
+endif()
 
 file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")
 
@@ -65,7 +71,7 @@ add_executable(Microservice "${SRC_DIR}/main.cpp")
 add_dependencies(Microservice proto)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_property(TARGET Microservice PROPERTY CXX_STANDARD 23) # 23 Because std::format is not avalible in std:c++20 for some reason. Maybe it's because i use v142 toolset.
+set_property(TARGET Microservice PROPERTY CXX_STANDARD 20) # 23 Because std::format is not avalible in std:c++20 for some reason. Maybe it's because i use v142 toolset.
 # set_property(TARGET Microservice PROPERTY ISPC_INSTRUCTION_SETS avx2-i32x4)
 
 source_group(TREE ${SRC_DIR} PREFIX "src" FILES ${SRC_MAIN})
@@ -77,6 +83,7 @@ target_include_directories(Microservice PRIVATE
 target_precompile_headers(Microservice PRIVATE "${SRC_DIR}/common.hpp")
 
 target_link_libraries(Microservice PRIVATE 
+fmt::fmt
 gRPC::gpr 
 gRPC::grpc 
 gRPC::grpc++ 

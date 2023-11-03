@@ -22,6 +22,8 @@
 #include <Windows.h>
 #endif
 
+#include "fmt/format.h"
+
 #include "logger.hpp"
 
 // GRPC Dependencies Begin
