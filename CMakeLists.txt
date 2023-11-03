@@ -41,11 +41,11 @@ file(GLOB_RECURSE SRC_MAIN
 file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
 
 if (MSVC)
-set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
-set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
+    set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
+    set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
 else()
-set(PROTOC "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/protobuf/protoc")
-set(GRPC_CPP_PLUGIN "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/grpc/grpc_cpp_plugin")
+    set(PROTOC "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/protobuf/protoc")
+    set(GRPC_CPP_PLUGIN "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/grpc/grpc_cpp_plugin")
 endif()
 
 file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")

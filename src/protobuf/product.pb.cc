@@ -35,6 +35,20 @@ struct ProductReplyDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ProductReplyDefaultTypeInternal _ProductReply_default_instance_;
+PROTOBUF_CONSTEXPR QueryReply::QueryReply(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.message_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.success_)*/false
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct QueryReplyDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR QueryReplyDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~QueryReplyDefaultTypeInternal() {}
+  union {
+    QueryReply _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 QueryReplyDefaultTypeInternal _QueryReply_default_instance_;
 PROTOBUF_CONSTEXPR ProductsReply::ProductsReply(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.products_)*/{}
@@ -114,7 +128,7 @@ struct EmptyRequestDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EmptyRequestDefaultTypeInternal _EmptyRequest_default_instance_;
 }  // namespace product
-static ::_pb::Metadata file_level_metadata_product_2eproto[7];
+static ::_pb::Metadata file_level_metadata_product_2eproto[8];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_product_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_product_2eproto = nullptr;
 
@@ -127,6 +141,14 @@ const uint32_t TableStruct_product_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::product::ProductReply, _impl_.id_),
   PROTOBUF_FIELD_OFFSET(::product::ProductReply, _impl_.name_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::product::QueryReply, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::product::QueryReply, _impl_.message_),
+  PROTOBUF_FIELD_OFFSET(::product::QueryReply, _impl_.success_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::product::ProductsReply, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -173,16 +195,18 @@ const uint32_t TableStruct_product_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::product::ProductReply)},
-  { 8, -1, -1, sizeof(::product::ProductsReply)},
-  { 15, -1, -1, sizeof(::product::CreateRequest)},
-  { 22, -1, -1, sizeof(::product::UpdateRequest)},
-  { 30, -1, -1, sizeof(::product::FindByIdRequest)},
-  { 37, -1, -1, sizeof(::product::PaginationRequest)},
-  { 45, -1, -1, sizeof(::product::EmptyRequest)},
+  { 8, -1, -1, sizeof(::product::QueryReply)},
+  { 16, -1, -1, sizeof(::product::ProductsReply)},
+  { 23, -1, -1, sizeof(::product::CreateRequest)},
+  { 30, -1, -1, sizeof(::product::UpdateRequest)},
+  { 38, -1, -1, sizeof(::product::FindByIdRequest)},
+  { 45, -1, -1, sizeof(::product::PaginationRequest)},
+  { 53, -1, -1, sizeof(::product::EmptyRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::product::_ProductReply_default_instance_._instance,
+  &::product::_QueryReply_default_instance_._instance,
   &::product::_ProductsReply_default_instance_._instance,
   &::product::_CreateRequest_default_instance_._instance,
   &::product::_UpdateRequest_default_instance_._instance,
@@ -193,29 +217,30 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_product_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rproduct.proto\022\007product\"(\n\014ProductReply"
-  "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"!\n\rProductsRe"
-  "ply\022\020\n\010products\030\001 \003(\t\"\035\n\rCreateRequest\022\014"
-  "\n\004name\030\001 \001(\t\")\n\rUpdateRequest\022\n\n\002id\030\001 \001("
-  "\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindByIdRequest\022\n\n\002id"
-  "\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004page\030\001 \001("
-  "\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2\242\003\n\007Prod"
-  "uct\022A\n\016FindAllProduct\022\025.product.EmptyReq"
-  "uest\032\026.product.ProductsReply\"\000\022C\n\016FindOn"
-  "eProduct\022\030.product.FindByIdRequest\032\025.pro"
-  "duct.ProductReply\"\000\022@\n\rCreateProduct\022\026.p"
-  "roduct.CreateRequest\032\025.product.ProductRe"
-  "ply\"\000\022@\n\rUpdateProduct\022\026.product.UpdateR"
-  "equest\032\025.product.ProductReply\"\000\022B\n\rRemov"
-  "eProduct\022\030.product.FindByIdRequest\032\025.pro"
-  "duct.ProductReply\"\000\022G\n\014QueryProduct\022\032.pr"
-  "oduct.PaginationRequest\032\025.product.Produc"
-  "tReply\"\000(\0010\001b\006proto3"
+  "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\".\n\nQueryReply"
+  "\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"!\n\rPr"
+  "oductsReply\022\020\n\010products\030\001 \003(\t\"\035\n\rCreateR"
+  "equest\022\014\n\004name\030\001 \001(\t\")\n\rUpdateRequest\022\n\n"
+  "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindByIdReque"
+  "st\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004p"
+  "age\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2"
+  "\236\003\n\007Product\022C\n\016FindAllProduct\022\025.product."
+  "EmptyRequest\032\026.product.ProductsReply\"\0000\001"
+  "\022C\n\016FindOneProduct\022\030.product.FindByIdReq"
+  "uest\032\025.product.ProductReply\"\000\022>\n\rCreateP"
+  "roduct\022\026.product.CreateRequest\032\023.product"
+  ".QueryReply\"\000\022>\n\rUpdateProduct\022\026.product"
+  ".UpdateRequest\032\023.product.QueryReply\"\000\022@\n"
+  "\rRemoveProduct\022\030.product.FindByIdRequest"
+  "\032\023.product.QueryReply\"\000\022G\n\014QueryProduct\022"
+  "\032.product.PaginationRequest\032\025.product.Pr"
+  "oductReply\"\000(\0010\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_product_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_product_2eproto = {
-    false, false, 700, descriptor_table_protodef_product_2eproto,
+    false, false, 744, descriptor_table_protodef_product_2eproto,
     "product.proto",
-    &descriptor_table_product_2eproto_once, nullptr, 0, 7,
+    &descriptor_table_product_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_product_2eproto::offsets,
     file_level_metadata_product_2eproto, file_level_enum_descriptors_product_2eproto,
     file_level_service_descriptors_product_2eproto,
@@ -460,6 +485,236 @@ void ProductReply::InternalSwap(ProductReply* other) {
 
 // ===================================================================
 
+class QueryReply::_Internal {
+ public:
+};
+
+QueryReply::QueryReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:product.QueryReply)
+}
+QueryReply::QueryReply(const QueryReply& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  QueryReply* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.message_){}
+    , decltype(_impl_.success_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.message_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.message_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_message().empty()) {
+    _this->_impl_.message_.Set(from._internal_message(), 
+      _this->GetArenaForAllocation());
+  }
+  _this->_impl_.success_ = from._impl_.success_;
+  // @@protoc_insertion_point(copy_constructor:product.QueryReply)
+}
+
+inline void QueryReply::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.message_){}
+    , decltype(_impl_.success_){false}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.message_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.message_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+QueryReply::~QueryReply() {
+  // @@protoc_insertion_point(destructor:product.QueryReply)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void QueryReply::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.message_.Destroy();
+}
+
+void QueryReply::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void QueryReply::Clear() {
+// @@protoc_insertion_point(message_clear_start:product.QueryReply)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.message_.ClearToEmpty();
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* QueryReply::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string message = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_message();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "product.QueryReply.message"));
+        } else
+          goto handle_unusual;
+        continue;
+      // bool success = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* QueryReply::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:product.QueryReply)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string message = 1;
+  if (!this->_internal_message().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "product.QueryReply.message");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_message(), target);
+  }
+
+  // bool success = 2;
+  if (this->_internal_success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_success(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:product.QueryReply)
+  return target;
+}
+
+size_t QueryReply::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:product.QueryReply)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string message = 1;
+  if (!this->_internal_message().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_message());
+  }
+
+  // bool success = 2;
+  if (this->_internal_success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData QueryReply::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    QueryReply::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*QueryReply::GetClassData() const { return &_class_data_; }
+
+
+void QueryReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<QueryReply*>(&to_msg);
+  auto& from = static_cast<const QueryReply&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:product.QueryReply)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_message().empty()) {
+    _this->_internal_set_message(from._internal_message());
+  }
+  if (from._internal_success() != 0) {
+    _this->_internal_set_success(from._internal_success());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void QueryReply::CopyFrom(const QueryReply& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:product.QueryReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool QueryReply::IsInitialized() const {
+  return true;
+}
+
+void QueryReply::InternalSwap(QueryReply* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.message_, lhs_arena,
+      &other->_impl_.message_, rhs_arena
+  );
+  swap(_impl_.success_, other->_impl_.success_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata QueryReply::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
+      file_level_metadata_product_2eproto[1]);
+}
+
+// ===================================================================
+
 class ProductsReply::_Internal {
  public:
 };
@@ -645,7 +900,7 @@ void ProductsReply::InternalSwap(ProductsReply* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata ProductsReply::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
-      file_level_metadata_product_2eproto[1]);
+      file_level_metadata_product_2eproto[2]);
 }
 
 // ===================================================================
@@ -848,7 +1103,7 @@ void CreateRequest::InternalSwap(CreateRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata CreateRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
-      file_level_metadata_product_2eproto[2]);
+      file_level_metadata_product_2eproto[3]);
 }
 
 // ===================================================================
@@ -1078,7 +1333,7 @@ void UpdateRequest::InternalSwap(UpdateRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata UpdateRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
-      file_level_metadata_product_2eproto[3]);
+      file_level_metadata_product_2eproto[4]);
 }
 
 // ===================================================================
@@ -1256,7 +1511,7 @@ void FindByIdRequest::InternalSwap(FindByIdRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata FindByIdRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
-      file_level_metadata_product_2eproto[4]);
+      file_level_metadata_product_2eproto[5]);
 }
 
 // ===================================================================
@@ -1467,7 +1722,7 @@ void PaginationRequest::InternalSwap(PaginationRequest* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata PaginationRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
-      file_level_metadata_product_2eproto[5]);
+      file_level_metadata_product_2eproto[6]);
 }
 
 // ===================================================================
@@ -1507,7 +1762,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*EmptyRequest::GetClassData() c
 ::PROTOBUF_NAMESPACE_ID::Metadata EmptyRequest::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_product_2eproto_getter, &descriptor_table_product_2eproto_once,
-      file_level_metadata_product_2eproto[6]);
+      file_level_metadata_product_2eproto[7]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -1516,6 +1771,10 @@ PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::product::ProductReply*
 Arena::CreateMaybeMessage< ::product::ProductReply >(Arena* arena) {
   return Arena::CreateMessageInternal< ::product::ProductReply >(arena);
+}
+template<> PROTOBUF_NOINLINE ::product::QueryReply*
+Arena::CreateMaybeMessage< ::product::QueryReply >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::product::QueryReply >(arena);
 }
 template<> PROTOBUF_NOINLINE ::product::ProductsReply*
 Arena::CreateMaybeMessage< ::product::ProductsReply >(Arena* arena) {

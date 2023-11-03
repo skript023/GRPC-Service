@@ -7,6 +7,11 @@ message ProductReply {
     string name = 2;
 }
 
+message QueryReply {
+    string message = 1;
+    bool success = 2;
+}
+
 message ProductsReply {
     repeated string products = 1;
 }
@@ -32,10 +37,10 @@ message PaginationRequest {
 message EmptyRequest {}
 
 service Product {
-    rpc FindAllProduct (EmptyRequest) returns (ProductsReply) {}
+    rpc FindAllProduct (EmptyRequest) returns (stream ProductsReply) {}
     rpc FindOneProduct (FindByIdRequest) returns (ProductReply) {}
-    rpc CreateProduct (CreateRequest) returns (ProductReply) {}
-    rpc UpdateProduct (UpdateRequest) returns (ProductReply) {}
-    rpc RemoveProduct (FindByIdRequest) returns (ProductReply) {}
+    rpc CreateProduct (CreateRequest) returns (QueryReply) {}
+    rpc UpdateProduct (UpdateRequest) returns (QueryReply) {}
+    rpc RemoveProduct (FindByIdRequest) returns (QueryReply) {}
     rpc QueryProduct (stream PaginationRequest) returns (stream ProductReply) {}
 }

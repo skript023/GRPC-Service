@@ -64,6 +64,9 @@ extern ProductReplyDefaultTypeInternal _ProductReply_default_instance_;
 class ProductsReply;
 struct ProductsReplyDefaultTypeInternal;
 extern ProductsReplyDefaultTypeInternal _ProductsReply_default_instance_;
+class QueryReply;
+struct QueryReplyDefaultTypeInternal;
+extern QueryReplyDefaultTypeInternal _QueryReply_default_instance_;
 class UpdateRequest;
 struct UpdateRequestDefaultTypeInternal;
 extern UpdateRequestDefaultTypeInternal _UpdateRequest_default_instance_;
@@ -75,6 +78,7 @@ template<> ::product::FindByIdRequest* Arena::CreateMaybeMessage<::product::Find
 template<> ::product::PaginationRequest* Arena::CreateMaybeMessage<::product::PaginationRequest>(Arena*);
 template<> ::product::ProductReply* Arena::CreateMaybeMessage<::product::ProductReply>(Arena*);
 template<> ::product::ProductsReply* Arena::CreateMaybeMessage<::product::ProductsReply>(Arena*);
+template<> ::product::QueryReply* Arena::CreateMaybeMessage<::product::QueryReply>(Arena*);
 template<> ::product::UpdateRequest* Arena::CreateMaybeMessage<::product::UpdateRequest>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace product {
@@ -245,6 +249,170 @@ class ProductReply final :
 };
 // -------------------------------------------------------------------
 
+class QueryReply final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:product.QueryReply) */ {
+ public:
+  inline QueryReply() : QueryReply(nullptr) {}
+  ~QueryReply() override;
+  explicit PROTOBUF_CONSTEXPR QueryReply(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  QueryReply(const QueryReply& from);
+  QueryReply(QueryReply&& from) noexcept
+    : QueryReply() {
+    *this = ::std::move(from);
+  }
+
+  inline QueryReply& operator=(const QueryReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline QueryReply& operator=(QueryReply&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const QueryReply& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const QueryReply* internal_default_instance() {
+    return reinterpret_cast<const QueryReply*>(
+               &_QueryReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  friend void swap(QueryReply& a, QueryReply& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(QueryReply* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(QueryReply* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  QueryReply* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<QueryReply>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const QueryReply& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const QueryReply& from) {
+    QueryReply::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(QueryReply* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "product.QueryReply";
+  }
+  protected:
+  explicit QueryReply(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMessageFieldNumber = 1,
+    kSuccessFieldNumber = 2,
+  };
+  // string message = 1;
+  void clear_message();
+  const std::string& message() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_message(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_message();
+  PROTOBUF_NODISCARD std::string* release_message();
+  void set_allocated_message(std::string* message);
+  private:
+  const std::string& _internal_message() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_message(const std::string& value);
+  std::string* _internal_mutable_message();
+  public:
+
+  // bool success = 2;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:product.QueryReply)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
+    bool success_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_product_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ProductsReply final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:product.ProductsReply) */ {
  public:
@@ -293,7 +461,7 @@ class ProductsReply final :
                &_ProductsReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(ProductsReply& a, ProductsReply& b) {
     a.Swap(&b);
@@ -456,7 +624,7 @@ class CreateRequest final :
                &_CreateRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(CreateRequest& a, CreateRequest& b) {
     a.Swap(&b);
@@ -609,7 +777,7 @@ class UpdateRequest final :
                &_UpdateRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(UpdateRequest& a, UpdateRequest& b) {
     a.Swap(&b);
@@ -773,7 +941,7 @@ class FindByIdRequest final :
                &_FindByIdRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(FindByIdRequest& a, FindByIdRequest& b) {
     a.Swap(&b);
@@ -921,7 +1089,7 @@ class PaginationRequest final :
                &_PaginationRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(PaginationRequest& a, PaginationRequest& b) {
     a.Swap(&b);
@@ -1079,7 +1247,7 @@ class EmptyRequest final :
                &_EmptyRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(EmptyRequest& a, EmptyRequest& b) {
     a.Swap(&b);
@@ -1227,6 +1395,80 @@ inline void ProductReply::set_allocated_name(std::string* name) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:product.ProductReply.name)
+}
+
+// -------------------------------------------------------------------
+
+// QueryReply
+
+// string message = 1;
+inline void QueryReply::clear_message() {
+  _impl_.message_.ClearToEmpty();
+}
+inline const std::string& QueryReply::message() const {
+  // @@protoc_insertion_point(field_get:product.QueryReply.message)
+  return _internal_message();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void QueryReply::set_message(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.message_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:product.QueryReply.message)
+}
+inline std::string* QueryReply::mutable_message() {
+  std::string* _s = _internal_mutable_message();
+  // @@protoc_insertion_point(field_mutable:product.QueryReply.message)
+  return _s;
+}
+inline const std::string& QueryReply::_internal_message() const {
+  return _impl_.message_.Get();
+}
+inline void QueryReply::_internal_set_message(const std::string& value) {
+  
+  _impl_.message_.Set(value, GetArenaForAllocation());
+}
+inline std::string* QueryReply::_internal_mutable_message() {
+  
+  return _impl_.message_.Mutable(GetArenaForAllocation());
+}
+inline std::string* QueryReply::release_message() {
+  // @@protoc_insertion_point(field_release:product.QueryReply.message)
+  return _impl_.message_.Release();
+}
+inline void QueryReply::set_allocated_message(std::string* message) {
+  if (message != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.message_.SetAllocated(message, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.message_.IsDefault()) {
+    _impl_.message_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:product.QueryReply.message)
+}
+
+// bool success = 2;
+inline void QueryReply::clear_success() {
+  _impl_.success_ = false;
+}
+inline bool QueryReply::_internal_success() const {
+  return _impl_.success_;
+}
+inline bool QueryReply::success() const {
+  // @@protoc_insertion_point(field_get:product.QueryReply.success)
+  return _internal_success();
+}
+inline void QueryReply::_internal_set_success(bool value) {
+  
+  _impl_.success_ = value;
+}
+inline void QueryReply::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:product.QueryReply.success)
 }
 
 // -------------------------------------------------------------------
@@ -1511,6 +1753,8 @@ inline void PaginationRequest::set_skip(int32_t value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

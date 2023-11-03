@@ -35,12 +35,14 @@ class Product final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::product::ProductsReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductsReply>> AsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductsReply>>(AsyncFindAllProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::product::ProductsReply>> FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::product::ProductsReply>>(FindAllProductRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductsReply>> PrepareAsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductsReply>>(PrepareAsyncFindAllProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::product::ProductsReply>> AsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::product::ProductsReply>>(AsyncFindAllProductRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::product::ProductsReply>> PrepareAsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::product::ProductsReply>>(PrepareAsyncFindAllProductRaw(context, request, cq));
     }
     virtual ::grpc::Status FindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::product::ProductReply* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> AsyncFindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
@@ -49,26 +51,26 @@ class Product final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> PrepareAsyncFindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(PrepareAsyncFindOneProductRaw(context, request, cq));
     }
-    virtual ::grpc::Status CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::product::ProductReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> AsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(AsyncCreateProductRaw(context, request, cq));
+    virtual ::grpc::Status CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::product::QueryReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>> AsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>>(AsyncCreateProductRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> PrepareAsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(PrepareAsyncCreateProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>> PrepareAsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>>(PrepareAsyncCreateProductRaw(context, request, cq));
     }
-    virtual ::grpc::Status UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::product::ProductReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> AsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(AsyncUpdateProductRaw(context, request, cq));
+    virtual ::grpc::Status UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::product::QueryReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>> AsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>>(AsyncUpdateProductRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> PrepareAsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(PrepareAsyncUpdateProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>> PrepareAsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>>(PrepareAsyncUpdateProductRaw(context, request, cq));
     }
-    virtual ::grpc::Status RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::product::ProductReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> AsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(AsyncRemoveProductRaw(context, request, cq));
+    virtual ::grpc::Status RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::product::QueryReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>> AsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>>(AsyncRemoveProductRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>> PrepareAsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>>(PrepareAsyncRemoveProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>> PrepareAsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>>(PrepareAsyncRemoveProductRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::product::PaginationRequest, ::product::ProductReply>> QueryProduct(::grpc::ClientContext* context) {
       return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::product::PaginationRequest, ::product::ProductReply>>(QueryProductRaw(context));
@@ -82,32 +84,32 @@ class Product final {
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest* request, ::product::ProductsReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest* request, ::product::ProductsReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest* request, ::grpc::ClientReadReactor< ::product::ProductsReply>* reactor) = 0;
       virtual void FindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void FindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::QueryReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::QueryReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::QueryReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void QueryProduct(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::product::PaginationRequest,::product::ProductReply>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductsReply>* AsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductsReply>* PrepareAsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::product::ProductsReply>* FindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::product::ProductsReply>* AsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::product::ProductsReply>* PrepareAsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* AsyncFindOneProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* PrepareAsyncFindOneProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* AsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* PrepareAsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* AsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* PrepareAsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* AsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::ProductReply>* PrepareAsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>* AsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>* PrepareAsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>* AsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>* PrepareAsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>* AsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::product::QueryReply>* PrepareAsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientReaderWriterInterface< ::product::PaginationRequest, ::product::ProductReply>* QueryProductRaw(::grpc::ClientContext* context) = 0;
     virtual ::grpc::ClientAsyncReaderWriterInterface< ::product::PaginationRequest, ::product::ProductReply>* AsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncReaderWriterInterface< ::product::PaginationRequest, ::product::ProductReply>* PrepareAsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
@@ -115,12 +117,14 @@ class Product final {
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::product::ProductsReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductsReply>> AsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductsReply>>(AsyncFindAllProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientReader< ::product::ProductsReply>> FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::product::ProductsReply>>(FindAllProductRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductsReply>> PrepareAsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductsReply>>(PrepareAsyncFindAllProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::product::ProductsReply>> AsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::product::ProductsReply>>(AsyncFindAllProductRaw(context, request, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::product::ProductsReply>> PrepareAsyncFindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::product::ProductsReply>>(PrepareAsyncFindAllProductRaw(context, request, cq));
     }
     ::grpc::Status FindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::product::ProductReply* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> AsyncFindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
@@ -129,26 +133,26 @@ class Product final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> PrepareAsyncFindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(PrepareAsyncFindOneProductRaw(context, request, cq));
     }
-    ::grpc::Status CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::product::ProductReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> AsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(AsyncCreateProductRaw(context, request, cq));
+    ::grpc::Status CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::product::QueryReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>> AsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>>(AsyncCreateProductRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> PrepareAsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(PrepareAsyncCreateProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>> PrepareAsyncCreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>>(PrepareAsyncCreateProductRaw(context, request, cq));
     }
-    ::grpc::Status UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::product::ProductReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> AsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(AsyncUpdateProductRaw(context, request, cq));
+    ::grpc::Status UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::product::QueryReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>> AsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>>(AsyncUpdateProductRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> PrepareAsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(PrepareAsyncUpdateProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>> PrepareAsyncUpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>>(PrepareAsyncUpdateProductRaw(context, request, cq));
     }
-    ::grpc::Status RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::product::ProductReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> AsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(AsyncRemoveProductRaw(context, request, cq));
+    ::grpc::Status RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::product::QueryReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>> AsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>>(AsyncRemoveProductRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>> PrepareAsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::ProductReply>>(PrepareAsyncRemoveProductRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>> PrepareAsyncRemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::product::QueryReply>>(PrepareAsyncRemoveProductRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientReaderWriter< ::product::PaginationRequest, ::product::ProductReply>> QueryProduct(::grpc::ClientContext* context) {
       return std::unique_ptr< ::grpc::ClientReaderWriter< ::product::PaginationRequest, ::product::ProductReply>>(QueryProductRaw(context));
@@ -162,16 +166,15 @@ class Product final {
     class async final :
       public StubInterface::async_interface {
      public:
-      void FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest* request, ::product::ProductsReply* response, std::function<void(::grpc::Status)>) override;
-      void FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest* request, ::product::ProductsReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest* request, ::grpc::ClientReadReactor< ::product::ProductsReply>* reactor) override;
       void FindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) override;
       void FindOneProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) override;
-      void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) override;
-      void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, std::function<void(::grpc::Status)>) override;
-      void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::QueryReply* response, std::function<void(::grpc::Status)>) override;
+      void CreateProduct(::grpc::ClientContext* context, const ::product::CreateRequest* request, ::product::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::QueryReply* response, std::function<void(::grpc::Status)>) override;
+      void UpdateProduct(::grpc::ClientContext* context, const ::product::UpdateRequest* request, ::product::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::QueryReply* response, std::function<void(::grpc::Status)>) override;
+      void RemoveProduct(::grpc::ClientContext* context, const ::product::FindByIdRequest* request, ::product::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void QueryProduct(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::product::PaginationRequest,::product::ProductReply>* reactor) override;
      private:
       friend class Stub;
@@ -184,16 +187,17 @@ class Product final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::product::ProductsReply>* AsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductsReply>* PrepareAsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::product::ProductsReply>* FindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request) override;
+    ::grpc::ClientAsyncReader< ::product::ProductsReply>* AsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::product::ProductsReply>* PrepareAsyncFindAllProductRaw(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* AsyncFindOneProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* PrepareAsyncFindOneProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* AsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* PrepareAsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* AsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* PrepareAsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* AsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::product::ProductReply>* PrepareAsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::product::QueryReply>* AsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::product::QueryReply>* PrepareAsyncCreateProductRaw(::grpc::ClientContext* context, const ::product::CreateRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::product::QueryReply>* AsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::product::QueryReply>* PrepareAsyncUpdateProductRaw(::grpc::ClientContext* context, const ::product::UpdateRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::product::QueryReply>* AsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::product::QueryReply>* PrepareAsyncRemoveProductRaw(::grpc::ClientContext* context, const ::product::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientReaderWriter< ::product::PaginationRequest, ::product::ProductReply>* QueryProductRaw(::grpc::ClientContext* context) override;
     ::grpc::ClientAsyncReaderWriter< ::product::PaginationRequest, ::product::ProductReply>* AsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReaderWriter< ::product::PaginationRequest, ::product::ProductReply>* PrepareAsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
@@ -210,11 +214,11 @@ class Product final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status FindAllProduct(::grpc::ServerContext* context, const ::product::EmptyRequest* request, ::product::ProductsReply* response);
+    virtual ::grpc::Status FindAllProduct(::grpc::ServerContext* context, const ::product::EmptyRequest* request, ::grpc::ServerWriter< ::product::ProductsReply>* writer);
     virtual ::grpc::Status FindOneProduct(::grpc::ServerContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response);
-    virtual ::grpc::Status CreateProduct(::grpc::ServerContext* context, const ::product::CreateRequest* request, ::product::ProductReply* response);
-    virtual ::grpc::Status UpdateProduct(::grpc::ServerContext* context, const ::product::UpdateRequest* request, ::product::ProductReply* response);
-    virtual ::grpc::Status RemoveProduct(::grpc::ServerContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response);
+    virtual ::grpc::Status CreateProduct(::grpc::ServerContext* context, const ::product::CreateRequest* request, ::product::QueryReply* response);
+    virtual ::grpc::Status UpdateProduct(::grpc::ServerContext* context, const ::product::UpdateRequest* request, ::product::QueryReply* response);
+    virtual ::grpc::Status RemoveProduct(::grpc::ServerContext* context, const ::product::FindByIdRequest* request, ::product::QueryReply* response);
     virtual ::grpc::Status QueryProduct(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::product::ProductReply, ::product::PaginationRequest>* stream);
   };
   template <class BaseClass>
@@ -229,12 +233,12 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/) override {
+    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::grpc::ServerWriter< ::product::ProductsReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestFindAllProduct(::grpc::ServerContext* context, ::product::EmptyRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::ProductsReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestFindAllProduct(::grpc::ServerContext* context, ::product::EmptyRequest* request, ::grpc::ServerAsyncWriter< ::product::ProductsReply>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -269,11 +273,11 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestCreateProduct(::grpc::ServerContext* context, ::product::CreateRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::ProductReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestCreateProduct(::grpc::ServerContext* context, ::product::CreateRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::QueryReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -289,11 +293,11 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestUpdateProduct(::grpc::ServerContext* context, ::product::UpdateRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::ProductReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestUpdateProduct(::grpc::ServerContext* context, ::product::UpdateRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::QueryReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -309,11 +313,11 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestRemoveProduct(::grpc::ServerContext* context, ::product::FindByIdRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::ProductReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestRemoveProduct(::grpc::ServerContext* context, ::product::FindByIdRequest* request, ::grpc::ServerAsyncResponseWriter< ::product::QueryReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -345,25 +349,20 @@ class Product final {
    public:
     WithCallbackMethod_FindAllProduct() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::product::EmptyRequest, ::product::ProductsReply>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::product::EmptyRequest, ::product::ProductsReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::product::EmptyRequest* request, ::product::ProductsReply* response) { return this->FindAllProduct(context, request, response); }));}
-    void SetMessageAllocatorFor_FindAllProduct(
-        ::grpc::MessageAllocator< ::product::EmptyRequest, ::product::ProductsReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::EmptyRequest, ::product::ProductsReply>*>(handler)
-              ->SetMessageAllocator(allocator);
+                   ::grpc::CallbackServerContext* context, const ::product::EmptyRequest* request) { return this->FindAllProduct(context, request); }));
     }
     ~WithCallbackMethod_FindAllProduct() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/) override {
+    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::grpc::ServerWriter< ::product::ProductsReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* FindAllProduct(
-      ::grpc::CallbackServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::product::ProductsReply>* FindAllProduct(
+      ::grpc::CallbackServerContext* /*context*/, const ::product::EmptyRequest* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_FindOneProduct : public BaseClass {
@@ -399,25 +398,25 @@ class Product final {
    public:
     WithCallbackMethod_CreateProduct() {
       ::grpc::Service::MarkMethodCallback(2,
-          new ::grpc::internal::CallbackUnaryHandler< ::product::CreateRequest, ::product::ProductReply>(
+          new ::grpc::internal::CallbackUnaryHandler< ::product::CreateRequest, ::product::QueryReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::product::CreateRequest* request, ::product::ProductReply* response) { return this->CreateProduct(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::product::CreateRequest* request, ::product::QueryReply* response) { return this->CreateProduct(context, request, response); }));}
     void SetMessageAllocatorFor_CreateProduct(
-        ::grpc::MessageAllocator< ::product::CreateRequest, ::product::ProductReply>* allocator) {
+        ::grpc::MessageAllocator< ::product::CreateRequest, ::product::QueryReply>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::CreateRequest, ::product::ProductReply>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::CreateRequest, ::product::QueryReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_CreateProduct() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* CreateProduct(
-      ::grpc::CallbackServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_UpdateProduct : public BaseClass {
@@ -426,25 +425,25 @@ class Product final {
    public:
     WithCallbackMethod_UpdateProduct() {
       ::grpc::Service::MarkMethodCallback(3,
-          new ::grpc::internal::CallbackUnaryHandler< ::product::UpdateRequest, ::product::ProductReply>(
+          new ::grpc::internal::CallbackUnaryHandler< ::product::UpdateRequest, ::product::QueryReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::product::UpdateRequest* request, ::product::ProductReply* response) { return this->UpdateProduct(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::product::UpdateRequest* request, ::product::QueryReply* response) { return this->UpdateProduct(context, request, response); }));}
     void SetMessageAllocatorFor_UpdateProduct(
-        ::grpc::MessageAllocator< ::product::UpdateRequest, ::product::ProductReply>* allocator) {
+        ::grpc::MessageAllocator< ::product::UpdateRequest, ::product::QueryReply>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::UpdateRequest, ::product::ProductReply>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::UpdateRequest, ::product::QueryReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_UpdateProduct() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* UpdateProduct(
-      ::grpc::CallbackServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_RemoveProduct : public BaseClass {
@@ -453,25 +452,25 @@ class Product final {
    public:
     WithCallbackMethod_RemoveProduct() {
       ::grpc::Service::MarkMethodCallback(4,
-          new ::grpc::internal::CallbackUnaryHandler< ::product::FindByIdRequest, ::product::ProductReply>(
+          new ::grpc::internal::CallbackUnaryHandler< ::product::FindByIdRequest, ::product::QueryReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::product::FindByIdRequest* request, ::product::ProductReply* response) { return this->RemoveProduct(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::product::FindByIdRequest* request, ::product::QueryReply* response) { return this->RemoveProduct(context, request, response); }));}
     void SetMessageAllocatorFor_RemoveProduct(
-        ::grpc::MessageAllocator< ::product::FindByIdRequest, ::product::ProductReply>* allocator) {
+        ::grpc::MessageAllocator< ::product::FindByIdRequest, ::product::QueryReply>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::FindByIdRequest, ::product::ProductReply>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::product::FindByIdRequest, ::product::QueryReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_RemoveProduct() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* RemoveProduct(
-      ::grpc::CallbackServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_QueryProduct : public BaseClass {
@@ -510,7 +509,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/) override {
+    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::grpc::ServerWriter< ::product::ProductsReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -544,7 +543,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -561,7 +560,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -578,7 +577,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -612,12 +611,12 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/) override {
+    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::grpc::ServerWriter< ::product::ProductsReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestFindAllProduct(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    void RequestFindAllProduct(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(0, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -652,7 +651,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -672,7 +671,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -692,7 +691,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -727,20 +726,20 @@ class Product final {
    public:
     WithRawCallbackMethod_FindAllProduct() {
       ::grpc::Service::MarkMethodRawCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->FindAllProduct(context, request, response); }));
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->FindAllProduct(context, request); }));
     }
     ~WithRawCallbackMethod_FindAllProduct() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/) override {
+    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::grpc::ServerWriter< ::product::ProductsReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerUnaryReactor* FindAllProduct(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* FindAllProduct(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithRawCallbackMethod_FindOneProduct : public BaseClass {
@@ -779,7 +778,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -801,7 +800,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -823,7 +822,7 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -852,33 +851,6 @@ class Product final {
     virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* QueryProduct(
       ::grpc::CallbackServerContext* /*context*/)
       { return nullptr; }
-  };
-  template <class BaseClass>
-  class WithStreamedUnaryMethod_FindAllProduct : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithStreamedUnaryMethod_FindAllProduct() {
-      ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::product::EmptyRequest, ::product::ProductsReply>(
-            [this](::grpc::ServerContext* context,
-                   ::grpc::ServerUnaryStreamer<
-                     ::product::EmptyRequest, ::product::ProductsReply>* streamer) {
-                       return this->StreamedFindAllProduct(context,
-                         streamer);
-                  }));
-    }
-    ~WithStreamedUnaryMethod_FindAllProduct() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable regular version of this method
-    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::product::ProductsReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedFindAllProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::EmptyRequest,::product::ProductsReply>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_FindOneProduct : public BaseClass {
@@ -915,10 +887,10 @@ class Product final {
     WithStreamedUnaryMethod_CreateProduct() {
       ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::product::CreateRequest, ::product::ProductReply>(
+          ::product::CreateRequest, ::product::QueryReply>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::product::CreateRequest, ::product::ProductReply>* streamer) {
+                     ::product::CreateRequest, ::product::QueryReply>* streamer) {
                        return this->StreamedCreateProduct(context,
                          streamer);
                   }));
@@ -927,12 +899,12 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status CreateProduct(::grpc::ServerContext* /*context*/, const ::product::CreateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedCreateProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::CreateRequest,::product::ProductReply>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedCreateProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::CreateRequest,::product::QueryReply>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_UpdateProduct : public BaseClass {
@@ -942,10 +914,10 @@ class Product final {
     WithStreamedUnaryMethod_UpdateProduct() {
       ::grpc::Service::MarkMethodStreamed(3,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::product::UpdateRequest, ::product::ProductReply>(
+          ::product::UpdateRequest, ::product::QueryReply>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::product::UpdateRequest, ::product::ProductReply>* streamer) {
+                     ::product::UpdateRequest, ::product::QueryReply>* streamer) {
                        return this->StreamedUpdateProduct(context,
                          streamer);
                   }));
@@ -954,12 +926,12 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status UpdateProduct(::grpc::ServerContext* /*context*/, const ::product::UpdateRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedUpdateProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::UpdateRequest,::product::ProductReply>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedUpdateProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::UpdateRequest,::product::QueryReply>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_RemoveProduct : public BaseClass {
@@ -969,10 +941,10 @@ class Product final {
     WithStreamedUnaryMethod_RemoveProduct() {
       ::grpc::Service::MarkMethodStreamed(4,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::product::FindByIdRequest, ::product::ProductReply>(
+          ::product::FindByIdRequest, ::product::QueryReply>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::product::FindByIdRequest, ::product::ProductReply>* streamer) {
+                     ::product::FindByIdRequest, ::product::QueryReply>* streamer) {
                        return this->StreamedRemoveProduct(context,
                          streamer);
                   }));
@@ -981,16 +953,43 @@ class Product final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::ProductReply* /*response*/) override {
+    ::grpc::Status RemoveProduct(::grpc::ServerContext* /*context*/, const ::product::FindByIdRequest* /*request*/, ::product::QueryReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedRemoveProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::FindByIdRequest,::product::ProductReply>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedRemoveProduct(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::product::FindByIdRequest,::product::QueryReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_FindAllProduct<WithStreamedUnaryMethod_FindOneProduct<WithStreamedUnaryMethod_CreateProduct<WithStreamedUnaryMethod_UpdateProduct<WithStreamedUnaryMethod_RemoveProduct<Service > > > > > StreamedUnaryService;
-  typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_FindAllProduct<WithStreamedUnaryMethod_FindOneProduct<WithStreamedUnaryMethod_CreateProduct<WithStreamedUnaryMethod_UpdateProduct<WithStreamedUnaryMethod_RemoveProduct<Service > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_FindOneProduct<WithStreamedUnaryMethod_CreateProduct<WithStreamedUnaryMethod_UpdateProduct<WithStreamedUnaryMethod_RemoveProduct<Service > > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_FindAllProduct : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_FindAllProduct() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::product::EmptyRequest, ::product::ProductsReply>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerSplitStreamer<
+                     ::product::EmptyRequest, ::product::ProductsReply>* streamer) {
+                       return this->StreamedFindAllProduct(context,
+                         streamer);
+                  }));
+    }
+    ~WithSplitStreamingMethod_FindAllProduct() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status FindAllProduct(::grpc::ServerContext* /*context*/, const ::product::EmptyRequest* /*request*/, ::grpc::ServerWriter< ::product::ProductsReply>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedFindAllProduct(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::product::EmptyRequest,::product::ProductsReply>* server_split_streamer) = 0;
+  };
+  typedef WithSplitStreamingMethod_FindAllProduct<Service > SplitStreamedService;
+  typedef WithSplitStreamingMethod_FindAllProduct<WithStreamedUnaryMethod_FindOneProduct<WithStreamedUnaryMethod_CreateProduct<WithStreamedUnaryMethod_UpdateProduct<WithStreamedUnaryMethod_RemoveProduct<Service > > > > > StreamedService;
 };
 
 }  // namespace product
