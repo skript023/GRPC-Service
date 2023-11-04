@@ -26,6 +26,8 @@ namespace microservice
         Status CreateProduct(ServerContext* context, const CreateRequest* request, QueryReply* reply) override;
         Status UpdateProduct(ServerContext* context, const UpdateRequest* request, QueryReply* reply) override;
         Status RemoveProduct(ServerContext* context, const FindByIdRequest* request, QueryReply* reply) override;
+        bool on_changed(const std::vector<std::string>& previousState);
+    private:
         std::string m_string;
         std::vector <std::string> m_mock_data
         {
@@ -34,6 +36,7 @@ namespace microservice
             "Product C",
         };
 
-        std::unique_ptr<ServerWriter<::product::ProductsReply>> m_data_replies;
+        std::atomic<bool> m_stream = true;
+        ProductsReply m_reply;
     };
 }

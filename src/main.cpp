@@ -17,8 +17,10 @@
  */
 
 #include "common.hpp"
-#include "greeter/greeter.service.hpp"
 #include "server.hpp"
+#include "streaming.hpp"
+
+#include "greeter/greeter.service.hpp"
 
 ABSL_FLAG(uint16_t, port, 50051, "Server port for the service");
 
