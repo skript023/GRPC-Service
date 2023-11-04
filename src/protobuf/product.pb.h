@@ -536,29 +536,23 @@ class ProductsReply final :
   enum : int {
     kProductsFieldNumber = 1,
   };
-  // repeated string products = 1;
+  // repeated .product.ProductReply products = 1;
   int products_size() const;
   private:
   int _internal_products_size() const;
   public:
   void clear_products();
-  const std::string& products(int index) const;
-  std::string* mutable_products(int index);
-  void set_products(int index, const std::string& value);
-  void set_products(int index, std::string&& value);
-  void set_products(int index, const char* value);
-  void set_products(int index, const char* value, size_t size);
-  std::string* add_products();
-  void add_products(const std::string& value);
-  void add_products(std::string&& value);
-  void add_products(const char* value);
-  void add_products(const char* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& products() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_products();
+  ::product::ProductReply* mutable_products(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >*
+      mutable_products();
   private:
-  const std::string& _internal_products(int index) const;
-  std::string* _internal_add_products();
+  const ::product::ProductReply& _internal_products(int index) const;
+  ::product::ProductReply* _internal_add_products();
   public:
+  const ::product::ProductReply& products(int index) const;
+  ::product::ProductReply* add_products();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >&
+      products() const;
 
   // @@protoc_insertion_point(class_scope:product.ProductsReply)
  private:
@@ -568,7 +562,7 @@ class ProductsReply final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> products_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply > products_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1475,7 +1469,7 @@ inline void QueryReply::set_success(bool value) {
 
 // ProductsReply
 
-// repeated string products = 1;
+// repeated .product.ProductReply products = 1;
 inline int ProductsReply::_internal_products_size() const {
   return _impl_.products_.size();
 }
@@ -1485,69 +1479,34 @@ inline int ProductsReply::products_size() const {
 inline void ProductsReply::clear_products() {
   _impl_.products_.Clear();
 }
-inline std::string* ProductsReply::add_products() {
-  std::string* _s = _internal_add_products();
-  // @@protoc_insertion_point(field_add_mutable:product.ProductsReply.products)
-  return _s;
-}
-inline const std::string& ProductsReply::_internal_products(int index) const {
-  return _impl_.products_.Get(index);
-}
-inline const std::string& ProductsReply::products(int index) const {
-  // @@protoc_insertion_point(field_get:product.ProductsReply.products)
-  return _internal_products(index);
-}
-inline std::string* ProductsReply::mutable_products(int index) {
+inline ::product::ProductReply* ProductsReply::mutable_products(int index) {
   // @@protoc_insertion_point(field_mutable:product.ProductsReply.products)
   return _impl_.products_.Mutable(index);
 }
-inline void ProductsReply::set_products(int index, const std::string& value) {
-  _impl_.products_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:product.ProductsReply.products)
-}
-inline void ProductsReply::set_products(int index, std::string&& value) {
-  _impl_.products_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:product.ProductsReply.products)
-}
-inline void ProductsReply::set_products(int index, const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _impl_.products_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:product.ProductsReply.products)
-}
-inline void ProductsReply::set_products(int index, const char* value, size_t size) {
-  _impl_.products_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:product.ProductsReply.products)
-}
-inline std::string* ProductsReply::_internal_add_products() {
-  return _impl_.products_.Add();
-}
-inline void ProductsReply::add_products(const std::string& value) {
-  _impl_.products_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:product.ProductsReply.products)
-}
-inline void ProductsReply::add_products(std::string&& value) {
-  _impl_.products_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:product.ProductsReply.products)
-}
-inline void ProductsReply::add_products(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _impl_.products_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:product.ProductsReply.products)
-}
-inline void ProductsReply::add_products(const char* value, size_t size) {
-  _impl_.products_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:product.ProductsReply.products)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-ProductsReply::products() const {
-  // @@protoc_insertion_point(field_list:product.ProductsReply.products)
-  return _impl_.products_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >*
 ProductsReply::mutable_products() {
   // @@protoc_insertion_point(field_mutable_list:product.ProductsReply.products)
   return &_impl_.products_;
+}
+inline const ::product::ProductReply& ProductsReply::_internal_products(int index) const {
+  return _impl_.products_.Get(index);
+}
+inline const ::product::ProductReply& ProductsReply::products(int index) const {
+  // @@protoc_insertion_point(field_get:product.ProductsReply.products)
+  return _internal_products(index);
+}
+inline ::product::ProductReply* ProductsReply::_internal_add_products() {
+  return _impl_.products_.Add();
+}
+inline ::product::ProductReply* ProductsReply::add_products() {
+  ::product::ProductReply* _add = _internal_add_products();
+  // @@protoc_insertion_point(field_add:product.ProductsReply.products)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::product::ProductReply >&
+ProductsReply::products() const {
+  // @@protoc_insertion_point(field_list:product.ProductsReply.products)
+  return _impl_.products_;
 }
 
 // -------------------------------------------------------------------

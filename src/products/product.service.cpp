@@ -2,59 +2,47 @@
 
 namespace microservice
 {
-	Status ProductService::FindAllProduct(ServerContext* context, const EmptyRequest* request, ServerWriter<ProductsReply>* reply)
-	{
-		size_t size = m_mock_data.size();
-		ProductsReply replies; replies.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
-		grpc::WriteOptions opt;
-		while (reply->Write(replies))
-		{
-			if (size < m_mock_data.size())
-			{
-				break;
-			}
-			std::this_thread::sleep_for(1s);
-		}
+    product_service::product_service(Product::AsyncService* service, ServerCompletionQueue* cq) :
+        m_service(service), m_completed_queue(cq), m_responder(&m_context), m_status(CREATE)
+    {
+        // Invoke the serving logic right away.
+        this->proceed();
+    }
+    void product_service::proceed()
+    {
+        if (m_status == CREATE)
+        {
+            m_status = PROCESS;
 
-		replies.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
-		reply->WriteLast(replies, opt.set_last_message());
+            this->find_all_begin();
+        }
+        else if (m_status == PROCESS)
+        {
+            this->find_all_end();
+        }
+        else
+        {
+            GPR_ASSERT(m_status == FINISH);
+            // Once in the FINISH state, deallocate ourselves (register_service).
+            delete this;
+        }
+    }
+    product_service* product_service::find_all_begin()
+    {
+        m_service->RequestFindAllProduct(&m_context, &m_request, &m_responder, m_completed_queue, m_completed_queue, this);
 
-		return Status::OK;
-	}
-	Status ProductService::FindOneProduct(ServerContext* context, const FindByIdRequest* request, ProductReply* reply)
-	{
-		if (request->id() >= m_mock_data.size())
-			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");
+        return this;
+    }
+    product_service* product_service::find_all_end()
+    {
+        new product_service(m_service, m_completed_queue);
+        this->populate_data();
+        m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
+        new product_service(m_service, m_completed_queue);
 
-		reply->set_id(request->id());
-		reply->set_name(m_mock_data[request->id()]);
+        m_responder.Write(m_reply, this);
+        m_status = FINISH;
 
-		return Status::OK;
-	}
-	Status ProductService::CreateProduct(ServerContext* context, const CreateRequest* request, QueryReply* reply)
-	{
-		if (request->name().empty())
-			return Status::CANCELLED;
-
-		auto data = m_mock_data.emplace_back(std::move(request->name()));
-		reply->set_message(fmt::format("{} successfully created", data));
-		ProductsReply replies; replies.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
-
-		return Status::OK;
-	}
-	Status ProductService::UpdateProduct(ServerContext* context, const UpdateRequest* request, QueryReply* reply)
-	{
-		auto result = m_mock_data[request->id()] = request->name();
-		reply->set_message(fmt::format("{} successfully updated", result));
-
-		return Status::OK;
-	}
-	Status ProductService::RemoveProduct(ServerContext* context, const FindByIdRequest* request, QueryReply* reply)
-	{
-		m_mock_data.erase(m_mock_data.begin() + request->id());
-		
-		reply->set_message("data successfully deleted");
-
-		return Status::OK;
-	}
+        return this;
+    }
 }

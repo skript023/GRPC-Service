@@ -218,27 +218,28 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_product_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rproduct.proto\022\007product\"(\n\014ProductReply"
   "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\".\n\nQueryReply"
-  "\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"!\n\rPr"
-  "oductsReply\022\020\n\010products\030\001 \003(\t\"\035\n\rCreateR"
-  "equest\022\014\n\004name\030\001 \001(\t\")\n\rUpdateRequest\022\n\n"
-  "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindByIdReque"
-  "st\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004p"
-  "age\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2"
-  "\236\003\n\007Product\022C\n\016FindAllProduct\022\025.product."
-  "EmptyRequest\032\026.product.ProductsReply\"\0000\001"
-  "\022C\n\016FindOneProduct\022\030.product.FindByIdReq"
-  "uest\032\025.product.ProductReply\"\000\022>\n\rCreateP"
-  "roduct\022\026.product.CreateRequest\032\023.product"
-  ".QueryReply\"\000\022>\n\rUpdateProduct\022\026.product"
-  ".UpdateRequest\032\023.product.QueryReply\"\000\022@\n"
-  "\rRemoveProduct\022\030.product.FindByIdRequest"
-  "\032\023.product.QueryReply\"\000\022G\n\014QueryProduct\022"
-  "\032.product.PaginationRequest\032\025.product.Pr"
-  "oductReply\"\000(\0010\001b\006proto3"
+  "\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"8\n\rPr"
+  "oductsReply\022\'\n\010products\030\001 \003(\0132\025.product."
+  "ProductReply\"\035\n\rCreateRequest\022\014\n\004name\030\001 "
+  "\001(\t\")\n\rUpdateRequest\022\n\n\002id\030\001 \001(\005\022\014\n\004name"
+  "\030\002 \001(\t\"\035\n\017FindByIdRequest\022\n\n\002id\030\001 \001(\005\"/\n"
+  "\021PaginationRequest\022\014\n\004page\030\001 \001(\005\022\014\n\004skip"
+  "\030\002 \001(\005\"\016\n\014EmptyRequest2\236\003\n\007Product\022C\n\016Fi"
+  "ndAllProduct\022\025.product.EmptyRequest\032\026.pr"
+  "oduct.ProductsReply\"\0000\001\022C\n\016FindOneProduc"
+  "t\022\030.product.FindByIdRequest\032\025.product.Pr"
+  "oductReply\"\000\022>\n\rCreateProduct\022\026.product."
+  "CreateRequest\032\023.product.QueryReply\"\000\022>\n\r"
+  "UpdateProduct\022\026.product.UpdateRequest\032\023."
+  "product.QueryReply\"\000\022@\n\rRemoveProduct\022\030."
+  "product.FindByIdRequest\032\023.product.QueryR"
+  "eply\"\000\022G\n\014QueryProduct\022\032.product.Paginat"
+  "ionRequest\032\025.product.ProductReply\"\000(\0010\001b"
+  "\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_product_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_product_2eproto = {
-    false, false, 744, descriptor_table_protodef_product_2eproto,
+    false, false, 767, descriptor_table_protodef_product_2eproto,
     "product.proto",
     &descriptor_table_product_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_product_2eproto::offsets,
@@ -780,16 +781,14 @@ const char* ProductsReply::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated string products = 1;
+      // repeated .product.ProductReply products = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            auto str = _internal_add_products();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            ptr = ctx->ParseMessage(_internal_add_products(), ptr);
             CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "product.ProductsReply.products"));
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else
@@ -824,14 +823,12 @@ uint8_t* ProductsReply::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string products = 1;
-  for (int i = 0, n = this->_internal_products_size(); i < n; i++) {
-    const auto& s = this->_internal_products(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "product.ProductsReply.products");
-    target = stream->WriteString(1, s, target);
+  // repeated .product.ProductReply products = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_products_size()); i < n; i++) {
+    const auto& repfield = this->_internal_products(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -850,12 +847,11 @@ size_t ProductsReply::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string products = 1;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.products_.size());
-  for (int i = 0, n = _impl_.products_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.products_.Get(i));
+  // repeated .product.ProductReply products = 1;
+  total_size += 1UL * this->_internal_products_size();
+  for (const auto& msg : this->_impl_.products_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);

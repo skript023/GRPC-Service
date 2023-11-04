@@ -13,7 +13,7 @@ message QueryReply {
 }
 
 message ProductsReply {
-    repeated string products = 1;
+    repeated ProductReply products = 1;
 }
 
 message CreateRequest {
