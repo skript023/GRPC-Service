@@ -3,29 +3,12 @@
 
 namespace microservice
 {
-	Status ProductService::FindAllProduct(ServerContext* context, const EmptyRequest* request, ServerWriter<ProductsReply>* reply)
+	Status ProductService::FindAllProduct(ServerContext* context, const EmptyRequest* request, ProductsReply* reply)
 	{
 		if (m_mock_data.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
 
-		size_t size = m_mock_data.size();
-		auto data = m_mock_data;
 		m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
-		grpc::WriteOptions opt;
-
-		reply->Write(m_reply);
-
-		while (m_stream)
-		{
-			if (this->on_changed(data))
-			{
-				m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
-				reply->Write(m_reply);
-			}
-			if (!m_stream) break;
-
-			std::this_thread::sleep_for(1s);
-		}
 
 		return Status::OK;
 	}
@@ -86,6 +69,57 @@ namespace microservice
 
 		return Status::OK;
 	}
+	Status ProductService::FindAllProductStream(ServerContext* context, const EmptyRequest* request, ServerWriter<ProductsReply>* reply)
+	{
+		if (m_mock_data.empty())
+			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
+
+		size_t size = m_mock_data.size();
+		auto data = m_mock_data;
+		m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
+		grpc::WriteOptions opt;
+
+		reply->Write(m_reply);
+
+		while (m_stream)
+		{
+			std::unique_lock<std::mutex> lock(m_mutex);
+			if (this->on_changed(data))
+			{
+				m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
+				reply->Write(m_reply);
+			}
+			if (!m_stream) break;
+		}
+
+		return Status::OK;
+	}
+	Status ProductService::CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream)
+	{
+		CreateRequest data;
+		QueryReply reply;
+		while (stream->Read(&data))
+		{
+			std::unique_lock<std::mutex> lock(m_mutex);
+			
+			if (this->does_exist(data.name()))
+			{
+				reply.set_message(fmt::format("{} is already exist", data.name()));
+				stream->Write(reply);
+			}
+			else
+			{
+				if (!m_mock_data.emplace_back(data.name()).empty())
+				{
+					reply.set_message(fmt::format("{} has successfully added", data.name()));
+					reply.set_success(true);
+					stream->Write(reply);
+				}
+			}
+		}
+
+		return Status::OK;
+	}
 	bool ProductService::on_changed(std::vector<std::string>& previousState)
 	{
 		if (m_mock_data.size() > previousState.size())
@@ -111,6 +145,17 @@ namespace microservice
 			}
 		}
 
+		return false;
+	}
+	bool ProductService::does_exist(std::string const& element)
+	{
+		for (auto& value : m_mock_data) 
+		{
+			if (value == element) 
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 }

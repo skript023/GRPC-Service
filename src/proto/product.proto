@@ -37,10 +37,13 @@ message PaginationRequest {
 message EmptyRequest {}
 
 service Product {
-    rpc FindAllProduct (EmptyRequest) returns (stream ProductsReply) {}
+    rpc FindAllProduct (EmptyRequest) returns (ProductsReply) {}
     rpc FindOneProduct (FindByIdRequest) returns (ProductReply) {}
     rpc CreateProduct (CreateRequest) returns (QueryReply) {}
     rpc UpdateProduct (UpdateRequest) returns (QueryReply) {}
     rpc RemoveProduct (FindByIdRequest) returns (QueryReply) {}
     rpc QueryProduct (stream PaginationRequest) returns (stream ProductReply) {}
+
+    rpc FindAllProductStream (EmptyRequest) returns (stream ProductsReply) {}
+    rpc CreateProductBidiStream (stream CreateRequest) returns (stream QueryReply) {}
 }

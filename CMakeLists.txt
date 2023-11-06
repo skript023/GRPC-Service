@@ -25,19 +25,6 @@ include(package/g3log.cmake)
 include(package/fmtlib.cmake)
 include(package/grpc.cmake)
 
-# Microservice
-message(STATUS "Microservice")
-file(GLOB_RECURSE SRC_MAIN
-    "${SRC_DIR}/**.hpp"
-    "${SRC_DIR}/**.hxx"
-    "${SRC_DIR}/**.hh"
-    "${SRC_DIR}/**.h"
-    "${SRC_DIR}/**.cpp"
-    "${SRC_DIR}/**.cc"
-    "${SRC_DIR}/**.cxx"
-    "${SRC_DIR}/**.asm"
-)
-
 file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
 
 if (MSVC)
@@ -63,6 +50,23 @@ foreach(protos ${DATAMODEL_PROTOS})
     endif()
 endforeach(protos)
 
+# Microservice
+message(STATUS "Microservice")
+file(GLOB_RECURSE SRC_MAIN
+    "${SRC_DIR}/**.hpp"
+    "${SRC_DIR}/**.hxx"
+    "${SRC_DIR}/**.hh"
+    "${SRC_DIR}/**.h"
+    "${SRC_DIR}/**.cpp"
+    "${SRC_DIR}/**.cc"
+    "${SRC_DIR}/**.cxx"
+    "${SRC_DIR}/**.asm"
+)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+  enable_language("RC")
+  set (ICON ${SRC_DIR}/gaboot_icon.rc)
+endif()
 
 # Define a custom target to associate with the custom command
 add_custom_target(proto DEPENDS "${SRC_DIR}/protobuf")
