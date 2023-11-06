@@ -44,7 +44,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
   set (ICON ${SRC_DIR}/gaboot_icon.rc)
 endif()
 
-add_executable(Microservice "${SRC_DIR}/main.cpp")
+add_executable(Microservice "${SRC_DIR}/main.cpp" ${ICON})
 
 file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
 
