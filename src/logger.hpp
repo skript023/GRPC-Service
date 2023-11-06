@@ -80,7 +80,7 @@ namespace microservice
 			}
 #endif
 
-			m_file_path /= "Drogon Log";
+			m_file_path /= "GRPC Service";
 			std::filesystem::path m_backup_path = m_file_path;
 			m_backup_path /= "Backup";
 			try
@@ -105,8 +105,8 @@ namespace microservice
 				}
 
 				m_event_file_path = m_file_path;
-				m_file_path /= "Drogon.log";
-				m_event_file_path /= "Drogon Events.log";
+				m_file_path /= "GRPC-Service.log";
+				m_event_file_path /= "GRPC-Service-Events.log";
 
 				if (std::filesystem::exists(m_file_path))
 				{

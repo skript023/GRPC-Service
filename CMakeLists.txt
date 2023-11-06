@@ -6,19 +6,19 @@ set(SRC_DIR "${PROJECT_SOURCE_DIR}/src")
 
 include(CheckIncludeFileCXX)
 
-if (MSVC)
-    if("${CMAKE_MAKE_PROGRAM}" MATCHES "ninja")
-        message("Ninja build system is being used.")
-    else()
-        include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
-        message("Ninja build system is not being used.")
-    endif()
+if (WIN32)
+  message("Building on Windows")
+  include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
+elseif(UNIX)
+  message("Building on a Unix-based platform (including Linux)")
+  include("/mnt/j/database/Tools/vcpkg/scripts/buildsystems/vcpkg.cmake")
 else()
-    
+  message(FATAL "Building on an unknown or unsupported platform")
+  # Add default configurations or actions here
 endif()
 
 #include external dependencies
-#include(package/git.cmake)
+include(package/git.cmake)
 
 message("\nFetching modules")
 include(package/g3log.cmake)

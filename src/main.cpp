@@ -18,6 +18,8 @@
 
 #include "common.hpp"
 #include "server.hpp"
+#include "version.hpp"
+#include "database.hpp"
 #include "streaming.hpp"
 
 #include "greeter/greeter.service.hpp"
@@ -27,6 +29,8 @@ ABSL_FLAG(uint16_t, port, 50051, "Server port for the service");
 int main(int argc, char** argv) 
 {
     using namespace microservice;
+    absl::ParseCommandLine(argc, argv);
+
     auto logger_instance = std::make_unique<logger>("GRPC Console");
 
     try
@@ -41,15 +45,20 @@ int main(int argc, char** argv)
                                                                     __/ |
                                                                    |___/ 
 )kek";
-        absl::ParseCommandLine(argc, argv);
+        LOG(INFO) << fmt::format("\n\tGit Info\n\tBranch:\t{}\n\tHash:\t{}\n\tDate:\t{}", server_version::GIT_BRANCH, server_version::GIT_SHA1, server_version::GIT_DATE);
+        
+        auto database_instance = std::make_unique<database>();
+        LOG(INFO) << "Database created";
+
         auto server_instance = std::make_unique<server>();
         server_instance->run(absl::GetFlag(FLAGS_port));
 
         server_instance.reset();
+        database_instance.reset();
     }
-    catch (const std::exception&)
+    catch (const std::exception& ex)
     {
-
+        LOG(WARNING) << ex.what();
     }
 
     logger_instance.reset();

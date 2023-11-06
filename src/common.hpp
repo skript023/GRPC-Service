@@ -23,6 +23,7 @@
 #endif
 
 #include "fmt/format.h"
+#include "sqlite_orm/sqlite_orm.h"
 
 #include "logger.hpp"
 
