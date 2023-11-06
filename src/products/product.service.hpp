@@ -1,6 +1,7 @@
 #pragma once
 #include "common.hpp"
 #include "service_invoker.hpp"
+#include "entity/product.entity.hpp"
 
 #include "protobuf/product.grpc.pb.h"
 
@@ -21,6 +22,7 @@ using grpc::ServerReader;
 
 namespace microservice
 {
+    using product_table_t = std::vector<microservice::Products, std::allocator<microservice::Products>>; 
     class ProductService final : public Product::Service
     {
     private:
@@ -36,7 +38,7 @@ namespace microservice
 
         Status CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream) override;
     private:
-        bool on_changed(std::vector<std::string>& previousState);
+        bool on_changed(product_table_t& previousState, product_table_t const& currentState);
         bool does_exist(std::string const& element);
     private:
         std::string m_string;
