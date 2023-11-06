@@ -45,5 +45,7 @@ service Product {
     rpc QueryProduct (stream PaginationRequest) returns (stream ProductReply) {}
 
     rpc FindAllProductStream (EmptyRequest) returns (stream ProductsReply) {}
+    rpc UpdateProductStream (stream UpdateRequest) returns (QueryReply) {}
+
     rpc CreateProductBidiStream (stream CreateRequest) returns (stream QueryReply) {}
 }

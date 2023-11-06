@@ -8,7 +8,7 @@ namespace microservice
 		if (m_mock_data.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
 
-		m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
+		reply->mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
 
 		return Status::OK;
 	}
@@ -79,7 +79,7 @@ namespace microservice
 		m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
 		grpc::WriteOptions opt;
 
-		reply->Write(m_reply);
+		m_stream = reply->Write(m_reply);
 
 		while (m_stream)
 		{
@@ -87,11 +87,31 @@ namespace microservice
 			if (this->on_changed(data))
 			{
 				m_reply.mutable_products()->Assign(m_mock_data.begin(), m_mock_data.end());
-				reply->Write(m_reply);
+				m_stream = reply->Write(m_reply);
 			}
 			if (!m_stream) break;
 		}
 
+		return Status::OK;
+	}
+	Status ProductService::UpdateProductStream(ServerContext* context, ServerReader<UpdateRequest>* reader, QueryReply* response)
+	{
+		UpdateRequest request;
+		while (reader->Read(&request))
+		{
+			std::unique_lock<std::mutex> lock(m_mutex);
+
+			if (this->does_exist(request.name()))
+			{
+				response->set_message(fmt::format("{} is already exist", request.name()));
+			}
+			else
+			{
+				auto result = m_mock_data[request.id()] = request.name();
+				response->set_message(fmt::format("{} successfully updated", result));
+				response->set_success(true);
+			}
+		}
 		return Status::OK;
 	}
 	Status ProductService::CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream)

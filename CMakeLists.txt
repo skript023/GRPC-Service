@@ -25,31 +25,6 @@ include(package/g3log.cmake)
 include(package/fmtlib.cmake)
 include(package/grpc.cmake)
 
-file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
-
-if (MSVC)
-    set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
-    set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
-else()
-    set(PROTOC "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/protobuf/protoc")
-    set(GRPC_CPP_PLUGIN "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/grpc/grpc_cpp_plugin")
-endif()
-
-file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")
-
-message(STATUS "Compiling proto")
-foreach(protos ${DATAMODEL_PROTOS})
-    message(STATUS "Execute ${PROTOC} --grpc_out="${SRC_DIR}/protobuf" --cpp_out="${SRC_DIR}/protobuf" -I "${SRC_DIR}/proto" --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}" "${proto_path}"")
-    execute_process(
-      COMMAND ${PROTOC} --grpc_out=${SRC_DIR}/protobuf --cpp_out=${SRC_DIR}/protobuf -I ${SRC_DIR}/proto --plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN} ${protos}
-        RESULT_VARIABLE GRPC_RESULT)
-    if (GRPC_RESULT)
-        message(FATAL_ERROR "grpc generate failed with error code: ${GRPC_RESULT}")
-    else()
-        message(STATUS "${protos} compiled")
-    endif()
-endforeach(protos)
-
 # Microservice
 message(STATUS "Microservice")
 file(GLOB_RECURSE SRC_MAIN
@@ -68,11 +43,37 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
   set (ICON ${SRC_DIR}/gaboot_icon.rc)
 endif()
 
-# Define a custom target to associate with the custom command
-add_custom_target(proto DEPENDS "${SRC_DIR}/protobuf")
-
 add_executable(Microservice "${SRC_DIR}/main.cpp")
-add_dependencies(Microservice proto)
+
+file(GLOB_RECURSE DATAMODEL_PROTOS "${SRC_DIR}/**.proto")
+
+if (MSVC)
+    set(PROTOC "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/protobuf/protoc.exe")
+    set(GRPC_CPP_PLUGIN "$ENV{VCPKG_ROOT}/installed/x64-windows/tools/grpc/grpc_cpp_plugin.exe")
+else()
+    set(PROTOC "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/protobuf/protoc")
+    set(GRPC_CPP_PLUGIN "/mnt/j/database/Tools/vcpkg/installed/x64-linux/tools/grpc/grpc_cpp_plugin")
+endif()
+
+file(MAKE_DIRECTORY "${SRC_DIR}/protobuf")
+
+foreach(protos ${DATAMODEL_PROTOS})
+    get_filename_component(source_name ${protos} NAME_WE)
+
+    add_custom_command(
+      OUTPUT "${SRC_DIR}/protobuf/${source_name}.pb.cc" "${SRC_DIR}/protobuf/${source_name}.pb.h"
+      COMMAND ${PROTOC}
+      ARGS --grpc_out ${SRC_DIR}/protobuf
+        --cpp_out ${SRC_DIR}/protobuf
+        -I ${SRC_DIR}/proto
+        --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}"
+        ${protos}
+      DEPENDS ${protos})
+
+    # Define a custom target to associate with the custom command
+    add_custom_target(${source_name} DEPENDS "${SRC_DIR}/protobuf/${source_name}.pb.cc" "${SRC_DIR}/protobuf/${source_name}.pb.h")
+    add_dependencies(Microservice ${source_name})
+endforeach(protos)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(TARGET Microservice PROPERTY CXX_STANDARD 20) # 23 Because std::format is not avalible in std:c++20 for some reason. Maybe it's because i use v142 toolset.

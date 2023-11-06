@@ -14,9 +14,10 @@ using product::FindByIdRequest;
 using product::EmptyRequest;
 using product::UpdateRequest;
 using product::CreateRequest;
-using product::ProductsReply;
+
 using grpc::ServerWriter;
 using grpc::ServerReaderWriter;
+using grpc::ServerReader;
 
 namespace microservice
 {
@@ -30,6 +31,8 @@ namespace microservice
         Status RemoveProduct(ServerContext* context, const FindByIdRequest* request, QueryReply* reply) override;
 
         Status FindAllProductStream(ServerContext* context, const EmptyRequest* request, ServerWriter<ProductsReply>* reply) override;
+        Status UpdateProductStream(ServerContext* context, ServerReader<UpdateRequest>* reader, QueryReply* response) override;
+
 
         Status CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream) override;
     private:
@@ -37,7 +40,7 @@ namespace microservice
         bool does_exist(std::string const& element);
     private:
         std::string m_string;
-        std::atomic<bool> m_stream = true;
+        std::atomic<bool> m_stream;
         ProductsReply m_reply;
         std::mutex m_mutex;
     private:

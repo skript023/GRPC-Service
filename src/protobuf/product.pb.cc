@@ -224,7 +224,7 @@ const char descriptor_table_protodef_product_2eproto[] PROTOBUF_SECTION_VARIABLE
   "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindByIdReque"
   "st\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004p"
   "age\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2"
-  "\265\004\n\007Product\022A\n\016FindAllProduct\022\025.product."
+  "\375\004\n\007Product\022A\n\016FindAllProduct\022\025.product."
   "EmptyRequest\032\026.product.ProductsReply\"\000\022C"
   "\n\016FindOneProduct\022\030.product.FindByIdReque"
   "st\032\025.product.ProductReply\"\000\022>\n\rCreatePro"
@@ -236,13 +236,15 @@ const char descriptor_table_protodef_product_2eproto[] PROTOBUF_SECTION_VARIABLE
   "product.PaginationRequest\032\025.product.Prod"
   "uctReply\"\000(\0010\001\022I\n\024FindAllProductStream\022\025"
   ".product.EmptyRequest\032\026.product.Products"
-  "Reply\"\0000\001\022L\n\027CreateProductBidiStream\022\026.p"
-  "roduct.CreateRequest\032\023.product.QueryRepl"
-  "y\"\000(\0010\001b\006proto3"
+  "Reply\"\0000\001\022F\n\023UpdateProductStream\022\026.produ"
+  "ct.UpdateRequest\032\023.product.QueryReply\"\000("
+  "\001\022L\n\027CreateProductBidiStream\022\026.product.C"
+  "reateRequest\032\023.product.QueryReply\"\000(\0010\001b"
+  "\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_product_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_product_2eproto = {
-    false, false, 895, descriptor_table_protodef_product_2eproto,
+    false, false, 967, descriptor_table_protodef_product_2eproto,
     "product.proto",
     &descriptor_table_product_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_product_2eproto::offsets,

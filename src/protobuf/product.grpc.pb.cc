@@ -29,6 +29,7 @@ static const char* Product_method_names[] = {
   "/product.Product/RemoveProduct",
   "/product.Product/QueryProduct",
   "/product.Product/FindAllProductStream",
+  "/product.Product/UpdateProductStream",
   "/product.Product/CreateProductBidiStream",
 };
 
@@ -46,7 +47,8 @@ Product::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, c
   , rpcmethod_RemoveProduct_(Product_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_QueryProduct_(Product_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   , rpcmethod_FindAllProductStream_(Product_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
-  , rpcmethod_CreateProductBidiStream_(Product_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_UpdateProductStream_(Product_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
+  , rpcmethod_CreateProductBidiStream_(Product_method_names[8], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
 ::grpc::Status Product::Stub::FindAllProduct(::grpc::ClientContext* context, const ::product::EmptyRequest& request, ::product::ProductsReply* response) {
@@ -196,6 +198,22 @@ void Product::Stub::async::FindAllProductStream(::grpc::ClientContext* context, 
   return ::grpc::internal::ClientAsyncReaderFactory< ::product::ProductsReply>::Create(channel_.get(), cq, rpcmethod_FindAllProductStream_, context, request, false, nullptr);
 }
 
+::grpc::ClientWriter< ::product::UpdateRequest>* Product::Stub::UpdateProductStreamRaw(::grpc::ClientContext* context, ::product::QueryReply* response) {
+  return ::grpc::internal::ClientWriterFactory< ::product::UpdateRequest>::Create(channel_.get(), rpcmethod_UpdateProductStream_, context, response);
+}
+
+void Product::Stub::async::UpdateProductStream(::grpc::ClientContext* context, ::product::QueryReply* response, ::grpc::ClientWriteReactor< ::product::UpdateRequest>* reactor) {
+  ::grpc::internal::ClientCallbackWriterFactory< ::product::UpdateRequest>::Create(stub_->channel_.get(), stub_->rpcmethod_UpdateProductStream_, context, response, reactor);
+}
+
+::grpc::ClientAsyncWriter< ::product::UpdateRequest>* Product::Stub::AsyncUpdateProductStreamRaw(::grpc::ClientContext* context, ::product::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncWriterFactory< ::product::UpdateRequest>::Create(channel_.get(), cq, rpcmethod_UpdateProductStream_, context, response, true, tag);
+}
+
+::grpc::ClientAsyncWriter< ::product::UpdateRequest>* Product::Stub::PrepareAsyncUpdateProductStreamRaw(::grpc::ClientContext* context, ::product::QueryReply* response, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncWriterFactory< ::product::UpdateRequest>::Create(channel_.get(), cq, rpcmethod_UpdateProductStream_, context, response, false, nullptr);
+}
+
 ::grpc::ClientReaderWriter< ::product::CreateRequest, ::product::QueryReply>* Product::Stub::CreateProductBidiStreamRaw(::grpc::ClientContext* context) {
   return ::grpc::internal::ClientReaderWriterFactory< ::product::CreateRequest, ::product::QueryReply>::Create(channel_.get(), rpcmethod_CreateProductBidiStream_, context);
 }
@@ -285,6 +303,16 @@ Product::Service::Service() {
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Product_method_names[7],
+      ::grpc::internal::RpcMethod::CLIENT_STREAMING,
+      new ::grpc::internal::ClientStreamingHandler< Product::Service, ::product::UpdateRequest, ::product::QueryReply>(
+          [](Product::Service* service,
+             ::grpc::ServerContext* ctx,
+             ::grpc::ServerReader<::product::UpdateRequest>* reader,
+             ::product::QueryReply* resp) {
+               return service->UpdateProductStream(ctx, reader, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Product_method_names[8],
       ::grpc::internal::RpcMethod::BIDI_STREAMING,
       new ::grpc::internal::BidiStreamingHandler< Product::Service, ::product::CreateRequest, ::product::QueryReply>(
           [](Product::Service* service,
@@ -343,6 +371,13 @@ Product::Service::~Service() {
   (void) context;
   (void) request;
   (void) writer;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Product::Service::UpdateProductStream(::grpc::ServerContext* context, ::grpc::ServerReader< ::product::UpdateRequest>* reader, ::product::QueryReply* response) {
+  (void) context;
+  (void) reader;
+  (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
