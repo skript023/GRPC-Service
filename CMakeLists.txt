@@ -24,6 +24,7 @@ message("\nFetching modules")
 include(package/g3log.cmake)
 include(package/fmtlib.cmake)
 include(package/grpc.cmake)
+include(package/sqlite.cmake)
 
 # Microservice
 message(STATUS "Microservice")
@@ -88,6 +89,7 @@ target_include_directories(Microservice PRIVATE
 target_precompile_headers(Microservice PRIVATE "${SRC_DIR}/common.hpp")
 
 target_link_libraries(Microservice PRIVATE 
+sqlite_orm::sqlite_orm
 fmt::fmt
 gRPC::gpr 
 gRPC::grpc 
@@ -111,4 +113,4 @@ add_compile_definitions(Microservice
 )
 
 # Add unit test build
-#add_subdirectory(test)
+add_subdirectory(test)
