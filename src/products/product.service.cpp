@@ -51,21 +51,22 @@ namespace microservice
 	}
 	Status ProductService::UpdateProduct(ServerContext* context, const UpdateRequest* request, QueryReply* reply)
 	{
-		auto product = g_database->storage().get<Products>(request->id());
+		auto storage = g_database->storage(); 
+		auto product = g_database->storage().get_pointer<Products>(request->id());
 
-		if (product.name.empty())
+		if (!product)
 		{
 			reply->set_message("Unable to create empty data");
 
 			return Status::CANCELLED;
 		}
 
-		product.name = request->name();
-		product.description = request->name();
+		product->name = request->name();
+		product->description = request->name();
 
-		g_database->storage().update(product);
+		storage.update(*product);
 
-		reply->set_message(fmt::format("{} successfully updated", product.name));
+		reply->set_message(fmt::format("{} successfully updated", product->name));
 		reply->set_success(true);
 
 		return Status::OK;
@@ -93,29 +94,33 @@ namespace microservice
 		auto storage = g_database->storage();
 		auto products = storage.get_all<Products>();
 		
+		
 		if (products.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
 
-		for (auto& product : products)
+		std::ranges::for_each(products, [this](Products product)
 		{
 			m_reply.mutable_products()->Add(std::move(product.name));
-		}
+		});
 
 		m_stream = reply->Write(m_reply);
 
 		while (m_stream)
 		{
-			std::unique_lock lock(m_mutex);
-			
 			if (this->on_changed(products, storage.get_all<Products>()))
 			{
-				for (auto& product : products)
+				products = storage.get_all<Products>();
+				m_reply.clear_products();
+				std::ranges::for_each(products, [this](Products product)
 				{
 					m_reply.mutable_products()->Add(std::move(product.name));
-				}
+				});
+				
 				m_stream = reply->Write(m_reply);
 			}
 			if (!m_stream) break;
+
+			std::this_thread::sleep_for(1s);
 		}
 
 		return Status::OK;
@@ -126,79 +131,80 @@ namespace microservice
 		UpdateRequest request;
 		while (reader->Read(&request))
 		{
-			std::unique_lock lock(m_mutex);
+			{
+				std::unique_lock lock(m_mutex);
 
-			auto product = storage.get<Products>(request.id());
-			product.name = request.name();
-			product.description = request.name();
+				m_condition.wait(lock, [request] {return &request;});
+				
+				auto product = storage.get<Products>(request.id());
+				product.name = request.name();
+				product.description = request.name();
 
-			storage.update(product);
-			
-			response->set_message(fmt::format("{} successfully updated", product.name));
-			response->set_success(true);
+				storage.update(product);
+
+				lock.unlock();
+			}
 		}
 		return Status::OK;
 	}
 	Status ProductService::CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream)
 	{
+		auto storage = g_database->storage();
 		CreateRequest request;
 		QueryReply reply;
 		Products product;
 		
 		while (stream->Read(&request))
 		{
-			std::unique_lock lock(m_mutex);
-			
-			product.id = -1;
-			product.name = request.name();
-			product.description = request.name();
-
-			if (int data = g_database->storage().insert(product); data != 0)
 			{
-				reply.set_message(fmt::format("{} has successfully added", request.name()));
-				reply.set_success(true);
-				stream->Write(reply);
+				std::unique_lock lock(m_mutex);
+
+				m_condition.wait(lock, [request] {return &request;});
+			
+				product.id = -1;
+				product.name = request.name();
+				product.description = request.name();
+
+				if (int data = storage.insert(product); data != 0)
+				{
+					reply.set_message(fmt::format("{} has successfully added", request.name()));
+					reply.set_success(true);
+					stream->Write(reply);
+				}
+				else
+				{
+					reply.set_message(fmt::format("{} has failed added", request.name()));
+					reply.set_success(false);
+					stream->Write(reply);
+				}
+
+				lock.unlock();
 			}
 		}
 
 		return Status::OK;
 	}
-	bool ProductService::on_changed(product_table_t& previousState, product_table_t const& currentState)
+	bool ProductService::on_changed(product_table_t previousState, product_table_t currentState)
 	{
 		if (currentState.size() > previousState.size())
 		{
-			previousState = currentState;
+			previousState = g_database->storage().get_all<Products>();
 			return true;
 		}
 
 		if (previousState.size() > currentState.size())
 		{
-			previousState = currentState;
 			return true;
 		}
 
 		for (size_t i = 0; i < previousState.size() || i < currentState.size(); i++)
 		{
-			LOG(INFO) << previousState[i].name << " - " << currentState[i].name;
 			if (previousState[i].name != currentState[i].name)
 			{
-				previousState = currentState;
-
 				return true;
 			}
 		}
 
-		return false;
-	}
-	bool ProductService::does_exist(std::string const& element)
-	{
-		for (auto& value : m_mock_data) 
-		{
-			if (value == element) 
-			{
-				return true;
-			}
-		}
 		return false;
 	}
 }

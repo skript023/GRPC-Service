@@ -23,6 +23,8 @@ using grpc::ServerReader;
 namespace microservice
 {
     using product_table_t = std::vector<microservice::Products, std::allocator<microservice::Products>>; 
+    using proto_table_t = google::protobuf::RepeatedPtrField<std::string>; 
+    
     class ProductService final : public Product::Service
     {
     private:
@@ -38,19 +40,13 @@ namespace microservice
 
         Status CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream) override;
     private:
-        bool on_changed(product_table_t& previousState, product_table_t const& currentState);
-        bool does_exist(std::string const& element);
+        bool on_changed(product_table_t previousState, product_table_t currentState);
     private:
+        bool m_on_change;
         std::string m_string;
         std::atomic<bool> m_stream;
         ProductsReply m_reply;
         std::mutex m_mutex;
-    private:
-        std::vector <std::string> m_mock_data
-        {
-            "Product A",
-            "Product B",
-            "Product C",
-        };
+        std::condition_variable m_condition;
     };
 }
