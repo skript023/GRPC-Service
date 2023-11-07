@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package activity;
+
+message ActivityReply {
+    int32 id = 1;
+    string name = 2;
+}
+
+message QueryReply {
+    string message = 1;
+    bool success = 2;
+}
+
+message ActivitiesReply {
+    repeated string activities = 1;
+}
+
+message CreateRequest {
+    string name = 1;
+}
+
+message UpdateRequest {
+    int32 id = 1;
+    string name = 2;
+}
+
+message FindByIdRequest {
+    int32 id = 1;
+}
+
+message PaginationRequest {
+    int32 page = 1;
+    int32 skip = 2;
+}
+
+message EmptyRequest {}
+
+service Product {
+    rpc FindAllProduct (EmptyRequest) returns (ActivitiesReply) {}
+    rpc FindOneProduct (FindByIdRequest) returns (ActivityReply) {}
+    rpc CreateProduct (CreateRequest) returns (QueryReply) {}
+    rpc UpdateProduct (UpdateRequest) returns (QueryReply) {}
+    rpc RemoveProduct (FindByIdRequest) returns (QueryReply) {}
+    rpc QueryProduct (stream PaginationRequest) returns (stream ActivityReply) {}
+
+    rpc FindAllProductStream (EmptyRequest) returns (stream ActivitiesReply) {}
+    rpc UpdateProductStream (stream UpdateRequest) returns (QueryReply) {}
+
+    rpc CreateProductBidiStream (stream CreateRequest) returns (stream QueryReply) {}
+}

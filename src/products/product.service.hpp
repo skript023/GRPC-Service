@@ -5,20 +5,8 @@
 
 #include "protobuf/product.grpc.pb.h"
 
-using product::Product;
-
-using product::ProductReply;
-using product::QueryReply;
-using product::ProductsReply;
-
-using product::FindByIdRequest;
-using product::EmptyRequest;
-using product::UpdateRequest;
-using product::CreateRequest;
-
-using grpc::ServerWriter;
-using grpc::ServerReaderWriter;
-using grpc::ServerReader;
+using namespace product;
+using namespace grpc;
 
 namespace microservice
 {

@@ -1,3 +1,4 @@
+#include <catch2/catch_all.hpp>
 #include <sqlite_orm/sqlite_orm.h>
 
 #include <string>
@@ -20,20 +21,31 @@ struct UserType {
     std::string comment;
 };
 
-int main()
+void MigrationTest()
 {
-	// using namespace sqlite_orm;
-    // auto storage = make_storage("grpc.sqlite",
-    //     make_table("users",
-    //         make_column("id", &User::id, autoincrement(), primary_key()),
-    //         make_column("first_name", &User::firstName),
-    //         make_column("last_name", &User::lastName),
-    //         make_column("birth_date", &User::birthDate),
-    //         make_column("image_url", &User::imageUrl),
-    //         make_column("type_id", &User::typeId)),
-    //     make_table("user_types",
-    //         make_column("id", &UserType::id, autoincrement(), primary_key()),
-    //         make_column("name", &UserType::name),
-    //         make_column("comment", &UserType::comment, default_value("user"))));
-    // auto syncSchemaRes = storage.sync_schema();
+    using namespace sqlite_orm;
+    auto storage = make_storage("grpc.sqlite",
+        make_table("users",
+            make_column("id", &User::id, autoincrement(), primary_key()),
+            make_column("first_name", &User::firstName),
+            make_column("last_name", &User::lastName),
+            make_column("birth_date", &User::birthDate),
+            make_column("image_url", &User::imageUrl),
+            make_column("type_id", &User::typeId)),
+        make_table("user_types",
+            make_column("id", &UserType::id, autoincrement(), primary_key()),
+            make_column("name", &UserType::name),
+            make_column("comment", &UserType::comment, default_value("user"))));
+    auto syncSchemaRes = storage.sync_schema();
+}
+
+TEST_CASE("Migration Test")
+{
+    REQUIRE(MigrationTest);
+}
+
+int main(int argc, char* argv[])
+{
+	int result = Catch::Session().run(argc, argv);
+    return result;
 }

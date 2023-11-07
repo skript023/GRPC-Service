@@ -2,8 +2,8 @@
 
 namespace microservice
 {
-	const char* server_version::GIT_SHA1           = "9d435786c221e69d1db9b578dd0026e504e582e4";
+	const char* server_version::GIT_SHA1           = "eaebd51c394cfe2e869868d255a5c55134b8f623-dirty";
 	const char* server_version::GIT_BRANCH         = "main";
-	const char* server_version::GIT_DATE           = "Mon Nov 6 22:17:41 2023";
-	const char* server_version::GIT_COMMIT_SUBJECT = "forgot add icon";
+	const char* server_version::GIT_DATE           = "Tue Nov 7 13:53:05 2023";
+	const char* server_version::GIT_COMMIT_SUBJECT = "fix busy stream findAll";
 };

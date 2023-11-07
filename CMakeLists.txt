@@ -25,6 +25,7 @@ include(package/g3log.cmake)
 include(package/fmtlib.cmake)
 include(package/grpc.cmake)
 include(package/sqlite.cmake)
+include(package/catch2.cmake)
 
 # Microservice
 message(STATUS "Microservice")
@@ -84,6 +85,7 @@ source_group(TREE ${SRC_DIR} PREFIX "src" FILES ${SRC_MAIN})
 
 target_include_directories(Microservice PRIVATE 
   ${SRC_DIR}
+  "${catch2_SOURCE_DIR}/src"
 )
 
 target_precompile_headers(Microservice PRIVATE "${SRC_DIR}/common.hpp")
