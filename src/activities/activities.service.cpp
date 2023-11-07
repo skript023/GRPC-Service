@@ -18,6 +18,7 @@ namespace microservice
             m_reply.set_name(activity.name);
             m_reply.set_start_date(activity.start_date);
             m_reply.set_end_date(activity.end_date);
+            m_reply.set_status(activity.status);
 
             response->mutable_activities()->Add(std::move(m_reply));
         });
@@ -34,6 +35,7 @@ namespace microservice
 		response->set_name(activity->name);
 		response->set_start_date(activity->start_date);
 		response->set_end_date(activity->end_date);
+		response->set_status(activity->status);
 
 		return Status::OK;
     }
