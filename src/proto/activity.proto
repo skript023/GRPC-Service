@@ -36,7 +36,7 @@ message PaginationRequest {
 
 message EmptyRequest {}
 
-service Product {
+service Activity {
     rpc FindAllProduct (EmptyRequest) returns (ActivitiesReply) {}
     rpc FindOneProduct (FindByIdRequest) returns (ActivityReply) {}
     rpc CreateProduct (CreateRequest) returns (QueryReply) {}

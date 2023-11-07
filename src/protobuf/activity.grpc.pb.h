@@ -27,10 +27,10 @@
 
 namespace activity {
 
-class Product final {
+class Activity final {
  public:
   static constexpr char const* service_full_name() {
-    return "activity.Product";
+    return "activity.Activity";
   }
   class StubInterface {
    public:

@@ -21,301 +21,301 @@
 #include <grpcpp/support/sync_stream.h>
 namespace activity {
 
-static const char* Product_method_names[] = {
-  "/activity.Product/FindAllProduct",
-  "/activity.Product/FindOneProduct",
-  "/activity.Product/CreateProduct",
-  "/activity.Product/UpdateProduct",
-  "/activity.Product/RemoveProduct",
-  "/activity.Product/QueryProduct",
-  "/activity.Product/FindAllProductStream",
-  "/activity.Product/UpdateProductStream",
-  "/activity.Product/CreateProductBidiStream",
+static const char* Activity_method_names[] = {
+  "/activity.Activity/FindAllProduct",
+  "/activity.Activity/FindOneProduct",
+  "/activity.Activity/CreateProduct",
+  "/activity.Activity/UpdateProduct",
+  "/activity.Activity/RemoveProduct",
+  "/activity.Activity/QueryProduct",
+  "/activity.Activity/FindAllProductStream",
+  "/activity.Activity/UpdateProductStream",
+  "/activity.Activity/CreateProductBidiStream",
 };
 
-std::unique_ptr< Product::Stub> Product::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< Activity::Stub> Activity::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< Product::Stub> stub(new Product::Stub(channel, options));
+  std::unique_ptr< Activity::Stub> stub(new Activity::Stub(channel, options));
   return stub;
 }
 
-Product::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_FindAllProduct_(Product_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_FindOneProduct_(Product_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CreateProduct_(Product_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_UpdateProduct_(Product_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_RemoveProduct_(Product_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_QueryProduct_(Product_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
-  , rpcmethod_FindAllProductStream_(Product_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
-  , rpcmethod_UpdateProductStream_(Product_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
-  , rpcmethod_CreateProductBidiStream_(Product_method_names[8], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+Activity::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_FindAllProduct_(Activity_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_FindOneProduct_(Activity_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreateProduct_(Activity_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_UpdateProduct_(Activity_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RemoveProduct_(Activity_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_QueryProduct_(Activity_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_FindAllProductStream_(Activity_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
+  , rpcmethod_UpdateProductStream_(Activity_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
+  , rpcmethod_CreateProductBidiStream_(Activity_method_names[8], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
-::grpc::Status Product::Stub::FindAllProduct(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::activity::ActivitiesReply* response) {
+::grpc::Status Activity::Stub::FindAllProduct(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::activity::ActivitiesReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::activity::EmptyRequest, ::activity::ActivitiesReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_FindAllProduct_, context, request, response);
 }
 
-void Product::Stub::async::FindAllProduct(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::activity::ActivitiesReply* response, std::function<void(::grpc::Status)> f) {
+void Activity::Stub::async::FindAllProduct(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::activity::ActivitiesReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::activity::EmptyRequest, ::activity::ActivitiesReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindAllProduct_, context, request, response, std::move(f));
 }
 
-void Product::Stub::async::FindAllProduct(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::activity::ActivitiesReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void Activity::Stub::async::FindAllProduct(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::activity::ActivitiesReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindAllProduct_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::ActivitiesReply>* Product::Stub::PrepareAsyncFindAllProductRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::ActivitiesReply>* Activity::Stub::PrepareAsyncFindAllProductRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::activity::ActivitiesReply, ::activity::EmptyRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_FindAllProduct_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::ActivitiesReply>* Product::Stub::AsyncFindAllProductRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::ActivitiesReply>* Activity::Stub::AsyncFindAllProductRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncFindAllProductRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status Product::Stub::FindOneProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::activity::ActivityReply* response) {
+::grpc::Status Activity::Stub::FindOneProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::activity::ActivityReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::activity::FindByIdRequest, ::activity::ActivityReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_FindOneProduct_, context, request, response);
 }
 
-void Product::Stub::async::FindOneProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::ActivityReply* response, std::function<void(::grpc::Status)> f) {
+void Activity::Stub::async::FindOneProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::ActivityReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::activity::FindByIdRequest, ::activity::ActivityReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindOneProduct_, context, request, response, std::move(f));
 }
 
-void Product::Stub::async::FindOneProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::ActivityReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void Activity::Stub::async::FindOneProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::ActivityReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_FindOneProduct_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::ActivityReply>* Product::Stub::PrepareAsyncFindOneProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::ActivityReply>* Activity::Stub::PrepareAsyncFindOneProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::activity::ActivityReply, ::activity::FindByIdRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_FindOneProduct_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::ActivityReply>* Product::Stub::AsyncFindOneProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::ActivityReply>* Activity::Stub::AsyncFindOneProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncFindOneProductRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status Product::Stub::CreateProduct(::grpc::ClientContext* context, const ::activity::CreateRequest& request, ::activity::QueryReply* response) {
+::grpc::Status Activity::Stub::CreateProduct(::grpc::ClientContext* context, const ::activity::CreateRequest& request, ::activity::QueryReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::activity::CreateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_CreateProduct_, context, request, response);
 }
 
-void Product::Stub::async::CreateProduct(::grpc::ClientContext* context, const ::activity::CreateRequest* request, ::activity::QueryReply* response, std::function<void(::grpc::Status)> f) {
+void Activity::Stub::async::CreateProduct(::grpc::ClientContext* context, const ::activity::CreateRequest* request, ::activity::QueryReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::activity::CreateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CreateProduct_, context, request, response, std::move(f));
 }
 
-void Product::Stub::async::CreateProduct(::grpc::ClientContext* context, const ::activity::CreateRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void Activity::Stub::async::CreateProduct(::grpc::ClientContext* context, const ::activity::CreateRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CreateProduct_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Product::Stub::PrepareAsyncCreateProductRaw(::grpc::ClientContext* context, const ::activity::CreateRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Activity::Stub::PrepareAsyncCreateProductRaw(::grpc::ClientContext* context, const ::activity::CreateRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::activity::QueryReply, ::activity::CreateRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_CreateProduct_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Product::Stub::AsyncCreateProductRaw(::grpc::ClientContext* context, const ::activity::CreateRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Activity::Stub::AsyncCreateProductRaw(::grpc::ClientContext* context, const ::activity::CreateRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncCreateProductRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status Product::Stub::UpdateProduct(::grpc::ClientContext* context, const ::activity::UpdateRequest& request, ::activity::QueryReply* response) {
+::grpc::Status Activity::Stub::UpdateProduct(::grpc::ClientContext* context, const ::activity::UpdateRequest& request, ::activity::QueryReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::activity::UpdateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_UpdateProduct_, context, request, response);
 }
 
-void Product::Stub::async::UpdateProduct(::grpc::ClientContext* context, const ::activity::UpdateRequest* request, ::activity::QueryReply* response, std::function<void(::grpc::Status)> f) {
+void Activity::Stub::async::UpdateProduct(::grpc::ClientContext* context, const ::activity::UpdateRequest* request, ::activity::QueryReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::activity::UpdateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_UpdateProduct_, context, request, response, std::move(f));
 }
 
-void Product::Stub::async::UpdateProduct(::grpc::ClientContext* context, const ::activity::UpdateRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void Activity::Stub::async::UpdateProduct(::grpc::ClientContext* context, const ::activity::UpdateRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_UpdateProduct_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Product::Stub::PrepareAsyncUpdateProductRaw(::grpc::ClientContext* context, const ::activity::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Activity::Stub::PrepareAsyncUpdateProductRaw(::grpc::ClientContext* context, const ::activity::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::activity::QueryReply, ::activity::UpdateRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_UpdateProduct_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Product::Stub::AsyncUpdateProductRaw(::grpc::ClientContext* context, const ::activity::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Activity::Stub::AsyncUpdateProductRaw(::grpc::ClientContext* context, const ::activity::UpdateRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncUpdateProductRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status Product::Stub::RemoveProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::activity::QueryReply* response) {
+::grpc::Status Activity::Stub::RemoveProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::activity::QueryReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::activity::FindByIdRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RemoveProduct_, context, request, response);
 }
 
-void Product::Stub::async::RemoveProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response, std::function<void(::grpc::Status)> f) {
+void Activity::Stub::async::RemoveProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response, std::function<void(::grpc::Status)> f) {
   ::grpc::internal::CallbackUnaryCall< ::activity::FindByIdRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RemoveProduct_, context, request, response, std::move(f));
 }
 
-void Product::Stub::async::RemoveProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void Activity::Stub::async::RemoveProduct(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RemoveProduct_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Product::Stub::PrepareAsyncRemoveProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Activity::Stub::PrepareAsyncRemoveProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::activity::QueryReply, ::activity::FindByIdRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RemoveProduct_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Product::Stub::AsyncRemoveProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::activity::QueryReply>* Activity::Stub::AsyncRemoveProductRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncRemoveProductRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::ClientReaderWriter< ::activity::PaginationRequest, ::activity::ActivityReply>* Product::Stub::QueryProductRaw(::grpc::ClientContext* context) {
+::grpc::ClientReaderWriter< ::activity::PaginationRequest, ::activity::ActivityReply>* Activity::Stub::QueryProductRaw(::grpc::ClientContext* context) {
   return ::grpc::internal::ClientReaderWriterFactory< ::activity::PaginationRequest, ::activity::ActivityReply>::Create(channel_.get(), rpcmethod_QueryProduct_, context);
 }
 
-void Product::Stub::async::QueryProduct(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::PaginationRequest,::activity::ActivityReply>* reactor) {
+void Activity::Stub::async::QueryProduct(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::PaginationRequest,::activity::ActivityReply>* reactor) {
   ::grpc::internal::ClientCallbackReaderWriterFactory< ::activity::PaginationRequest,::activity::ActivityReply>::Create(stub_->channel_.get(), stub_->rpcmethod_QueryProduct_, context, reactor);
 }
 
-::grpc::ClientAsyncReaderWriter< ::activity::PaginationRequest, ::activity::ActivityReply>* Product::Stub::AsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+::grpc::ClientAsyncReaderWriter< ::activity::PaginationRequest, ::activity::ActivityReply>* Activity::Stub::AsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
   return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::PaginationRequest, ::activity::ActivityReply>::Create(channel_.get(), cq, rpcmethod_QueryProduct_, context, true, tag);
 }
 
-::grpc::ClientAsyncReaderWriter< ::activity::PaginationRequest, ::activity::ActivityReply>* Product::Stub::PrepareAsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncReaderWriter< ::activity::PaginationRequest, ::activity::ActivityReply>* Activity::Stub::PrepareAsyncQueryProductRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::PaginationRequest, ::activity::ActivityReply>::Create(channel_.get(), cq, rpcmethod_QueryProduct_, context, false, nullptr);
 }
 
-::grpc::ClientReader< ::activity::ActivitiesReply>* Product::Stub::FindAllProductStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request) {
+::grpc::ClientReader< ::activity::ActivitiesReply>* Activity::Stub::FindAllProductStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request) {
   return ::grpc::internal::ClientReaderFactory< ::activity::ActivitiesReply>::Create(channel_.get(), rpcmethod_FindAllProductStream_, context, request);
 }
 
-void Product::Stub::async::FindAllProductStream(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::grpc::ClientReadReactor< ::activity::ActivitiesReply>* reactor) {
+void Activity::Stub::async::FindAllProductStream(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::grpc::ClientReadReactor< ::activity::ActivitiesReply>* reactor) {
   ::grpc::internal::ClientCallbackReaderFactory< ::activity::ActivitiesReply>::Create(stub_->channel_.get(), stub_->rpcmethod_FindAllProductStream_, context, request, reactor);
 }
 
-::grpc::ClientAsyncReader< ::activity::ActivitiesReply>* Product::Stub::AsyncFindAllProductStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+::grpc::ClientAsyncReader< ::activity::ActivitiesReply>* Activity::Stub::AsyncFindAllProductStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
   return ::grpc::internal::ClientAsyncReaderFactory< ::activity::ActivitiesReply>::Create(channel_.get(), cq, rpcmethod_FindAllProductStream_, context, request, true, tag);
 }
 
-::grpc::ClientAsyncReader< ::activity::ActivitiesReply>* Product::Stub::PrepareAsyncFindAllProductStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncReader< ::activity::ActivitiesReply>* Activity::Stub::PrepareAsyncFindAllProductStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncReaderFactory< ::activity::ActivitiesReply>::Create(channel_.get(), cq, rpcmethod_FindAllProductStream_, context, request, false, nullptr);
 }
 
-::grpc::ClientWriter< ::activity::UpdateRequest>* Product::Stub::UpdateProductStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response) {
+::grpc::ClientWriter< ::activity::UpdateRequest>* Activity::Stub::UpdateProductStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response) {
   return ::grpc::internal::ClientWriterFactory< ::activity::UpdateRequest>::Create(channel_.get(), rpcmethod_UpdateProductStream_, context, response);
 }
 
-void Product::Stub::async::UpdateProductStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::ClientWriteReactor< ::activity::UpdateRequest>* reactor) {
+void Activity::Stub::async::UpdateProductStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::ClientWriteReactor< ::activity::UpdateRequest>* reactor) {
   ::grpc::internal::ClientCallbackWriterFactory< ::activity::UpdateRequest>::Create(stub_->channel_.get(), stub_->rpcmethod_UpdateProductStream_, context, response, reactor);
 }
 
-::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* Product::Stub::AsyncUpdateProductStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) {
+::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* Activity::Stub::AsyncUpdateProductStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) {
   return ::grpc::internal::ClientAsyncWriterFactory< ::activity::UpdateRequest>::Create(channel_.get(), cq, rpcmethod_UpdateProductStream_, context, response, true, tag);
 }
 
-::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* Product::Stub::PrepareAsyncUpdateProductStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* Activity::Stub::PrepareAsyncUpdateProductStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncWriterFactory< ::activity::UpdateRequest>::Create(channel_.get(), cq, rpcmethod_UpdateProductStream_, context, response, false, nullptr);
 }
 
-::grpc::ClientReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Product::Stub::CreateProductBidiStreamRaw(::grpc::ClientContext* context) {
+::grpc::ClientReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Activity::Stub::CreateProductBidiStreamRaw(::grpc::ClientContext* context) {
   return ::grpc::internal::ClientReaderWriterFactory< ::activity::CreateRequest, ::activity::QueryReply>::Create(channel_.get(), rpcmethod_CreateProductBidiStream_, context);
 }
 
-void Product::Stub::async::CreateProductBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::CreateRequest,::activity::QueryReply>* reactor) {
+void Activity::Stub::async::CreateProductBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::CreateRequest,::activity::QueryReply>* reactor) {
   ::grpc::internal::ClientCallbackReaderWriterFactory< ::activity::CreateRequest,::activity::QueryReply>::Create(stub_->channel_.get(), stub_->rpcmethod_CreateProductBidiStream_, context, reactor);
 }
 
-::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Product::Stub::AsyncCreateProductBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Activity::Stub::AsyncCreateProductBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
   return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::CreateRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_CreateProductBidiStream_, context, true, tag);
 }
 
-::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Product::Stub::PrepareAsyncCreateProductBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Activity::Stub::PrepareAsyncCreateProductBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::CreateRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_CreateProductBidiStream_, context, false, nullptr);
 }
 
-Product::Service::Service() {
+Activity::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[0],
+      Activity_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Product::Service, ::activity::EmptyRequest, ::activity::ActivitiesReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Product::Service* service,
+      new ::grpc::internal::RpcMethodHandler< Activity::Service, ::activity::EmptyRequest, ::activity::ActivitiesReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              const ::activity::EmptyRequest* req,
              ::activity::ActivitiesReply* resp) {
                return service->FindAllProduct(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[1],
+      Activity_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Product::Service, ::activity::FindByIdRequest, ::activity::ActivityReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Product::Service* service,
+      new ::grpc::internal::RpcMethodHandler< Activity::Service, ::activity::FindByIdRequest, ::activity::ActivityReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              const ::activity::FindByIdRequest* req,
              ::activity::ActivityReply* resp) {
                return service->FindOneProduct(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[2],
+      Activity_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Product::Service, ::activity::CreateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Product::Service* service,
+      new ::grpc::internal::RpcMethodHandler< Activity::Service, ::activity::CreateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              const ::activity::CreateRequest* req,
              ::activity::QueryReply* resp) {
                return service->CreateProduct(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[3],
+      Activity_method_names[3],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Product::Service, ::activity::UpdateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Product::Service* service,
+      new ::grpc::internal::RpcMethodHandler< Activity::Service, ::activity::UpdateRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              const ::activity::UpdateRequest* req,
              ::activity::QueryReply* resp) {
                return service->UpdateProduct(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[4],
+      Activity_method_names[4],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Product::Service, ::activity::FindByIdRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Product::Service* service,
+      new ::grpc::internal::RpcMethodHandler< Activity::Service, ::activity::FindByIdRequest, ::activity::QueryReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              const ::activity::FindByIdRequest* req,
              ::activity::QueryReply* resp) {
                return service->RemoveProduct(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[5],
+      Activity_method_names[5],
       ::grpc::internal::RpcMethod::BIDI_STREAMING,
-      new ::grpc::internal::BidiStreamingHandler< Product::Service, ::activity::PaginationRequest, ::activity::ActivityReply>(
-          [](Product::Service* service,
+      new ::grpc::internal::BidiStreamingHandler< Activity::Service, ::activity::PaginationRequest, ::activity::ActivityReply>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              ::grpc::ServerReaderWriter<::activity::ActivityReply,
              ::activity::PaginationRequest>* stream) {
                return service->QueryProduct(ctx, stream);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[6],
+      Activity_method_names[6],
       ::grpc::internal::RpcMethod::SERVER_STREAMING,
-      new ::grpc::internal::ServerStreamingHandler< Product::Service, ::activity::EmptyRequest, ::activity::ActivitiesReply>(
-          [](Product::Service* service,
+      new ::grpc::internal::ServerStreamingHandler< Activity::Service, ::activity::EmptyRequest, ::activity::ActivitiesReply>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              const ::activity::EmptyRequest* req,
              ::grpc::ServerWriter<::activity::ActivitiesReply>* writer) {
                return service->FindAllProductStream(ctx, req, writer);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[7],
+      Activity_method_names[7],
       ::grpc::internal::RpcMethod::CLIENT_STREAMING,
-      new ::grpc::internal::ClientStreamingHandler< Product::Service, ::activity::UpdateRequest, ::activity::QueryReply>(
-          [](Product::Service* service,
+      new ::grpc::internal::ClientStreamingHandler< Activity::Service, ::activity::UpdateRequest, ::activity::QueryReply>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              ::grpc::ServerReader<::activity::UpdateRequest>* reader,
              ::activity::QueryReply* resp) {
                return service->UpdateProductStream(ctx, reader, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Product_method_names[8],
+      Activity_method_names[8],
       ::grpc::internal::RpcMethod::BIDI_STREAMING,
-      new ::grpc::internal::BidiStreamingHandler< Product::Service, ::activity::CreateRequest, ::activity::QueryReply>(
-          [](Product::Service* service,
+      new ::grpc::internal::BidiStreamingHandler< Activity::Service, ::activity::CreateRequest, ::activity::QueryReply>(
+          [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
              ::grpc::ServerReaderWriter<::activity::QueryReply,
              ::activity::CreateRequest>* stream) {
@@ -323,65 +323,65 @@ Product::Service::Service() {
              }, this)));
 }
 
-Product::Service::~Service() {
+Activity::Service::~Service() {
 }
 
-::grpc::Status Product::Service::FindAllProduct(::grpc::ServerContext* context, const ::activity::EmptyRequest* request, ::activity::ActivitiesReply* response) {
+::grpc::Status Activity::Service::FindAllProduct(::grpc::ServerContext* context, const ::activity::EmptyRequest* request, ::activity::ActivitiesReply* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::FindOneProduct(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::activity::ActivityReply* response) {
+::grpc::Status Activity::Service::FindOneProduct(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::activity::ActivityReply* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::CreateProduct(::grpc::ServerContext* context, const ::activity::CreateRequest* request, ::activity::QueryReply* response) {
+::grpc::Status Activity::Service::CreateProduct(::grpc::ServerContext* context, const ::activity::CreateRequest* request, ::activity::QueryReply* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::UpdateProduct(::grpc::ServerContext* context, const ::activity::UpdateRequest* request, ::activity::QueryReply* response) {
+::grpc::Status Activity::Service::UpdateProduct(::grpc::ServerContext* context, const ::activity::UpdateRequest* request, ::activity::QueryReply* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::RemoveProduct(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response) {
+::grpc::Status Activity::Service::RemoveProduct(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::QueryProduct(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::ActivityReply, ::activity::PaginationRequest>* stream) {
+::grpc::Status Activity::Service::QueryProduct(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::ActivityReply, ::activity::PaginationRequest>* stream) {
   (void) context;
   (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::FindAllProductStream(::grpc::ServerContext* context, const ::activity::EmptyRequest* request, ::grpc::ServerWriter< ::activity::ActivitiesReply>* writer) {
+::grpc::Status Activity::Service::FindAllProductStream(::grpc::ServerContext* context, const ::activity::EmptyRequest* request, ::grpc::ServerWriter< ::activity::ActivitiesReply>* writer) {
   (void) context;
   (void) request;
   (void) writer;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::UpdateProductStream(::grpc::ServerContext* context, ::grpc::ServerReader< ::activity::UpdateRequest>* reader, ::activity::QueryReply* response) {
+::grpc::Status Activity::Service::UpdateProductStream(::grpc::ServerContext* context, ::grpc::ServerReader< ::activity::UpdateRequest>* reader, ::activity::QueryReply* response) {
   (void) context;
   (void) reader;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Product::Service::CreateProductBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::CreateRequest>* stream) {
+::grpc::Status Activity::Service::CreateProductBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::CreateRequest>* stream) {
   (void) context;
   (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");

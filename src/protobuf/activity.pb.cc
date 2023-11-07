@@ -224,27 +224,27 @@ const char descriptor_table_protodef_activity_2eproto[] PROTOBUF_SECTION_VARIABL
   "uest\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindBy"
   "IdRequest\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationReque"
   "st\022\014\n\004page\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyR"
-  "equest2\225\005\n\007Product\022E\n\016FindAllProduct\022\026.a"
-  "ctivity.EmptyRequest\032\031.activity.Activiti"
-  "esReply\"\000\022F\n\016FindOneProduct\022\031.activity.F"
-  "indByIdRequest\032\027.activity.ActivityReply\""
-  "\000\022@\n\rCreateProduct\022\027.activity.CreateRequ"
-  "est\032\024.activity.QueryReply\"\000\022@\n\rUpdatePro"
-  "duct\022\027.activity.UpdateRequest\032\024.activity"
-  ".QueryReply\"\000\022B\n\rRemoveProduct\022\031.activit"
-  "y.FindByIdRequest\032\024.activity.QueryReply\""
-  "\000\022J\n\014QueryProduct\022\033.activity.PaginationR"
-  "equest\032\027.activity.ActivityReply\"\000(\0010\001\022M\n"
-  "\024FindAllProductStream\022\026.activity.EmptyRe"
-  "quest\032\031.activity.ActivitiesReply\"\0000\001\022H\n\023"
-  "UpdateProductStream\022\027.activity.UpdateReq"
-  "uest\032\024.activity.QueryReply\"\000(\001\022N\n\027Create"
-  "ProductBidiStream\022\027.activity.CreateReque"
-  "st\032\024.activity.QueryReply\"\000(\0010\001b\006proto3"
+  "equest2\226\005\n\010Activity\022E\n\016FindAllProduct\022\026."
+  "activity.EmptyRequest\032\031.activity.Activit"
+  "iesReply\"\000\022F\n\016FindOneProduct\022\031.activity."
+  "FindByIdRequest\032\027.activity.ActivityReply"
+  "\"\000\022@\n\rCreateProduct\022\027.activity.CreateReq"
+  "uest\032\024.activity.QueryReply\"\000\022@\n\rUpdatePr"
+  "oduct\022\027.activity.UpdateRequest\032\024.activit"
+  "y.QueryReply\"\000\022B\n\rRemoveProduct\022\031.activi"
+  "ty.FindByIdRequest\032\024.activity.QueryReply"
+  "\"\000\022J\n\014QueryProduct\022\033.activity.Pagination"
+  "Request\032\027.activity.ActivityReply\"\000(\0010\001\022M"
+  "\n\024FindAllProductStream\022\026.activity.EmptyR"
+  "equest\032\031.activity.ActivitiesReply\"\0000\001\022H\n"
+  "\023UpdateProductStream\022\027.activity.UpdateRe"
+  "quest\032\024.activity.QueryReply\"\000(\001\022N\n\027Creat"
+  "eProductBidiStream\022\027.activity.CreateRequ"
+  "est\032\024.activity.QueryReply\"\000(\0010\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_activity_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_activity_2eproto = {
-    false, false, 998, descriptor_table_protodef_activity_2eproto,
+    false, false, 999, descriptor_table_protodef_activity_2eproto,
     "activity.proto",
     &descriptor_table_activity_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_activity_2eproto::offsets,
