@@ -1,10 +1,11 @@
 #pragma once
 #include "common.hpp"
 
-struct Activity
+struct Activities
 {
     int id;
     std::string name;
-    time_t start_date;
-    time_t end_date;
+    std::string start_date;
+    std::string end_date;
+    std::string status;
 };

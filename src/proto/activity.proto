@@ -5,6 +5,9 @@ package activity;
 message ActivityReply {
     int32 id = 1;
     string name = 2;
+    string start_date = 3;
+    string end_date = 4; 
+    string status = 5;
 }
 
 message QueryReply {
@@ -13,16 +16,22 @@ message QueryReply {
 }
 
 message ActivitiesReply {
-    repeated string activities = 1;
+    repeated ActivityReply activities = 1;
 }
 
 message CreateRequest {
     string name = 1;
+    string start_date = 2;
+    string end_date = 3; 
+    string status = 4;
 }
 
 message UpdateRequest {
     int32 id = 1;
     string name = 2;
+    string start_date = 3;
+    string end_date = 4; 
+    string status = 5;
 }
 
 message FindByIdRequest {
@@ -37,15 +46,15 @@ message PaginationRequest {
 message EmptyRequest {}
 
 service Activity {
-    rpc FindAllProduct (EmptyRequest) returns (ActivitiesReply) {}
-    rpc FindOneProduct (FindByIdRequest) returns (ActivityReply) {}
-    rpc CreateProduct (CreateRequest) returns (QueryReply) {}
-    rpc UpdateProduct (UpdateRequest) returns (QueryReply) {}
-    rpc RemoveProduct (FindByIdRequest) returns (QueryReply) {}
-    rpc QueryProduct (stream PaginationRequest) returns (stream ActivityReply) {}
+    rpc FindAllActivity (EmptyRequest) returns (ActivitiesReply) {}
+    rpc FindOneActivity (FindByIdRequest) returns (ActivityReply) {}
+    rpc CreateActivity (CreateRequest) returns (QueryReply) {}
+    rpc UpdateActivity (UpdateRequest) returns (QueryReply) {}
+    rpc RemoveActivity (FindByIdRequest) returns (QueryReply) {}
+    rpc QueryActivity (stream PaginationRequest) returns (stream ActivityReply) {}
 
-    rpc FindAllProductStream (EmptyRequest) returns (stream ActivitiesReply) {}
-    rpc UpdateProductStream (stream UpdateRequest) returns (QueryReply) {}
+    rpc FindAllActivityStream (EmptyRequest) returns (stream ActivitiesReply) {}
+    rpc UpdateActivityStream (stream UpdateRequest) returns (QueryReply) {}
 
-    rpc CreateProductBidiStream (stream CreateRequest) returns (stream QueryReply) {}
+    rpc CreateActivityBidiStream (stream CreateRequest) returns (stream QueryReply) {}
 }

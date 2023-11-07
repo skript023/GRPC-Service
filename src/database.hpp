@@ -22,10 +22,11 @@ namespace microservice
             make_column("description", &Products::description));
 
             auto activities = make_table("activities", 
-            make_column("id", &Activity::id, autoincrement(), primary_key()), 
-            make_column("name", &Activity::name), 
-            make_column("start_date", &Activity::start_date),
-            make_column("end_date", &Activity::end_date));
+            make_column("id", &Activities::id, autoincrement(), primary_key()), 
+            make_column("name", &Activities::name), 
+            make_column("start_date", &Activities::start_date),
+            make_column("end_date", &Activities::end_date),
+            make_column("status", &Activities::status));
 
         
             return make_storage("grpc.sqlite", products, activities);

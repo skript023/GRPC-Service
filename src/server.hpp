@@ -2,6 +2,7 @@
 #include "common.hpp"
 #include "greeter/greeter.service.hpp"
 #include "products/product.service.hpp"
+#include "activities/activities.service.hpp"
 
 namespace microservice
 {
@@ -15,6 +16,7 @@ namespace microservice
     private:
         GreeterService m_greeter_service;
         ProductService m_product_service;
+        ActivityService m_activity_service;
         std::unique_ptr<Server> m_server;
     };
 }

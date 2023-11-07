@@ -2,6 +2,8 @@
 #include "streaming.hpp"
 #include "database.hpp"
 
+using namespace product;
+
 namespace microservice
 {
 	Status ProductService::FindAllProduct(ServerContext* context, const EmptyRequest* request, ProductsReply* reply)

@@ -20,6 +20,7 @@ namespace microservice
         // clients. In this case it corresponds to an *synchronous* service.
         builder.RegisterService(&m_greeter_service);
         builder.RegisterService(&m_product_service);
+        builder.RegisterService(&m_activity_service);
         // Finally assemble the server.
         m_server = builder.BuildAndStart();
         LOG(INFO) << "Server listening on " << server_address;

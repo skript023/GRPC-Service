@@ -24,6 +24,9 @@ namespace activity {
 PROTOBUF_CONSTEXPR ActivityReply::ActivityReply(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.start_date_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.end_date_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ActivityReplyDefaultTypeInternal {
@@ -65,6 +68,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR CreateRequest::CreateRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.start_date_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.end_date_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CreateRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CreateRequestDefaultTypeInternal()
@@ -78,6 +84,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR UpdateRequest::UpdateRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.start_date_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.end_date_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.status_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct UpdateRequestDefaultTypeInternal {
@@ -141,6 +150,9 @@ const uint32_t TableStruct_activity_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::activity::ActivityReply, _impl_.id_),
   PROTOBUF_FIELD_OFFSET(::activity::ActivityReply, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::activity::ActivityReply, _impl_.start_date_),
+  PROTOBUF_FIELD_OFFSET(::activity::ActivityReply, _impl_.end_date_),
+  PROTOBUF_FIELD_OFFSET(::activity::ActivityReply, _impl_.status_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::activity::QueryReply, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -163,6 +175,9 @@ const uint32_t TableStruct_activity_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::activity::CreateRequest, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::activity::CreateRequest, _impl_.start_date_),
+  PROTOBUF_FIELD_OFFSET(::activity::CreateRequest, _impl_.end_date_),
+  PROTOBUF_FIELD_OFFSET(::activity::CreateRequest, _impl_.status_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::activity::UpdateRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -171,6 +186,9 @@ const uint32_t TableStruct_activity_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::activity::UpdateRequest, _impl_.id_),
   PROTOBUF_FIELD_OFFSET(::activity::UpdateRequest, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::activity::UpdateRequest, _impl_.start_date_),
+  PROTOBUF_FIELD_OFFSET(::activity::UpdateRequest, _impl_.end_date_),
+  PROTOBUF_FIELD_OFFSET(::activity::UpdateRequest, _impl_.status_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::activity::FindByIdRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -195,13 +213,13 @@ const uint32_t TableStruct_activity_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::activity::ActivityReply)},
-  { 8, -1, -1, sizeof(::activity::QueryReply)},
-  { 16, -1, -1, sizeof(::activity::ActivitiesReply)},
-  { 23, -1, -1, sizeof(::activity::CreateRequest)},
-  { 30, -1, -1, sizeof(::activity::UpdateRequest)},
-  { 38, -1, -1, sizeof(::activity::FindByIdRequest)},
-  { 45, -1, -1, sizeof(::activity::PaginationRequest)},
-  { 53, -1, -1, sizeof(::activity::EmptyRequest)},
+  { 11, -1, -1, sizeof(::activity::QueryReply)},
+  { 19, -1, -1, sizeof(::activity::ActivitiesReply)},
+  { 26, -1, -1, sizeof(::activity::CreateRequest)},
+  { 36, -1, -1, sizeof(::activity::UpdateRequest)},
+  { 47, -1, -1, sizeof(::activity::FindByIdRequest)},
+  { 54, -1, -1, sizeof(::activity::PaginationRequest)},
+  { 62, -1, -1, sizeof(::activity::EmptyRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -216,35 +234,40 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_activity_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016activity.proto\022\010activity\")\n\rActivityRe"
-  "ply\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\".\n\nQueryRe"
-  "ply\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"%\n"
-  "\017ActivitiesReply\022\022\n\nactivities\030\001 \003(\t\"\035\n\r"
-  "CreateRequest\022\014\n\004name\030\001 \001(\t\")\n\rUpdateReq"
-  "uest\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindBy"
-  "IdRequest\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationReque"
-  "st\022\014\n\004page\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyR"
-  "equest2\226\005\n\010Activity\022E\n\016FindAllProduct\022\026."
-  "activity.EmptyRequest\032\031.activity.Activit"
-  "iesReply\"\000\022F\n\016FindOneProduct\022\031.activity."
-  "FindByIdRequest\032\027.activity.ActivityReply"
-  "\"\000\022@\n\rCreateProduct\022\027.activity.CreateReq"
-  "uest\032\024.activity.QueryReply\"\000\022@\n\rUpdatePr"
-  "oduct\022\027.activity.UpdateRequest\032\024.activit"
-  "y.QueryReply\"\000\022B\n\rRemoveProduct\022\031.activi"
-  "ty.FindByIdRequest\032\024.activity.QueryReply"
-  "\"\000\022J\n\014QueryProduct\022\033.activity.Pagination"
-  "Request\032\027.activity.ActivityReply\"\000(\0010\001\022M"
-  "\n\024FindAllProductStream\022\026.activity.EmptyR"
-  "equest\032\031.activity.ActivitiesReply\"\0000\001\022H\n"
-  "\023UpdateProductStream\022\027.activity.UpdateRe"
-  "quest\032\024.activity.QueryReply\"\000(\001\022N\n\027Creat"
-  "eProductBidiStream\022\027.activity.CreateRequ"
-  "est\032\024.activity.QueryReply\"\000(\0010\001b\006proto3"
+  "\n\016activity.proto\022\010activity\"_\n\rActivityRe"
+  "ply\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nstart_d"
+  "ate\030\003 \001(\t\022\020\n\010end_date\030\004 \001(\t\022\016\n\006status\030\005 "
+  "\001(\t\".\n\nQueryReply\022\017\n\007message\030\001 \001(\t\022\017\n\007su"
+  "ccess\030\002 \001(\010\">\n\017ActivitiesReply\022+\n\nactivi"
+  "ties\030\001 \003(\0132\027.activity.ActivityReply\"S\n\rC"
+  "reateRequest\022\014\n\004name\030\001 \001(\t\022\022\n\nstart_date"
+  "\030\002 \001(\t\022\020\n\010end_date\030\003 \001(\t\022\016\n\006status\030\004 \001(\t"
+  "\"_\n\rUpdateRequest\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 "
+  "\001(\t\022\022\n\nstart_date\030\003 \001(\t\022\020\n\010end_date\030\004 \001("
+  "\t\022\016\n\006status\030\005 \001(\t\"\035\n\017FindByIdRequest\022\n\n\002"
+  "id\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004page\030\001 "
+  "\001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2\237\005\n\010Ac"
+  "tivity\022F\n\017FindAllActivity\022\026.activity.Emp"
+  "tyRequest\032\031.activity.ActivitiesReply\"\000\022G"
+  "\n\017FindOneActivity\022\031.activity.FindByIdReq"
+  "uest\032\027.activity.ActivityReply\"\000\022A\n\016Creat"
+  "eActivity\022\027.activity.CreateRequest\032\024.act"
+  "ivity.QueryReply\"\000\022A\n\016UpdateActivity\022\027.a"
+  "ctivity.UpdateRequest\032\024.activity.QueryRe"
+  "ply\"\000\022C\n\016RemoveActivity\022\031.activity.FindB"
+  "yIdRequest\032\024.activity.QueryReply\"\000\022K\n\rQu"
+  "eryActivity\022\033.activity.PaginationRequest"
+  "\032\027.activity.ActivityReply\"\000(\0010\001\022N\n\025FindA"
+  "llActivityStream\022\026.activity.EmptyRequest"
+  "\032\031.activity.ActivitiesReply\"\0000\001\022I\n\024Updat"
+  "eActivityStream\022\027.activity.UpdateRequest"
+  "\032\024.activity.QueryReply\"\000(\001\022O\n\030CreateActi"
+  "vityBidiStream\022\027.activity.CreateRequest\032"
+  "\024.activity.QueryReply\"\000(\0010\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_activity_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_activity_2eproto = {
-    false, false, 999, descriptor_table_protodef_activity_2eproto,
+    false, false, 1195, descriptor_table_protodef_activity_2eproto,
     "activity.proto",
     &descriptor_table_activity_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_activity_2eproto::offsets,
@@ -276,6 +299,9 @@ ActivityReply::ActivityReply(const ActivityReply& from)
   ActivityReply* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.start_date_){}
+    , decltype(_impl_.end_date_){}
+    , decltype(_impl_.status_){}
     , decltype(_impl_.id_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -288,6 +314,30 @@ ActivityReply::ActivityReply(const ActivityReply& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.start_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_start_date().empty()) {
+    _this->_impl_.start_date_.Set(from._internal_start_date(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.end_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_end_date().empty()) {
+    _this->_impl_.end_date_.Set(from._internal_end_date(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_status().empty()) {
+    _this->_impl_.status_.Set(from._internal_status(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.id_ = from._impl_.id_;
   // @@protoc_insertion_point(copy_constructor:activity.ActivityReply)
 }
@@ -298,12 +348,27 @@ inline void ActivityReply::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.start_date_){}
+    , decltype(_impl_.end_date_){}
+    , decltype(_impl_.status_){}
     , decltype(_impl_.id_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.start_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.end_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -319,6 +384,9 @@ ActivityReply::~ActivityReply() {
 inline void ActivityReply::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.start_date_.Destroy();
+  _impl_.end_date_.Destroy();
+  _impl_.status_.Destroy();
 }
 
 void ActivityReply::SetCachedSize(int size) const {
@@ -332,6 +400,9 @@ void ActivityReply::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
+  _impl_.start_date_.ClearToEmpty();
+  _impl_.end_date_.ClearToEmpty();
+  _impl_.status_.ClearToEmpty();
   _impl_.id_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -357,6 +428,36 @@ const char* ActivityReply::_InternalParse(const char* ptr, ::_pbi::ParseContext*
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "activity.ActivityReply.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string start_date = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_start_date();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.ActivityReply.start_date"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string end_date = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_end_date();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.ActivityReply.end_date"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string status = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_status();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.ActivityReply.status"));
         } else
           goto handle_unusual;
         continue;
@@ -405,6 +506,36 @@ uint8_t* ActivityReply::_InternalSerialize(
         2, this->_internal_name(), target);
   }
 
+  // string start_date = 3;
+  if (!this->_internal_start_date().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_start_date().data(), static_cast<int>(this->_internal_start_date().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.ActivityReply.start_date");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_start_date(), target);
+  }
+
+  // string end_date = 4;
+  if (!this->_internal_end_date().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_end_date().data(), static_cast<int>(this->_internal_end_date().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.ActivityReply.end_date");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_end_date(), target);
+  }
+
+  // string status = 5;
+  if (!this->_internal_status().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.ActivityReply.status");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_status(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -426,6 +557,27 @@ size_t ActivityReply::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
+  }
+
+  // string start_date = 3;
+  if (!this->_internal_start_date().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_start_date());
+  }
+
+  // string end_date = 4;
+  if (!this->_internal_end_date().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_end_date());
+  }
+
+  // string status = 5;
+  if (!this->_internal_status().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_status());
   }
 
   // int32 id = 1;
@@ -454,6 +606,15 @@ void ActivityReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
+  if (!from._internal_start_date().empty()) {
+    _this->_internal_set_start_date(from._internal_start_date());
+  }
+  if (!from._internal_end_date().empty()) {
+    _this->_internal_set_end_date(from._internal_end_date());
+  }
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
+  }
   if (from._internal_id() != 0) {
     _this->_internal_set_id(from._internal_id());
   }
@@ -479,6 +640,18 @@ void ActivityReply::InternalSwap(ActivityReply* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.start_date_, lhs_arena,
+      &other->_impl_.start_date_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.end_date_, lhs_arena,
+      &other->_impl_.end_date_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.status_, lhs_arena,
+      &other->_impl_.status_, rhs_arena
   );
   swap(_impl_.id_, other->_impl_.id_);
 }
@@ -786,16 +959,14 @@ const char* ActivitiesReply::_InternalParse(const char* ptr, ::_pbi::ParseContex
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated string activities = 1;
+      // repeated .activity.ActivityReply activities = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            auto str = _internal_add_activities();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            ptr = ctx->ParseMessage(_internal_add_activities(), ptr);
             CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "activity.ActivitiesReply.activities"));
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else
@@ -830,14 +1001,12 @@ uint8_t* ActivitiesReply::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string activities = 1;
-  for (int i = 0, n = this->_internal_activities_size(); i < n; i++) {
-    const auto& s = this->_internal_activities(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "activity.ActivitiesReply.activities");
-    target = stream->WriteString(1, s, target);
+  // repeated .activity.ActivityReply activities = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_activities_size()); i < n; i++) {
+    const auto& repfield = this->_internal_activities(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -856,12 +1025,11 @@ size_t ActivitiesReply::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string activities = 1;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.activities_.size());
-  for (int i = 0, n = _impl_.activities_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.activities_.Get(i));
+  // repeated .activity.ActivityReply activities = 1;
+  total_size += 1UL * this->_internal_activities_size();
+  for (const auto& msg : this->_impl_.activities_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -926,6 +1094,9 @@ CreateRequest::CreateRequest(const CreateRequest& from)
   CreateRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.start_date_){}
+    , decltype(_impl_.end_date_){}
+    , decltype(_impl_.status_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -937,6 +1108,30 @@ CreateRequest::CreateRequest(const CreateRequest& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.start_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_start_date().empty()) {
+    _this->_impl_.start_date_.Set(from._internal_start_date(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.end_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_end_date().empty()) {
+    _this->_impl_.end_date_.Set(from._internal_end_date(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_status().empty()) {
+    _this->_impl_.status_.Set(from._internal_status(), 
+      _this->GetArenaForAllocation());
+  }
   // @@protoc_insertion_point(copy_constructor:activity.CreateRequest)
 }
 
@@ -946,11 +1141,26 @@ inline void CreateRequest::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.start_date_){}
+    , decltype(_impl_.end_date_){}
+    , decltype(_impl_.status_){}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.start_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.end_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -966,6 +1176,9 @@ CreateRequest::~CreateRequest() {
 inline void CreateRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.start_date_.Destroy();
+  _impl_.end_date_.Destroy();
+  _impl_.status_.Destroy();
 }
 
 void CreateRequest::SetCachedSize(int size) const {
@@ -979,6 +1192,9 @@ void CreateRequest::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
+  _impl_.start_date_.ClearToEmpty();
+  _impl_.end_date_.ClearToEmpty();
+  _impl_.status_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -995,6 +1211,36 @@ const char* CreateRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext*
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "activity.CreateRequest.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string start_date = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+          auto str = _internal_mutable_start_date();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.CreateRequest.start_date"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string end_date = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_end_date();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.CreateRequest.end_date"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string status = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_status();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.CreateRequest.status"));
         } else
           goto handle_unusual;
         continue;
@@ -1037,6 +1283,36 @@ uint8_t* CreateRequest::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
+  // string start_date = 2;
+  if (!this->_internal_start_date().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_start_date().data(), static_cast<int>(this->_internal_start_date().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.CreateRequest.start_date");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_start_date(), target);
+  }
+
+  // string end_date = 3;
+  if (!this->_internal_end_date().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_end_date().data(), static_cast<int>(this->_internal_end_date().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.CreateRequest.end_date");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_end_date(), target);
+  }
+
+  // string status = 4;
+  if (!this->_internal_status().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.CreateRequest.status");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_status(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1060,6 +1336,27 @@ size_t CreateRequest::ByteSizeLong() const {
         this->_internal_name());
   }
 
+  // string start_date = 2;
+  if (!this->_internal_start_date().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_start_date());
+  }
+
+  // string end_date = 3;
+  if (!this->_internal_end_date().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_end_date());
+  }
+
+  // string status = 4;
+  if (!this->_internal_status().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_status());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -1080,6 +1377,15 @@ void CreateRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
 
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
+  }
+  if (!from._internal_start_date().empty()) {
+    _this->_internal_set_start_date(from._internal_start_date());
+  }
+  if (!from._internal_end_date().empty()) {
+    _this->_internal_set_end_date(from._internal_end_date());
+  }
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1103,6 +1409,18 @@ void CreateRequest::InternalSwap(CreateRequest* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.start_date_, lhs_arena,
+      &other->_impl_.start_date_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.end_date_, lhs_arena,
+      &other->_impl_.end_date_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.status_, lhs_arena,
+      &other->_impl_.status_, rhs_arena
   );
 }
 
@@ -1129,6 +1447,9 @@ UpdateRequest::UpdateRequest(const UpdateRequest& from)
   UpdateRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.start_date_){}
+    , decltype(_impl_.end_date_){}
+    , decltype(_impl_.status_){}
     , decltype(_impl_.id_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -1141,6 +1462,30 @@ UpdateRequest::UpdateRequest(const UpdateRequest& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.start_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_start_date().empty()) {
+    _this->_impl_.start_date_.Set(from._internal_start_date(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.end_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_end_date().empty()) {
+    _this->_impl_.end_date_.Set(from._internal_end_date(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_status().empty()) {
+    _this->_impl_.status_.Set(from._internal_status(), 
+      _this->GetArenaForAllocation());
+  }
   _this->_impl_.id_ = from._impl_.id_;
   // @@protoc_insertion_point(copy_constructor:activity.UpdateRequest)
 }
@@ -1151,12 +1496,27 @@ inline void UpdateRequest::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.start_date_){}
+    , decltype(_impl_.end_date_){}
+    , decltype(_impl_.status_){}
     , decltype(_impl_.id_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.start_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.end_date_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.status_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.status_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1172,6 +1532,9 @@ UpdateRequest::~UpdateRequest() {
 inline void UpdateRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.start_date_.Destroy();
+  _impl_.end_date_.Destroy();
+  _impl_.status_.Destroy();
 }
 
 void UpdateRequest::SetCachedSize(int size) const {
@@ -1185,6 +1548,9 @@ void UpdateRequest::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
+  _impl_.start_date_.ClearToEmpty();
+  _impl_.end_date_.ClearToEmpty();
+  _impl_.status_.ClearToEmpty();
   _impl_.id_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -1210,6 +1576,36 @@ const char* UpdateRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext*
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "activity.UpdateRequest.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string start_date = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_start_date();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.UpdateRequest.start_date"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string end_date = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_end_date();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.UpdateRequest.end_date"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string status = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+          auto str = _internal_mutable_status();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "activity.UpdateRequest.status"));
         } else
           goto handle_unusual;
         continue;
@@ -1258,6 +1654,36 @@ uint8_t* UpdateRequest::_InternalSerialize(
         2, this->_internal_name(), target);
   }
 
+  // string start_date = 3;
+  if (!this->_internal_start_date().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_start_date().data(), static_cast<int>(this->_internal_start_date().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.UpdateRequest.start_date");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_start_date(), target);
+  }
+
+  // string end_date = 4;
+  if (!this->_internal_end_date().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_end_date().data(), static_cast<int>(this->_internal_end_date().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.UpdateRequest.end_date");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_end_date(), target);
+  }
+
+  // string status = 5;
+  if (!this->_internal_status().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_status().data(), static_cast<int>(this->_internal_status().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "activity.UpdateRequest.status");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_status(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1279,6 +1705,27 @@ size_t UpdateRequest::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
+  }
+
+  // string start_date = 3;
+  if (!this->_internal_start_date().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_start_date());
+  }
+
+  // string end_date = 4;
+  if (!this->_internal_end_date().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_end_date());
+  }
+
+  // string status = 5;
+  if (!this->_internal_status().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_status());
   }
 
   // int32 id = 1;
@@ -1307,6 +1754,15 @@ void UpdateRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
+  if (!from._internal_start_date().empty()) {
+    _this->_internal_set_start_date(from._internal_start_date());
+  }
+  if (!from._internal_end_date().empty()) {
+    _this->_internal_set_end_date(from._internal_end_date());
+  }
+  if (!from._internal_status().empty()) {
+    _this->_internal_set_status(from._internal_status());
+  }
   if (from._internal_id() != 0) {
     _this->_internal_set_id(from._internal_id());
   }
@@ -1332,6 +1788,18 @@ void UpdateRequest::InternalSwap(UpdateRequest* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.start_date_, lhs_arena,
+      &other->_impl_.start_date_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.end_date_, lhs_arena,
+      &other->_impl_.end_date_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.status_, lhs_arena,
+      &other->_impl_.status_, rhs_arena
   );
   swap(_impl_.id_, other->_impl_.id_);
 }

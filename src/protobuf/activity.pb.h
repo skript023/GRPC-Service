@@ -207,6 +207,9 @@ class ActivityReply final :
 
   enum : int {
     kNameFieldNumber = 2,
+    kStartDateFieldNumber = 3,
+    kEndDateFieldNumber = 4,
+    kStatusFieldNumber = 5,
     kIdFieldNumber = 1,
   };
   // string name = 2;
@@ -221,6 +224,48 @@ class ActivityReply final :
   const std::string& _internal_name() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
   std::string* _internal_mutable_name();
+  public:
+
+  // string start_date = 3;
+  void clear_start_date();
+  const std::string& start_date() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_start_date(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_start_date();
+  PROTOBUF_NODISCARD std::string* release_start_date();
+  void set_allocated_start_date(std::string* start_date);
+  private:
+  const std::string& _internal_start_date() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_start_date(const std::string& value);
+  std::string* _internal_mutable_start_date();
+  public:
+
+  // string end_date = 4;
+  void clear_end_date();
+  const std::string& end_date() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_end_date(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_end_date();
+  PROTOBUF_NODISCARD std::string* release_end_date();
+  void set_allocated_end_date(std::string* end_date);
+  private:
+  const std::string& _internal_end_date() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_end_date(const std::string& value);
+  std::string* _internal_mutable_end_date();
+  public:
+
+  // string status = 5;
+  void clear_status();
+  const std::string& status() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_status(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_status();
+  PROTOBUF_NODISCARD std::string* release_status();
+  void set_allocated_status(std::string* status);
+  private:
+  const std::string& _internal_status() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(const std::string& value);
+  std::string* _internal_mutable_status();
   public:
 
   // int32 id = 1;
@@ -241,6 +286,9 @@ class ActivityReply final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr start_date_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr end_date_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
     int32_t id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -536,29 +584,23 @@ class ActivitiesReply final :
   enum : int {
     kActivitiesFieldNumber = 1,
   };
-  // repeated string activities = 1;
+  // repeated .activity.ActivityReply activities = 1;
   int activities_size() const;
   private:
   int _internal_activities_size() const;
   public:
   void clear_activities();
-  const std::string& activities(int index) const;
-  std::string* mutable_activities(int index);
-  void set_activities(int index, const std::string& value);
-  void set_activities(int index, std::string&& value);
-  void set_activities(int index, const char* value);
-  void set_activities(int index, const char* value, size_t size);
-  std::string* add_activities();
-  void add_activities(const std::string& value);
-  void add_activities(std::string&& value);
-  void add_activities(const char* value);
-  void add_activities(const char* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& activities() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_activities();
+  ::activity::ActivityReply* mutable_activities(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::activity::ActivityReply >*
+      mutable_activities();
   private:
-  const std::string& _internal_activities(int index) const;
-  std::string* _internal_add_activities();
+  const ::activity::ActivityReply& _internal_activities(int index) const;
+  ::activity::ActivityReply* _internal_add_activities();
   public:
+  const ::activity::ActivityReply& activities(int index) const;
+  ::activity::ActivityReply* add_activities();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::activity::ActivityReply >&
+      activities() const;
 
   // @@protoc_insertion_point(class_scope:activity.ActivitiesReply)
  private:
@@ -568,7 +610,7 @@ class ActivitiesReply final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> activities_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::activity::ActivityReply > activities_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -698,6 +740,9 @@ class CreateRequest final :
 
   enum : int {
     kNameFieldNumber = 1,
+    kStartDateFieldNumber = 2,
+    kEndDateFieldNumber = 3,
+    kStatusFieldNumber = 4,
   };
   // string name = 1;
   void clear_name();
@@ -713,6 +758,48 @@ class CreateRequest final :
   std::string* _internal_mutable_name();
   public:
 
+  // string start_date = 2;
+  void clear_start_date();
+  const std::string& start_date() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_start_date(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_start_date();
+  PROTOBUF_NODISCARD std::string* release_start_date();
+  void set_allocated_start_date(std::string* start_date);
+  private:
+  const std::string& _internal_start_date() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_start_date(const std::string& value);
+  std::string* _internal_mutable_start_date();
+  public:
+
+  // string end_date = 3;
+  void clear_end_date();
+  const std::string& end_date() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_end_date(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_end_date();
+  PROTOBUF_NODISCARD std::string* release_end_date();
+  void set_allocated_end_date(std::string* end_date);
+  private:
+  const std::string& _internal_end_date() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_end_date(const std::string& value);
+  std::string* _internal_mutable_end_date();
+  public:
+
+  // string status = 4;
+  void clear_status();
+  const std::string& status() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_status(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_status();
+  PROTOBUF_NODISCARD std::string* release_status();
+  void set_allocated_status(std::string* status);
+  private:
+  const std::string& _internal_status() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(const std::string& value);
+  std::string* _internal_mutable_status();
+  public:
+
   // @@protoc_insertion_point(class_scope:activity.CreateRequest)
  private:
   class _Internal;
@@ -722,6 +809,9 @@ class CreateRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr start_date_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr end_date_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -851,6 +941,9 @@ class UpdateRequest final :
 
   enum : int {
     kNameFieldNumber = 2,
+    kStartDateFieldNumber = 3,
+    kEndDateFieldNumber = 4,
+    kStatusFieldNumber = 5,
     kIdFieldNumber = 1,
   };
   // string name = 2;
@@ -865,6 +958,48 @@ class UpdateRequest final :
   const std::string& _internal_name() const;
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
   std::string* _internal_mutable_name();
+  public:
+
+  // string start_date = 3;
+  void clear_start_date();
+  const std::string& start_date() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_start_date(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_start_date();
+  PROTOBUF_NODISCARD std::string* release_start_date();
+  void set_allocated_start_date(std::string* start_date);
+  private:
+  const std::string& _internal_start_date() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_start_date(const std::string& value);
+  std::string* _internal_mutable_start_date();
+  public:
+
+  // string end_date = 4;
+  void clear_end_date();
+  const std::string& end_date() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_end_date(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_end_date();
+  PROTOBUF_NODISCARD std::string* release_end_date();
+  void set_allocated_end_date(std::string* end_date);
+  private:
+  const std::string& _internal_end_date() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_end_date(const std::string& value);
+  std::string* _internal_mutable_end_date();
+  public:
+
+  // string status = 5;
+  void clear_status();
+  const std::string& status() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_status(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_status();
+  PROTOBUF_NODISCARD std::string* release_status();
+  void set_allocated_status(std::string* status);
+  private:
+  const std::string& _internal_status() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_status(const std::string& value);
+  std::string* _internal_mutable_status();
   public:
 
   // int32 id = 1;
@@ -885,6 +1020,9 @@ class UpdateRequest final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr start_date_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr end_date_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr status_;
     int32_t id_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1397,6 +1535,156 @@ inline void ActivityReply::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:activity.ActivityReply.name)
 }
 
+// string start_date = 3;
+inline void ActivityReply::clear_start_date() {
+  _impl_.start_date_.ClearToEmpty();
+}
+inline const std::string& ActivityReply::start_date() const {
+  // @@protoc_insertion_point(field_get:activity.ActivityReply.start_date)
+  return _internal_start_date();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ActivityReply::set_start_date(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.start_date_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.ActivityReply.start_date)
+}
+inline std::string* ActivityReply::mutable_start_date() {
+  std::string* _s = _internal_mutable_start_date();
+  // @@protoc_insertion_point(field_mutable:activity.ActivityReply.start_date)
+  return _s;
+}
+inline const std::string& ActivityReply::_internal_start_date() const {
+  return _impl_.start_date_.Get();
+}
+inline void ActivityReply::_internal_set_start_date(const std::string& value) {
+  
+  _impl_.start_date_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ActivityReply::_internal_mutable_start_date() {
+  
+  return _impl_.start_date_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ActivityReply::release_start_date() {
+  // @@protoc_insertion_point(field_release:activity.ActivityReply.start_date)
+  return _impl_.start_date_.Release();
+}
+inline void ActivityReply::set_allocated_start_date(std::string* start_date) {
+  if (start_date != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.start_date_.SetAllocated(start_date, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.start_date_.IsDefault()) {
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.ActivityReply.start_date)
+}
+
+// string end_date = 4;
+inline void ActivityReply::clear_end_date() {
+  _impl_.end_date_.ClearToEmpty();
+}
+inline const std::string& ActivityReply::end_date() const {
+  // @@protoc_insertion_point(field_get:activity.ActivityReply.end_date)
+  return _internal_end_date();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ActivityReply::set_end_date(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.end_date_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.ActivityReply.end_date)
+}
+inline std::string* ActivityReply::mutable_end_date() {
+  std::string* _s = _internal_mutable_end_date();
+  // @@protoc_insertion_point(field_mutable:activity.ActivityReply.end_date)
+  return _s;
+}
+inline const std::string& ActivityReply::_internal_end_date() const {
+  return _impl_.end_date_.Get();
+}
+inline void ActivityReply::_internal_set_end_date(const std::string& value) {
+  
+  _impl_.end_date_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ActivityReply::_internal_mutable_end_date() {
+  
+  return _impl_.end_date_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ActivityReply::release_end_date() {
+  // @@protoc_insertion_point(field_release:activity.ActivityReply.end_date)
+  return _impl_.end_date_.Release();
+}
+inline void ActivityReply::set_allocated_end_date(std::string* end_date) {
+  if (end_date != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.end_date_.SetAllocated(end_date, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.end_date_.IsDefault()) {
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.ActivityReply.end_date)
+}
+
+// string status = 5;
+inline void ActivityReply::clear_status() {
+  _impl_.status_.ClearToEmpty();
+}
+inline const std::string& ActivityReply::status() const {
+  // @@protoc_insertion_point(field_get:activity.ActivityReply.status)
+  return _internal_status();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ActivityReply::set_status(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.status_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.ActivityReply.status)
+}
+inline std::string* ActivityReply::mutable_status() {
+  std::string* _s = _internal_mutable_status();
+  // @@protoc_insertion_point(field_mutable:activity.ActivityReply.status)
+  return _s;
+}
+inline const std::string& ActivityReply::_internal_status() const {
+  return _impl_.status_.Get();
+}
+inline void ActivityReply::_internal_set_status(const std::string& value) {
+  
+  _impl_.status_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ActivityReply::_internal_mutable_status() {
+  
+  return _impl_.status_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ActivityReply::release_status() {
+  // @@protoc_insertion_point(field_release:activity.ActivityReply.status)
+  return _impl_.status_.Release();
+}
+inline void ActivityReply::set_allocated_status(std::string* status) {
+  if (status != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.status_.SetAllocated(status, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.status_.IsDefault()) {
+    _impl_.status_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.ActivityReply.status)
+}
+
 // -------------------------------------------------------------------
 
 // QueryReply
@@ -1475,7 +1763,7 @@ inline void QueryReply::set_success(bool value) {
 
 // ActivitiesReply
 
-// repeated string activities = 1;
+// repeated .activity.ActivityReply activities = 1;
 inline int ActivitiesReply::_internal_activities_size() const {
   return _impl_.activities_.size();
 }
@@ -1485,69 +1773,34 @@ inline int ActivitiesReply::activities_size() const {
 inline void ActivitiesReply::clear_activities() {
   _impl_.activities_.Clear();
 }
-inline std::string* ActivitiesReply::add_activities() {
-  std::string* _s = _internal_add_activities();
-  // @@protoc_insertion_point(field_add_mutable:activity.ActivitiesReply.activities)
-  return _s;
-}
-inline const std::string& ActivitiesReply::_internal_activities(int index) const {
-  return _impl_.activities_.Get(index);
-}
-inline const std::string& ActivitiesReply::activities(int index) const {
-  // @@protoc_insertion_point(field_get:activity.ActivitiesReply.activities)
-  return _internal_activities(index);
-}
-inline std::string* ActivitiesReply::mutable_activities(int index) {
+inline ::activity::ActivityReply* ActivitiesReply::mutable_activities(int index) {
   // @@protoc_insertion_point(field_mutable:activity.ActivitiesReply.activities)
   return _impl_.activities_.Mutable(index);
 }
-inline void ActivitiesReply::set_activities(int index, const std::string& value) {
-  _impl_.activities_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:activity.ActivitiesReply.activities)
-}
-inline void ActivitiesReply::set_activities(int index, std::string&& value) {
-  _impl_.activities_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:activity.ActivitiesReply.activities)
-}
-inline void ActivitiesReply::set_activities(int index, const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _impl_.activities_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:activity.ActivitiesReply.activities)
-}
-inline void ActivitiesReply::set_activities(int index, const char* value, size_t size) {
-  _impl_.activities_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:activity.ActivitiesReply.activities)
-}
-inline std::string* ActivitiesReply::_internal_add_activities() {
-  return _impl_.activities_.Add();
-}
-inline void ActivitiesReply::add_activities(const std::string& value) {
-  _impl_.activities_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:activity.ActivitiesReply.activities)
-}
-inline void ActivitiesReply::add_activities(std::string&& value) {
-  _impl_.activities_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:activity.ActivitiesReply.activities)
-}
-inline void ActivitiesReply::add_activities(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  _impl_.activities_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:activity.ActivitiesReply.activities)
-}
-inline void ActivitiesReply::add_activities(const char* value, size_t size) {
-  _impl_.activities_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:activity.ActivitiesReply.activities)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-ActivitiesReply::activities() const {
-  // @@protoc_insertion_point(field_list:activity.ActivitiesReply.activities)
-  return _impl_.activities_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::activity::ActivityReply >*
 ActivitiesReply::mutable_activities() {
   // @@protoc_insertion_point(field_mutable_list:activity.ActivitiesReply.activities)
   return &_impl_.activities_;
+}
+inline const ::activity::ActivityReply& ActivitiesReply::_internal_activities(int index) const {
+  return _impl_.activities_.Get(index);
+}
+inline const ::activity::ActivityReply& ActivitiesReply::activities(int index) const {
+  // @@protoc_insertion_point(field_get:activity.ActivitiesReply.activities)
+  return _internal_activities(index);
+}
+inline ::activity::ActivityReply* ActivitiesReply::_internal_add_activities() {
+  return _impl_.activities_.Add();
+}
+inline ::activity::ActivityReply* ActivitiesReply::add_activities() {
+  ::activity::ActivityReply* _add = _internal_add_activities();
+  // @@protoc_insertion_point(field_add:activity.ActivitiesReply.activities)
+  return _add;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::activity::ActivityReply >&
+ActivitiesReply::activities() const {
+  // @@protoc_insertion_point(field_list:activity.ActivitiesReply.activities)
+  return _impl_.activities_;
 }
 
 // -------------------------------------------------------------------
@@ -1602,6 +1855,156 @@ inline void CreateRequest::set_allocated_name(std::string* name) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:activity.CreateRequest.name)
+}
+
+// string start_date = 2;
+inline void CreateRequest::clear_start_date() {
+  _impl_.start_date_.ClearToEmpty();
+}
+inline const std::string& CreateRequest::start_date() const {
+  // @@protoc_insertion_point(field_get:activity.CreateRequest.start_date)
+  return _internal_start_date();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CreateRequest::set_start_date(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.start_date_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.CreateRequest.start_date)
+}
+inline std::string* CreateRequest::mutable_start_date() {
+  std::string* _s = _internal_mutable_start_date();
+  // @@protoc_insertion_point(field_mutable:activity.CreateRequest.start_date)
+  return _s;
+}
+inline const std::string& CreateRequest::_internal_start_date() const {
+  return _impl_.start_date_.Get();
+}
+inline void CreateRequest::_internal_set_start_date(const std::string& value) {
+  
+  _impl_.start_date_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CreateRequest::_internal_mutable_start_date() {
+  
+  return _impl_.start_date_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CreateRequest::release_start_date() {
+  // @@protoc_insertion_point(field_release:activity.CreateRequest.start_date)
+  return _impl_.start_date_.Release();
+}
+inline void CreateRequest::set_allocated_start_date(std::string* start_date) {
+  if (start_date != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.start_date_.SetAllocated(start_date, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.start_date_.IsDefault()) {
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.CreateRequest.start_date)
+}
+
+// string end_date = 3;
+inline void CreateRequest::clear_end_date() {
+  _impl_.end_date_.ClearToEmpty();
+}
+inline const std::string& CreateRequest::end_date() const {
+  // @@protoc_insertion_point(field_get:activity.CreateRequest.end_date)
+  return _internal_end_date();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CreateRequest::set_end_date(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.end_date_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.CreateRequest.end_date)
+}
+inline std::string* CreateRequest::mutable_end_date() {
+  std::string* _s = _internal_mutable_end_date();
+  // @@protoc_insertion_point(field_mutable:activity.CreateRequest.end_date)
+  return _s;
+}
+inline const std::string& CreateRequest::_internal_end_date() const {
+  return _impl_.end_date_.Get();
+}
+inline void CreateRequest::_internal_set_end_date(const std::string& value) {
+  
+  _impl_.end_date_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CreateRequest::_internal_mutable_end_date() {
+  
+  return _impl_.end_date_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CreateRequest::release_end_date() {
+  // @@protoc_insertion_point(field_release:activity.CreateRequest.end_date)
+  return _impl_.end_date_.Release();
+}
+inline void CreateRequest::set_allocated_end_date(std::string* end_date) {
+  if (end_date != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.end_date_.SetAllocated(end_date, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.end_date_.IsDefault()) {
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.CreateRequest.end_date)
+}
+
+// string status = 4;
+inline void CreateRequest::clear_status() {
+  _impl_.status_.ClearToEmpty();
+}
+inline const std::string& CreateRequest::status() const {
+  // @@protoc_insertion_point(field_get:activity.CreateRequest.status)
+  return _internal_status();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void CreateRequest::set_status(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.status_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.CreateRequest.status)
+}
+inline std::string* CreateRequest::mutable_status() {
+  std::string* _s = _internal_mutable_status();
+  // @@protoc_insertion_point(field_mutable:activity.CreateRequest.status)
+  return _s;
+}
+inline const std::string& CreateRequest::_internal_status() const {
+  return _impl_.status_.Get();
+}
+inline void CreateRequest::_internal_set_status(const std::string& value) {
+  
+  _impl_.status_.Set(value, GetArenaForAllocation());
+}
+inline std::string* CreateRequest::_internal_mutable_status() {
+  
+  return _impl_.status_.Mutable(GetArenaForAllocation());
+}
+inline std::string* CreateRequest::release_status() {
+  // @@protoc_insertion_point(field_release:activity.CreateRequest.status)
+  return _impl_.status_.Release();
+}
+inline void CreateRequest::set_allocated_status(std::string* status) {
+  if (status != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.status_.SetAllocated(status, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.status_.IsDefault()) {
+    _impl_.status_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.CreateRequest.status)
 }
 
 // -------------------------------------------------------------------
@@ -1676,6 +2079,156 @@ inline void UpdateRequest::set_allocated_name(std::string* name) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:activity.UpdateRequest.name)
+}
+
+// string start_date = 3;
+inline void UpdateRequest::clear_start_date() {
+  _impl_.start_date_.ClearToEmpty();
+}
+inline const std::string& UpdateRequest::start_date() const {
+  // @@protoc_insertion_point(field_get:activity.UpdateRequest.start_date)
+  return _internal_start_date();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UpdateRequest::set_start_date(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.start_date_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.UpdateRequest.start_date)
+}
+inline std::string* UpdateRequest::mutable_start_date() {
+  std::string* _s = _internal_mutable_start_date();
+  // @@protoc_insertion_point(field_mutable:activity.UpdateRequest.start_date)
+  return _s;
+}
+inline const std::string& UpdateRequest::_internal_start_date() const {
+  return _impl_.start_date_.Get();
+}
+inline void UpdateRequest::_internal_set_start_date(const std::string& value) {
+  
+  _impl_.start_date_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UpdateRequest::_internal_mutable_start_date() {
+  
+  return _impl_.start_date_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UpdateRequest::release_start_date() {
+  // @@protoc_insertion_point(field_release:activity.UpdateRequest.start_date)
+  return _impl_.start_date_.Release();
+}
+inline void UpdateRequest::set_allocated_start_date(std::string* start_date) {
+  if (start_date != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.start_date_.SetAllocated(start_date, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.start_date_.IsDefault()) {
+    _impl_.start_date_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.UpdateRequest.start_date)
+}
+
+// string end_date = 4;
+inline void UpdateRequest::clear_end_date() {
+  _impl_.end_date_.ClearToEmpty();
+}
+inline const std::string& UpdateRequest::end_date() const {
+  // @@protoc_insertion_point(field_get:activity.UpdateRequest.end_date)
+  return _internal_end_date();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UpdateRequest::set_end_date(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.end_date_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.UpdateRequest.end_date)
+}
+inline std::string* UpdateRequest::mutable_end_date() {
+  std::string* _s = _internal_mutable_end_date();
+  // @@protoc_insertion_point(field_mutable:activity.UpdateRequest.end_date)
+  return _s;
+}
+inline const std::string& UpdateRequest::_internal_end_date() const {
+  return _impl_.end_date_.Get();
+}
+inline void UpdateRequest::_internal_set_end_date(const std::string& value) {
+  
+  _impl_.end_date_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UpdateRequest::_internal_mutable_end_date() {
+  
+  return _impl_.end_date_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UpdateRequest::release_end_date() {
+  // @@protoc_insertion_point(field_release:activity.UpdateRequest.end_date)
+  return _impl_.end_date_.Release();
+}
+inline void UpdateRequest::set_allocated_end_date(std::string* end_date) {
+  if (end_date != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.end_date_.SetAllocated(end_date, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.end_date_.IsDefault()) {
+    _impl_.end_date_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.UpdateRequest.end_date)
+}
+
+// string status = 5;
+inline void UpdateRequest::clear_status() {
+  _impl_.status_.ClearToEmpty();
+}
+inline const std::string& UpdateRequest::status() const {
+  // @@protoc_insertion_point(field_get:activity.UpdateRequest.status)
+  return _internal_status();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void UpdateRequest::set_status(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.status_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:activity.UpdateRequest.status)
+}
+inline std::string* UpdateRequest::mutable_status() {
+  std::string* _s = _internal_mutable_status();
+  // @@protoc_insertion_point(field_mutable:activity.UpdateRequest.status)
+  return _s;
+}
+inline const std::string& UpdateRequest::_internal_status() const {
+  return _impl_.status_.Get();
+}
+inline void UpdateRequest::_internal_set_status(const std::string& value) {
+  
+  _impl_.status_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UpdateRequest::_internal_mutable_status() {
+  
+  return _impl_.status_.Mutable(GetArenaForAllocation());
+}
+inline std::string* UpdateRequest::release_status() {
+  // @@protoc_insertion_point(field_release:activity.UpdateRequest.status)
+  return _impl_.status_.Release();
+}
+inline void UpdateRequest::set_allocated_status(std::string* status) {
+  if (status != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.status_.SetAllocated(status, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.status_.IsDefault()) {
+    _impl_.status_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:activity.UpdateRequest.status)
 }
 
 // -------------------------------------------------------------------
