@@ -12,10 +12,15 @@ namespace microservice
 		if (products.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
 
-		for (auto& product : products)
+		std::ranges::for_each(products, [=](Products product)
 		{
-			reply->mutable_products()->Add(std::move(product.name));
-		}
+			m_reply.set_id(product.id);
+            m_reply.set_price(product.price);
+            m_reply.set_name(product.name);
+            m_reply.set_description(product.description);
+
+			reply->mutable_products()->Add(std::move(m_reply));
+		});
 
 		return Status::OK;
 	}
@@ -26,7 +31,9 @@ namespace microservice
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");
 
 		reply->set_id(product.id);
+		reply->set_price(product.price);
 		reply->set_name(product.name);
+		reply->set_description(product.description);
 
 		return Status::OK;
 	}
@@ -41,8 +48,9 @@ namespace microservice
 
 		Products product;
 		product.id = -1;
+		product.price = request->price();
 		product.name = request->name();
-		product.description = request->name();
+		product.description = request->description();
 
 		int data = g_database->storage().insert(product);
 
@@ -63,8 +71,9 @@ namespace microservice
 			return Status::CANCELLED;
 		}
 
+		product->price = request->price();
 		product->name = request->name();
-		product->description = request->name();
+		product->description = request->description();
 
 		storage.update(*product);
 
@@ -102,23 +111,33 @@ namespace microservice
 
 		std::ranges::for_each(products, [this](Products product)
 		{
-			m_reply.mutable_products()->Add(std::move(product.name));
+			m_reply.set_id(product.id);
+            m_reply.set_price(product.price);
+            m_reply.set_name(product.name);
+            m_reply.set_description(product.description);
+
+			m_replies.mutable_products()->Add(std::move(m_reply));
 		});
 
-		m_stream = reply->Write(m_reply);
+		m_stream = reply->Write(m_replies);
 
 		while (m_stream)
 		{
 			if (this->on_changed(products, storage.get_all<Products>()))
 			{
 				products = storage.get_all<Products>();
-				m_reply.clear_products();
+				m_replies.clear_products();
 				std::ranges::for_each(products, [this](Products product)
 				{
-					m_reply.mutable_products()->Add(std::move(product.name));
+					m_reply.set_id(product.id);
+					m_reply.set_price(product.price);
+					m_reply.set_name(product.name);
+					m_reply.set_description(product.description);
+
+					m_replies.mutable_products()->Add(std::move(m_reply));
 				});
 				
-				m_stream = reply->Write(m_reply);
+				m_stream = reply->Write(m_replies);
 			}
 			if (!m_stream) break;
 
@@ -139,8 +158,9 @@ namespace microservice
 				m_condition.wait(lock, [request] {return &request;});
 				
 				auto product = storage.get<Products>(request.id());
+				product.price = request.price();
 				product.name = request.name();
-				product.description = request.name();
+				product.description = request.description();
 
 				storage.update(product);
 
@@ -164,8 +184,9 @@ namespace microservice
 				m_condition.wait(lock, [request] {return &request;});
 			
 				product.id = -1;
+				product.price = request.price();
 				product.name = request.name();
-				product.description = request.name();
+				product.description = request.description();
 
 				if (int data = storage.insert(product); data != 0)
 				{

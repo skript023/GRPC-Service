@@ -4,7 +4,10 @@ package product;
 
 message ProductReply {
     int32 id = 1;
-    string name = 2;
+    int32 price = 2;
+    string name = 3;
+    string description = 4;
+
 }
 
 message QueryReply {
@@ -13,16 +16,20 @@ message QueryReply {
 }
 
 message ProductsReply {
-    repeated string products = 1;
+    repeated ProductReply products = 1;
 }
 
 message CreateRequest {
-    string name = 1;
+    int32 price = 1;
+    string name = 2;
+    string description = 3;
 }
 
 message UpdateRequest {
     int32 id = 1;
-    string name = 2;
+    int32 price = 2;
+    string name = 3;
+    string description = 4;
 }
 
 message FindByIdRequest {

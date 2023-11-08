@@ -7,6 +7,7 @@ namespace microservice
     struct Products
     {
         int id;
+        int price;
         std::string name;
         std::string description;
     };

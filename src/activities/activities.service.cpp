@@ -91,7 +91,21 @@ namespace microservice
     }
     Status ActivityService::RemoveActivity(ServerContext *context, const FindByIdRequest *request, QueryReply *response)
     {
-        return Status();
+        try
+		{
+			g_database->storage().remove<Activities>(request->id());
+		
+			response->set_message("data successfully deleted");
+			response->set_success(true);
+		}
+		catch(std::system_error e)
+		{
+			LOG(WARNING) << e.what();
+
+			return Status::CANCELLED;
+		}
+
+		return Status::OK;
     }
     Status ActivityService::QueryActivity(ServerContext *context, ServerReaderWriter<ActivityReply, PaginationRequest> *stream)
     {

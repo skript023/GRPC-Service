@@ -18,6 +18,7 @@ namespace microservice
         {
             auto products = make_table("products", 
             make_column("id", &Products::id, autoincrement(), primary_key()), 
+            make_column("price", &Products::price), 
             make_column("name", &Products::name), 
             make_column("description", &Products::description));
 

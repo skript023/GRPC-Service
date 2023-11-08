@@ -31,7 +31,8 @@ namespace microservice
         bool m_on_change;
         std::string m_string;
         std::atomic<bool> m_stream;
-        product::ProductsReply m_reply;
+        product::ProductReply m_reply;
+        product::ProductsReply m_replies;
         std::mutex m_mutex;
         std::condition_variable m_condition;
     };

@@ -24,7 +24,9 @@ namespace product {
 PROTOBUF_CONSTEXPR ProductReply::ProductReply(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/0
+  , /*decltype(_impl_.price_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ProductReplyDefaultTypeInternal {
   PROTOBUF_CONSTEXPR ProductReplyDefaultTypeInternal()
@@ -65,6 +67,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR CreateRequest::CreateRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.price_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct CreateRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR CreateRequestDefaultTypeInternal()
@@ -78,7 +82,9 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR UpdateRequest::UpdateRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.id_)*/0
+  , /*decltype(_impl_.price_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct UpdateRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR UpdateRequestDefaultTypeInternal()
@@ -140,7 +146,9 @@ const uint32_t TableStruct_product_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::product::ProductReply, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::product::ProductReply, _impl_.price_),
   PROTOBUF_FIELD_OFFSET(::product::ProductReply, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::product::ProductReply, _impl_.description_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::product::QueryReply, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -162,7 +170,9 @@ const uint32_t TableStruct_product_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::product::CreateRequest, _impl_.price_),
   PROTOBUF_FIELD_OFFSET(::product::CreateRequest, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::product::CreateRequest, _impl_.description_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::product::UpdateRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -170,7 +180,9 @@ const uint32_t TableStruct_product_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::product::UpdateRequest, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::product::UpdateRequest, _impl_.price_),
   PROTOBUF_FIELD_OFFSET(::product::UpdateRequest, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::product::UpdateRequest, _impl_.description_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::product::FindByIdRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -195,13 +207,13 @@ const uint32_t TableStruct_product_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::product::ProductReply)},
-  { 8, -1, -1, sizeof(::product::QueryReply)},
-  { 16, -1, -1, sizeof(::product::ProductsReply)},
-  { 23, -1, -1, sizeof(::product::CreateRequest)},
-  { 30, -1, -1, sizeof(::product::UpdateRequest)},
-  { 38, -1, -1, sizeof(::product::FindByIdRequest)},
-  { 45, -1, -1, sizeof(::product::PaginationRequest)},
-  { 53, -1, -1, sizeof(::product::EmptyRequest)},
+  { 10, -1, -1, sizeof(::product::QueryReply)},
+  { 18, -1, -1, sizeof(::product::ProductsReply)},
+  { 25, -1, -1, sizeof(::product::CreateRequest)},
+  { 34, -1, -1, sizeof(::product::UpdateRequest)},
+  { 44, -1, -1, sizeof(::product::FindByIdRequest)},
+  { 51, -1, -1, sizeof(::product::PaginationRequest)},
+  { 59, -1, -1, sizeof(::product::EmptyRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -216,35 +228,38 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_product_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\rproduct.proto\022\007product\"(\n\014ProductReply"
-  "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\".\n\nQueryReply"
-  "\022\017\n\007message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"!\n\rPr"
-  "oductsReply\022\020\n\010products\030\001 \003(\t\"\035\n\rCreateR"
-  "equest\022\014\n\004name\030\001 \001(\t\")\n\rUpdateRequest\022\n\n"
-  "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\"\035\n\017FindByIdReque"
-  "st\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004p"
-  "age\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2"
-  "\375\004\n\007Product\022A\n\016FindAllProduct\022\025.product."
-  "EmptyRequest\032\026.product.ProductsReply\"\000\022C"
-  "\n\016FindOneProduct\022\030.product.FindByIdReque"
-  "st\032\025.product.ProductReply\"\000\022>\n\rCreatePro"
-  "duct\022\026.product.CreateRequest\032\023.product.Q"
-  "ueryReply\"\000\022>\n\rUpdateProduct\022\026.product.U"
-  "pdateRequest\032\023.product.QueryReply\"\000\022@\n\rR"
-  "emoveProduct\022\030.product.FindByIdRequest\032\023"
-  ".product.QueryReply\"\000\022G\n\014QueryProduct\022\032."
-  "product.PaginationRequest\032\025.product.Prod"
-  "uctReply\"\000(\0010\001\022I\n\024FindAllProductStream\022\025"
-  ".product.EmptyRequest\032\026.product.Products"
-  "Reply\"\0000\001\022F\n\023UpdateProductStream\022\026.produ"
-  "ct.UpdateRequest\032\023.product.QueryReply\"\000("
-  "\001\022L\n\027CreateProductBidiStream\022\026.product.C"
-  "reateRequest\032\023.product.QueryReply\"\000(\0010\001b"
-  "\006proto3"
+  "\n\rproduct.proto\022\007product\"L\n\014ProductReply"
+  "\022\n\n\002id\030\001 \001(\005\022\r\n\005price\030\002 \001(\005\022\014\n\004name\030\003 \001("
+  "\t\022\023\n\013description\030\004 \001(\t\".\n\nQueryReply\022\017\n\007"
+  "message\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\"8\n\rProduc"
+  "tsReply\022\'\n\010products\030\001 \003(\0132\025.product.Prod"
+  "uctReply\"A\n\rCreateRequest\022\r\n\005price\030\001 \001(\005"
+  "\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t\"M\n\rU"
+  "pdateRequest\022\n\n\002id\030\001 \001(\005\022\r\n\005price\030\002 \001(\005\022"
+  "\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\"\035\n\017Fi"
+  "ndByIdRequest\022\n\n\002id\030\001 \001(\005\"/\n\021PaginationR"
+  "equest\022\014\n\004page\030\001 \001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014Em"
+  "ptyRequest2\375\004\n\007Product\022A\n\016FindAllProduct"
+  "\022\025.product.EmptyRequest\032\026.product.Produc"
+  "tsReply\"\000\022C\n\016FindOneProduct\022\030.product.Fi"
+  "ndByIdRequest\032\025.product.ProductReply\"\000\022>"
+  "\n\rCreateProduct\022\026.product.CreateRequest\032"
+  "\023.product.QueryReply\"\000\022>\n\rUpdateProduct\022"
+  "\026.product.UpdateRequest\032\023.product.QueryR"
+  "eply\"\000\022@\n\rRemoveProduct\022\030.product.FindBy"
+  "IdRequest\032\023.product.QueryReply\"\000\022G\n\014Quer"
+  "yProduct\022\032.product.PaginationRequest\032\025.p"
+  "roduct.ProductReply\"\000(\0010\001\022I\n\024FindAllProd"
+  "uctStream\022\025.product.EmptyRequest\032\026.produ"
+  "ct.ProductsReply\"\0000\001\022F\n\023UpdateProductStr"
+  "eam\022\026.product.UpdateRequest\032\023.product.Qu"
+  "eryReply\"\000(\001\022L\n\027CreateProductBidiStream\022"
+  "\026.product.CreateRequest\032\023.product.QueryR"
+  "eply\"\000(\0010\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_product_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_product_2eproto = {
-    false, false, 967, descriptor_table_protodef_product_2eproto,
+    false, false, 1098, descriptor_table_protodef_product_2eproto,
     "product.proto",
     &descriptor_table_product_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_product_2eproto::offsets,
@@ -276,7 +291,9 @@ ProductReply::ProductReply(const ProductReply& from)
   ProductReply* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.description_){}
     , decltype(_impl_.id_){}
+    , decltype(_impl_.price_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -288,7 +305,17 @@ ProductReply::ProductReply(const ProductReply& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
-  _this->_impl_.id_ = from._impl_.id_;
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_description().empty()) {
+    _this->_impl_.description_.Set(from._internal_description(), 
+      _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.price_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.price_));
   // @@protoc_insertion_point(copy_constructor:product.ProductReply)
 }
 
@@ -298,12 +325,18 @@ inline void ProductReply::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.description_){}
     , decltype(_impl_.id_){0}
+    , decltype(_impl_.price_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -319,6 +352,7 @@ ProductReply::~ProductReply() {
 inline void ProductReply::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.description_.Destroy();
 }
 
 void ProductReply::SetCachedSize(int size) const {
@@ -332,7 +366,10 @@ void ProductReply::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
-  _impl_.id_ = 0;
+  _impl_.description_.ClearToEmpty();
+  ::memset(&_impl_.id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.price_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.price_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -350,13 +387,31 @@ const char* ProductReply::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         } else
           goto handle_unusual;
         continue;
-      // string name = 2;
+      // int32 price = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.price_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string name = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "product.ProductReply.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string description = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_description();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "product.ProductReply.description"));
         } else
           goto handle_unusual;
         continue;
@@ -395,14 +450,30 @@ uint8_t* ProductReply::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_id(), target);
   }
 
-  // string name = 2;
+  // int32 price = 2;
+  if (this->_internal_price() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_price(), target);
+  }
+
+  // string name = 3;
   if (!this->_internal_name().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "product.ProductReply.name");
     target = stream->WriteStringMaybeAliased(
-        2, this->_internal_name(), target);
+        3, this->_internal_name(), target);
+  }
+
+  // string description = 4;
+  if (!this->_internal_description().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "product.ProductReply.description");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_description(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -421,16 +492,28 @@ size_t ProductReply::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 2;
+  // string name = 3;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
+  // string description = 4;
+  if (!this->_internal_description().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_description());
+  }
+
   // int32 id = 1;
   if (this->_internal_id() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_id());
+  }
+
+  // int32 price = 2;
+  if (this->_internal_price() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_price());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -454,8 +537,14 @@ void ProductReply::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::P
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
+  if (!from._internal_description().empty()) {
+    _this->_internal_set_description(from._internal_description());
+  }
   if (from._internal_id() != 0) {
     _this->_internal_set_id(from._internal_id());
+  }
+  if (from._internal_price() != 0) {
+    _this->_internal_set_price(from._internal_price());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -480,7 +569,16 @@ void ProductReply::InternalSwap(ProductReply* other) {
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  swap(_impl_.id_, other->_impl_.id_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.description_, lhs_arena,
+      &other->_impl_.description_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ProductReply, _impl_.price_)
+      + sizeof(ProductReply::_impl_.price_)
+      - PROTOBUF_FIELD_OFFSET(ProductReply, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ProductReply::GetMetadata() const {
@@ -786,16 +884,14 @@ const char* ProductsReply::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated string products = 1;
+      // repeated .product.ProductReply products = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            auto str = _internal_add_products();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            ptr = ctx->ParseMessage(_internal_add_products(), ptr);
             CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "product.ProductsReply.products"));
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else
@@ -830,14 +926,12 @@ uint8_t* ProductsReply::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string products = 1;
-  for (int i = 0, n = this->_internal_products_size(); i < n; i++) {
-    const auto& s = this->_internal_products(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "product.ProductsReply.products");
-    target = stream->WriteString(1, s, target);
+  // repeated .product.ProductReply products = 1;
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_products_size()); i < n; i++) {
+    const auto& repfield = this->_internal_products(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -856,12 +950,11 @@ size_t ProductsReply::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string products = 1;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.products_.size());
-  for (int i = 0, n = _impl_.products_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.products_.Get(i));
+  // repeated .product.ProductReply products = 1;
+  total_size += 1UL * this->_internal_products_size();
+  for (const auto& msg : this->_impl_.products_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -926,6 +1019,8 @@ CreateRequest::CreateRequest(const CreateRequest& from)
   CreateRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.description_){}
+    , decltype(_impl_.price_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -937,6 +1032,15 @@ CreateRequest::CreateRequest(const CreateRequest& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_description().empty()) {
+    _this->_impl_.description_.Set(from._internal_description(), 
+      _this->GetArenaForAllocation());
+  }
+  _this->_impl_.price_ = from._impl_.price_;
   // @@protoc_insertion_point(copy_constructor:product.CreateRequest)
 }
 
@@ -946,11 +1050,17 @@ inline void CreateRequest::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.description_){}
+    , decltype(_impl_.price_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -966,6 +1076,7 @@ CreateRequest::~CreateRequest() {
 inline void CreateRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.description_.Destroy();
 }
 
 void CreateRequest::SetCachedSize(int size) const {
@@ -979,6 +1090,8 @@ void CreateRequest::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
+  _impl_.description_.ClearToEmpty();
+  _impl_.price_ = 0;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -988,13 +1101,31 @@ const char* CreateRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string name = 1;
+      // int32 price = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.price_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string name = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "product.CreateRequest.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string description = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_description();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "product.CreateRequest.description"));
         } else
           goto handle_unusual;
         continue;
@@ -1027,14 +1158,30 @@ uint8_t* CreateRequest::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string name = 1;
+  // int32 price = 1;
+  if (this->_internal_price() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_price(), target);
+  }
+
+  // string name = 2;
   if (!this->_internal_name().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "product.CreateRequest.name");
     target = stream->WriteStringMaybeAliased(
-        1, this->_internal_name(), target);
+        2, this->_internal_name(), target);
+  }
+
+  // string description = 3;
+  if (!this->_internal_description().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "product.CreateRequest.description");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_description(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1053,11 +1200,23 @@ size_t CreateRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 1;
+  // string name = 2;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
+  }
+
+  // string description = 3;
+  if (!this->_internal_description().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_description());
+  }
+
+  // int32 price = 1;
+  if (this->_internal_price() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_price());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1080,6 +1239,12 @@ void CreateRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
 
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
+  }
+  if (!from._internal_description().empty()) {
+    _this->_internal_set_description(from._internal_description());
+  }
+  if (from._internal_price() != 0) {
+    _this->_internal_set_price(from._internal_price());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1104,6 +1269,11 @@ void CreateRequest::InternalSwap(CreateRequest* other) {
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.description_, lhs_arena,
+      &other->_impl_.description_, rhs_arena
+  );
+  swap(_impl_.price_, other->_impl_.price_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata CreateRequest::GetMetadata() const {
@@ -1129,7 +1299,9 @@ UpdateRequest::UpdateRequest(const UpdateRequest& from)
   UpdateRequest* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.description_){}
     , decltype(_impl_.id_){}
+    , decltype(_impl_.price_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1141,7 +1313,17 @@ UpdateRequest::UpdateRequest(const UpdateRequest& from)
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
-  _this->_impl_.id_ = from._impl_.id_;
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_description().empty()) {
+    _this->_impl_.description_.Set(from._internal_description(), 
+      _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.price_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.price_));
   // @@protoc_insertion_point(copy_constructor:product.UpdateRequest)
 }
 
@@ -1151,12 +1333,18 @@ inline void UpdateRequest::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
+    , decltype(_impl_.description_){}
     , decltype(_impl_.id_){0}
+    , decltype(_impl_.price_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.description_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.description_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -1172,6 +1360,7 @@ UpdateRequest::~UpdateRequest() {
 inline void UpdateRequest::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
+  _impl_.description_.Destroy();
 }
 
 void UpdateRequest::SetCachedSize(int size) const {
@@ -1185,7 +1374,10 @@ void UpdateRequest::Clear() {
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
-  _impl_.id_ = 0;
+  _impl_.description_.ClearToEmpty();
+  ::memset(&_impl_.id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.price_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.price_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1203,13 +1395,31 @@ const char* UpdateRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         } else
           goto handle_unusual;
         continue;
-      // string name = 2;
+      // int32 price = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.price_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // string name = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "product.UpdateRequest.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // string description = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+          auto str = _internal_mutable_description();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "product.UpdateRequest.description"));
         } else
           goto handle_unusual;
         continue;
@@ -1248,14 +1458,30 @@ uint8_t* UpdateRequest::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_id(), target);
   }
 
-  // string name = 2;
+  // int32 price = 2;
+  if (this->_internal_price() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_price(), target);
+  }
+
+  // string name = 3;
   if (!this->_internal_name().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "product.UpdateRequest.name");
     target = stream->WriteStringMaybeAliased(
-        2, this->_internal_name(), target);
+        3, this->_internal_name(), target);
+  }
+
+  // string description = 4;
+  if (!this->_internal_description().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "product.UpdateRequest.description");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_description(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1274,16 +1500,28 @@ size_t UpdateRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string name = 2;
+  // string name = 3;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
+  // string description = 4;
+  if (!this->_internal_description().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_description());
+  }
+
   // int32 id = 1;
   if (this->_internal_id() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_id());
+  }
+
+  // int32 price = 2;
+  if (this->_internal_price() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_price());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1307,8 +1545,14 @@ void UpdateRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
+  if (!from._internal_description().empty()) {
+    _this->_internal_set_description(from._internal_description());
+  }
   if (from._internal_id() != 0) {
     _this->_internal_set_id(from._internal_id());
+  }
+  if (from._internal_price() != 0) {
+    _this->_internal_set_price(from._internal_price());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1333,7 +1577,16 @@ void UpdateRequest::InternalSwap(UpdateRequest* other) {
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  swap(_impl_.id_, other->_impl_.id_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.description_, lhs_arena,
+      &other->_impl_.description_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UpdateRequest, _impl_.price_)
+      + sizeof(UpdateRequest::_impl_.price_)
+      - PROTOBUF_FIELD_OFFSET(UpdateRequest, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata UpdateRequest::GetMetadata() const {
