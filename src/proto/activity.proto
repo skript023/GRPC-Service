@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package activity;
 
-message ActivityReply {
+message ActivityReply 
+{
     int32 id = 1;
     string name = 2;
     string start_date = 3;
@@ -10,23 +11,27 @@ message ActivityReply {
     string status = 5;
 }
 
-message QueryReply {
+message QueryReply 
+{
     string message = 1;
     bool success = 2;
 }
 
-message ActivitiesReply {
+message ActivitiesReply 
+{
     repeated ActivityReply activities = 1;
 }
 
-message CreateRequest {
+message CreateRequest 
+{
     string name = 1;
     string start_date = 2;
     string end_date = 3; 
     string status = 4;
 }
 
-message UpdateRequest {
+message UpdateRequest 
+{
     int32 id = 1;
     string name = 2;
     string start_date = 3;
@@ -34,18 +39,21 @@ message UpdateRequest {
     string status = 5;
 }
 
-message FindByIdRequest {
+message FindByIdRequest 
+{
     int32 id = 1;
 }
 
-message PaginationRequest {
+message PaginationRequest 
+{
     int32 page = 1;
     int32 skip = 2;
 }
 
 message EmptyRequest {}
 
-service Activity {
+service Activity 
+{
     rpc FindAllActivity (EmptyRequest) returns (ActivitiesReply) {}
     rpc FindOneActivity (FindByIdRequest) returns (ActivityReply) {}
     rpc CreateActivity (CreateRequest) returns (QueryReply) {}

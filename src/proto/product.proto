@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package product;
 
-message ProductReply {
+message ProductReply 
+{
     int32 id = 1;
     int32 price = 2;
     string name = 3;
@@ -10,40 +11,47 @@ message ProductReply {
 
 }
 
-message QueryReply {
+message QueryReply 
+{
     string message = 1;
     bool success = 2;
 }
 
-message ProductsReply {
+message ProductsReply 
+{
     repeated ProductReply products = 1;
 }
 
-message CreateRequest {
+message CreateRequest 
+{
     int32 price = 1;
     string name = 2;
     string description = 3;
 }
 
-message UpdateRequest {
+message UpdateRequest 
+{
     int32 id = 1;
     int32 price = 2;
     string name = 3;
     string description = 4;
 }
 
-message FindByIdRequest {
+message FindByIdRequest 
+{
     int32 id = 1;
 }
 
-message PaginationRequest {
+message PaginationRequest 
+{
     int32 page = 1;
     int32 skip = 2;
 }
 
 message EmptyRequest {}
 
-service Product {
+service Product 
+{
     rpc FindAllProduct (EmptyRequest) returns (ProductsReply) {}
     rpc FindOneProduct (FindByIdRequest) returns (ProductReply) {}
     rpc CreateProduct (CreateRequest) returns (QueryReply) {}

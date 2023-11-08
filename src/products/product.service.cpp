@@ -123,8 +123,12 @@ namespace microservice
 
 		while (m_stream)
 		{
-			if (this->on_changed(products, storage.get_all<Products>()))
+			
 			{
+				std::unique_lock lock(m_mutex);
+
+				m_condition.wait(lock, [this] { return m_on_change; });
+
 				products = storage.get_all<Products>();
 				m_replies.clear_products();
 				std::ranges::for_each(products, [this](Products product)
@@ -138,10 +142,10 @@ namespace microservice
 				});
 				
 				m_stream = reply->Write(m_replies);
-			}
-			if (!m_stream) break;
+				m_on_change = false;
 
-			std::this_thread::sleep_for(1s);
+				lock.unlock();
+			}
 		}
 
 		return Status::OK;
@@ -155,7 +159,7 @@ namespace microservice
 			{
 				std::unique_lock lock(m_mutex);
 
-				m_condition.wait(lock, [request] {return &request;});
+				m_condition.wait(lock, [request] { return &request; });
 				
 				auto product = storage.get<Products>(request.id());
 				product.price = request.price();
@@ -163,9 +167,12 @@ namespace microservice
 				product.description = request.description();
 
 				storage.update(product);
+				m_on_change = true;
 
 				lock.unlock();
 			}
+
+			m_condition.notify_one();
 		}
 		return Status::OK;
 	}
@@ -181,7 +188,7 @@ namespace microservice
 			{
 				std::unique_lock lock(m_mutex);
 
-				m_condition.wait(lock, [request] {return &request;});
+				m_condition.wait(lock, [request] { return &request; });
 			
 				product.id = -1;
 				product.price = request.price();
@@ -193,6 +200,7 @@ namespace microservice
 					reply.set_message(fmt::format("{} has successfully added", request.name()));
 					reply.set_success(true);
 					stream->Write(reply);
+					m_on_change = true;
 				}
 				else
 				{
@@ -203,6 +211,8 @@ namespace microservice
 
 				lock.unlock();
 			}
+
+			m_condition.notify_one();
 		}
 
 		return Status::OK;
