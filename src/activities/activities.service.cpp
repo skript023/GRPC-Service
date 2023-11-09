@@ -63,6 +63,8 @@ namespace microservice
 		response->set_message(fmt::format("{} successfully created", activity.name));
 		response->set_success(true);
 
+		m_condition.notify_one();
+
 		return Status::OK;
     }
     Status ActivityService::UpdateActivity(ServerContext *context, const UpdateRequest *request, QueryReply *response)
@@ -87,6 +89,8 @@ namespace microservice
 		response->set_message(fmt::format("{} successfully updated", activity->name));
 		response->set_success(true);
 
+		m_condition.notify_one();
+
 		return Status::OK;
     }
     Status ActivityService::RemoveActivity(ServerContext *context, const FindByIdRequest *request, QueryReply *response)
@@ -97,10 +101,15 @@ namespace microservice
 		
 			response->set_message("data successfully deleted");
 			response->set_success(true);
+
+			m_condition.notify_one();
 		}
-		catch(std::system_error e)
+		catch(std::system_error const& e)
 		{
 			LOG(WARNING) << e.what();
+
+			response->set_message(e.what());
+			response->set_success(false);
 
 			return Status::CANCELLED;
 		}
@@ -155,12 +164,51 @@ namespace microservice
 
 		return Status::OK;
     }
-    Status ActivityService::UpdateActivityStream(ServerContext *context, ServerReader<UpdateRequest> *reader, QueryReply *response)
+	Status ActivityService::FindOneActivityStream(ServerContext *context, const FindByIdRequest *request, ServerWriter<ActivityReply> *writer)
     {
         auto storage = g_database->storage();
+		auto activity = storage.get_pointer<Activities>(request->id());
+		
+		if (!activity)
+			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
+
+		m_reply.set_id(activity->id);
+		m_reply.set_name(activity->name);
+		m_reply.set_start_date(activity->start_date);
+		m_reply.set_end_date(activity->end_date);
+		m_reply.set_status(activity->status);
+
+		while (writer->Write(m_reply))
+		{
+			{
+				std::unique_lock lock(m_mutex);
+
+				m_condition.wait(lock, [&] { return *activity != storage.get<Activities>(request->id()); });
+
+				activity = storage.get_pointer<Activities>(request->id());
+
+				if (!activity)
+					return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
+
+				m_reply.set_id(activity->id);
+				m_reply.set_name(activity->name);
+				m_reply.set_start_date(activity->start_date);
+				m_reply.set_end_date(activity->end_date);
+				m_reply.set_status(activity->status);
+
+				lock.unlock();
+			}
+		}
+
+		return Status::OK;
+    }
+    Status ActivityService::UpdateActivityBidiStream(ServerContext *context, ServerReaderWriter<QueryReply, UpdateRequest> *stream)
+    {
+        auto storage = g_database->storage();
+		QueryReply reply;
 		UpdateRequest request;
 
-		while (reader->Read(&request))
+		while (stream->Read(&request))
 		{
 			{
 				std::unique_lock lock(m_mutex);
@@ -171,7 +219,7 @@ namespace microservice
 
                 if (!activity)
                 {
-                    return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to update data, not found");
+                    return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to update data, not found");
                 }
 
 				activity->name = request.name();
@@ -180,6 +228,12 @@ namespace microservice
 				activity->status = request.status();
 
 				storage.update(*activity);
+
+				reply.set_message(fmt::format("{} has successfully added", request.name()));
+				reply.set_success(true);
+
+				stream->Write(reply);
+
 				m_on_change = true;
 
 				lock.unlock();
@@ -213,7 +267,9 @@ namespace microservice
 				{
 					reply.set_message(fmt::format("{} has successfully added", request.name()));
 					reply.set_success(true);
+
 					stream->Write(reply);
+
 					m_on_change = true;
 				}
 				else
@@ -231,8 +287,51 @@ namespace microservice
 
 		return Status::OK;
     }
-    Status ActivityService::QueryActivity(ServerContext *context, ServerReaderWriter<ActivityReply, PaginationRequest> *stream)
+    Status ActivityService::RemoveActivityBidiStream(ServerContext *context, ServerReaderWriter<activity::QueryReply, activity::FindByIdRequest> *stream)
     {
-        return Status();
+        auto storage = g_database->storage();
+		FindByIdRequest request;
+		QueryReply reply;
+		Activities activity;
+		
+		while (stream->Read(&request))
+		{
+			{
+				std::unique_lock lock(m_mutex);
+
+				m_condition.wait(lock, [request] { return &request; });
+			
+				try
+				{
+					storage.remove<Activities>(request.id());
+		
+					reply.set_message("data successfully deleted");
+					reply.set_success(true);
+
+					stream->Write(reply);
+
+					m_on_change = true;
+
+					m_condition.notify_one();
+				}
+				catch(const std::exception& e)
+				{
+					LOG(WARNING) << e.what();
+
+					reply.set_message(e.what());
+					reply.set_success(false);
+
+					stream->Write(reply);
+
+					return Status::CANCELLED;
+				}
+				
+				lock.unlock();
+			}
+
+			m_condition.notify_one();
+		}
+
+		return Status::OK;
     }
 }

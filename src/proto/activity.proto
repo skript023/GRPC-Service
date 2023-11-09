@@ -62,7 +62,9 @@ service Activity
     rpc QueryActivity (stream PaginationRequest) returns (stream ActivityReply) {}
 
     rpc FindAllActivityStream (EmptyRequest) returns (stream ActivitiesReply) {}
-    rpc UpdateActivityStream (stream UpdateRequest) returns (QueryReply) {}
-
+    rpc FindOneActivityStream (FindByIdRequest) returns (stream ActivityReply) {}
+    
     rpc CreateActivityBidiStream (stream CreateRequest) returns (stream QueryReply) {}
+    rpc UpdateActivityBidiStream (stream UpdateRequest) returns (stream QueryReply) {}
+    rpc RemoveActivityBidiStream (stream FindByIdRequest) returns (stream QueryReply) {}
 }

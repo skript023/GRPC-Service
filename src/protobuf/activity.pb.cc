@@ -246,7 +246,7 @@ const char descriptor_table_protodef_activity_2eproto[] PROTOBUF_SECTION_VARIABL
   "\001(\t\022\022\n\nstart_date\030\003 \001(\t\022\020\n\010end_date\030\004 \001("
   "\t\022\016\n\006status\030\005 \001(\t\"\035\n\017FindByIdRequest\022\n\n\002"
   "id\030\001 \001(\005\"/\n\021PaginationRequest\022\014\n\004page\030\001 "
-  "\001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2\237\005\n\010Ac"
+  "\001(\005\022\014\n\004skip\030\002 \001(\005\"\016\n\014EmptyRequest2\311\006\n\010Ac"
   "tivity\022F\n\017FindAllActivity\022\026.activity.Emp"
   "tyRequest\032\031.activity.ActivitiesReply\"\000\022G"
   "\n\017FindOneActivity\022\031.activity.FindByIdReq"
@@ -259,15 +259,20 @@ const char descriptor_table_protodef_activity_2eproto[] PROTOBUF_SECTION_VARIABL
   "eryActivity\022\033.activity.PaginationRequest"
   "\032\027.activity.ActivityReply\"\000(\0010\001\022N\n\025FindA"
   "llActivityStream\022\026.activity.EmptyRequest"
-  "\032\031.activity.ActivitiesReply\"\0000\001\022I\n\024Updat"
-  "eActivityStream\022\027.activity.UpdateRequest"
-  "\032\024.activity.QueryReply\"\000(\001\022O\n\030CreateActi"
-  "vityBidiStream\022\027.activity.CreateRequest\032"
-  "\024.activity.QueryReply\"\000(\0010\001b\006proto3"
+  "\032\031.activity.ActivitiesReply\"\0000\001\022O\n\025FindO"
+  "neActivityStream\022\031.activity.FindByIdRequ"
+  "est\032\027.activity.ActivityReply\"\0000\001\022O\n\030Crea"
+  "teActivityBidiStream\022\027.activity.CreateRe"
+  "quest\032\024.activity.QueryReply\"\000(\0010\001\022O\n\030Upd"
+  "ateActivityBidiStream\022\027.activity.UpdateR"
+  "equest\032\024.activity.QueryReply\"\000(\0010\001\022Q\n\030Re"
+  "moveActivityBidiStream\022\031.activity.FindBy"
+  "IdRequest\032\024.activity.QueryReply\"\000(\0010\001b\006p"
+  "roto3"
   ;
 static ::_pbi::once_flag descriptor_table_activity_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_activity_2eproto = {
-    false, false, 1195, descriptor_table_protodef_activity_2eproto,
+    false, false, 1365, descriptor_table_protodef_activity_2eproto,
     "activity.proto",
     &descriptor_table_activity_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_activity_2eproto::offsets,

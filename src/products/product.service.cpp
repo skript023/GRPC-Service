@@ -57,6 +57,8 @@ namespace microservice
 		reply->set_message(fmt::format("{} successfully created", data));
 		reply->set_success(true);
 
+		m_condition.notify_one();
+
 		return Status::OK;
 	}
 	Status ProductService::UpdateProduct(ServerContext* context, const UpdateRequest* request, QueryReply* reply)
@@ -80,6 +82,8 @@ namespace microservice
 		reply->set_message(fmt::format("{} successfully updated", product->name));
 		reply->set_success(true);
 
+		m_condition.notify_one();
+
 		return Status::OK;
 	}
 	Status ProductService::RemoveProduct(ServerContext* context, const FindByIdRequest* request, QueryReply* reply)
@@ -90,6 +94,8 @@ namespace microservice
 		
 			reply->set_message("data successfully deleted");
 			reply->set_success(true);
+
+			m_condition.notify_one();
 		}
 		catch(std::system_error e)
 		{

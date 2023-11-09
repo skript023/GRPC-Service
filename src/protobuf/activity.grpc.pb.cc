@@ -29,8 +29,10 @@ static const char* Activity_method_names[] = {
   "/activity.Activity/RemoveActivity",
   "/activity.Activity/QueryActivity",
   "/activity.Activity/FindAllActivityStream",
-  "/activity.Activity/UpdateActivityStream",
+  "/activity.Activity/FindOneActivityStream",
   "/activity.Activity/CreateActivityBidiStream",
+  "/activity.Activity/UpdateActivityBidiStream",
+  "/activity.Activity/RemoveActivityBidiStream",
 };
 
 std::unique_ptr< Activity::Stub> Activity::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -47,8 +49,10 @@ Activity::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, 
   , rpcmethod_RemoveActivity_(Activity_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_QueryActivity_(Activity_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   , rpcmethod_FindAllActivityStream_(Activity_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
-  , rpcmethod_UpdateActivityStream_(Activity_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
+  , rpcmethod_FindOneActivityStream_(Activity_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::SERVER_STREAMING, channel)
   , rpcmethod_CreateActivityBidiStream_(Activity_method_names[8], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_UpdateActivityBidiStream_(Activity_method_names[9], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
+  , rpcmethod_RemoveActivityBidiStream_(Activity_method_names[10], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
 ::grpc::Status Activity::Stub::FindAllActivity(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::activity::ActivitiesReply* response) {
@@ -198,20 +202,20 @@ void Activity::Stub::async::FindAllActivityStream(::grpc::ClientContext* context
   return ::grpc::internal::ClientAsyncReaderFactory< ::activity::ActivitiesReply>::Create(channel_.get(), cq, rpcmethod_FindAllActivityStream_, context, request, false, nullptr);
 }
 
-::grpc::ClientWriter< ::activity::UpdateRequest>* Activity::Stub::UpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response) {
-  return ::grpc::internal::ClientWriterFactory< ::activity::UpdateRequest>::Create(channel_.get(), rpcmethod_UpdateActivityStream_, context, response);
+::grpc::ClientReader< ::activity::ActivityReply>* Activity::Stub::FindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request) {
+  return ::grpc::internal::ClientReaderFactory< ::activity::ActivityReply>::Create(channel_.get(), rpcmethod_FindOneActivityStream_, context, request);
 }
 
-void Activity::Stub::async::UpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::ClientWriteReactor< ::activity::UpdateRequest>* reactor) {
-  ::grpc::internal::ClientCallbackWriterFactory< ::activity::UpdateRequest>::Create(stub_->channel_.get(), stub_->rpcmethod_UpdateActivityStream_, context, response, reactor);
+void Activity::Stub::async::FindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::grpc::ClientReadReactor< ::activity::ActivityReply>* reactor) {
+  ::grpc::internal::ClientCallbackReaderFactory< ::activity::ActivityReply>::Create(stub_->channel_.get(), stub_->rpcmethod_FindOneActivityStream_, context, request, reactor);
 }
 
-::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* Activity::Stub::AsyncUpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) {
-  return ::grpc::internal::ClientAsyncWriterFactory< ::activity::UpdateRequest>::Create(channel_.get(), cq, rpcmethod_UpdateActivityStream_, context, response, true, tag);
+::grpc::ClientAsyncReader< ::activity::ActivityReply>* Activity::Stub::AsyncFindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::activity::ActivityReply>::Create(channel_.get(), cq, rpcmethod_FindOneActivityStream_, context, request, true, tag);
 }
 
-::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* Activity::Stub::PrepareAsyncUpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncWriterFactory< ::activity::UpdateRequest>::Create(channel_.get(), cq, rpcmethod_UpdateActivityStream_, context, response, false, nullptr);
+::grpc::ClientAsyncReader< ::activity::ActivityReply>* Activity::Stub::PrepareAsyncFindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderFactory< ::activity::ActivityReply>::Create(channel_.get(), cq, rpcmethod_FindOneActivityStream_, context, request, false, nullptr);
 }
 
 ::grpc::ClientReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Activity::Stub::CreateActivityBidiStreamRaw(::grpc::ClientContext* context) {
@@ -228,6 +232,38 @@ void Activity::Stub::async::CreateActivityBidiStream(::grpc::ClientContext* cont
 
 ::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* Activity::Stub::PrepareAsyncCreateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
   return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::CreateRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_CreateActivityBidiStream_, context, false, nullptr);
+}
+
+::grpc::ClientReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>* Activity::Stub::UpdateActivityBidiStreamRaw(::grpc::ClientContext* context) {
+  return ::grpc::internal::ClientReaderWriterFactory< ::activity::UpdateRequest, ::activity::QueryReply>::Create(channel_.get(), rpcmethod_UpdateActivityBidiStream_, context);
+}
+
+void Activity::Stub::async::UpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::UpdateRequest,::activity::QueryReply>* reactor) {
+  ::grpc::internal::ClientCallbackReaderWriterFactory< ::activity::UpdateRequest,::activity::QueryReply>::Create(stub_->channel_.get(), stub_->rpcmethod_UpdateActivityBidiStream_, context, reactor);
+}
+
+::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>* Activity::Stub::AsyncUpdateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::UpdateRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_UpdateActivityBidiStream_, context, true, tag);
+}
+
+::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>* Activity::Stub::PrepareAsyncUpdateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::UpdateRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_UpdateActivityBidiStream_, context, false, nullptr);
+}
+
+::grpc::ClientReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>* Activity::Stub::RemoveActivityBidiStreamRaw(::grpc::ClientContext* context) {
+  return ::grpc::internal::ClientReaderWriterFactory< ::activity::FindByIdRequest, ::activity::QueryReply>::Create(channel_.get(), rpcmethod_RemoveActivityBidiStream_, context);
+}
+
+void Activity::Stub::async::RemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::FindByIdRequest,::activity::QueryReply>* reactor) {
+  ::grpc::internal::ClientCallbackReaderWriterFactory< ::activity::FindByIdRequest,::activity::QueryReply>::Create(stub_->channel_.get(), stub_->rpcmethod_RemoveActivityBidiStream_, context, reactor);
+}
+
+::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>* Activity::Stub::AsyncRemoveActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::FindByIdRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_RemoveActivityBidiStream_, context, true, tag);
+}
+
+::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>* Activity::Stub::PrepareAsyncRemoveActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::activity::FindByIdRequest, ::activity::QueryReply>::Create(channel_.get(), cq, rpcmethod_RemoveActivityBidiStream_, context, false, nullptr);
 }
 
 Activity::Service::Service() {
@@ -303,13 +339,13 @@ Activity::Service::Service() {
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Activity_method_names[7],
-      ::grpc::internal::RpcMethod::CLIENT_STREAMING,
-      new ::grpc::internal::ClientStreamingHandler< Activity::Service, ::activity::UpdateRequest, ::activity::QueryReply>(
+      ::grpc::internal::RpcMethod::SERVER_STREAMING,
+      new ::grpc::internal::ServerStreamingHandler< Activity::Service, ::activity::FindByIdRequest, ::activity::ActivityReply>(
           [](Activity::Service* service,
              ::grpc::ServerContext* ctx,
-             ::grpc::ServerReader<::activity::UpdateRequest>* reader,
-             ::activity::QueryReply* resp) {
-               return service->UpdateActivityStream(ctx, reader, resp);
+             const ::activity::FindByIdRequest* req,
+             ::grpc::ServerWriter<::activity::ActivityReply>* writer) {
+               return service->FindOneActivityStream(ctx, req, writer);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Activity_method_names[8],
@@ -320,6 +356,26 @@ Activity::Service::Service() {
              ::grpc::ServerReaderWriter<::activity::QueryReply,
              ::activity::CreateRequest>* stream) {
                return service->CreateActivityBidiStream(ctx, stream);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Activity_method_names[9],
+      ::grpc::internal::RpcMethod::BIDI_STREAMING,
+      new ::grpc::internal::BidiStreamingHandler< Activity::Service, ::activity::UpdateRequest, ::activity::QueryReply>(
+          [](Activity::Service* service,
+             ::grpc::ServerContext* ctx,
+             ::grpc::ServerReaderWriter<::activity::QueryReply,
+             ::activity::UpdateRequest>* stream) {
+               return service->UpdateActivityBidiStream(ctx, stream);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Activity_method_names[10],
+      ::grpc::internal::RpcMethod::BIDI_STREAMING,
+      new ::grpc::internal::BidiStreamingHandler< Activity::Service, ::activity::FindByIdRequest, ::activity::QueryReply>(
+          [](Activity::Service* service,
+             ::grpc::ServerContext* ctx,
+             ::grpc::ServerReaderWriter<::activity::QueryReply,
+             ::activity::FindByIdRequest>* stream) {
+               return service->RemoveActivityBidiStream(ctx, stream);
              }, this)));
 }
 
@@ -374,14 +430,26 @@ Activity::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Activity::Service::UpdateActivityStream(::grpc::ServerContext* context, ::grpc::ServerReader< ::activity::UpdateRequest>* reader, ::activity::QueryReply* response) {
+::grpc::Status Activity::Service::FindOneActivityStream(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::grpc::ServerWriter< ::activity::ActivityReply>* writer) {
   (void) context;
-  (void) reader;
-  (void) response;
+  (void) request;
+  (void) writer;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
 ::grpc::Status Activity::Service::CreateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::CreateRequest>* stream) {
+  (void) context;
+  (void) stream;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Activity::Service::UpdateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* stream) {
+  (void) context;
+  (void) stream;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Activity::Service::RemoveActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* stream) {
   (void) context;
   (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");

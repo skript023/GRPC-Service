@@ -88,14 +88,14 @@ class Activity final {
     std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::activity::ActivitiesReply>> PrepareAsyncFindAllActivityStream(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::activity::ActivitiesReply>>(PrepareAsyncFindAllActivityStreamRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientWriterInterface< ::activity::UpdateRequest>> UpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response) {
-      return std::unique_ptr< ::grpc::ClientWriterInterface< ::activity::UpdateRequest>>(UpdateActivityStreamRaw(context, response));
+    std::unique_ptr< ::grpc::ClientReaderInterface< ::activity::ActivityReply>> FindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReaderInterface< ::activity::ActivityReply>>(FindOneActivityStreamRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::activity::UpdateRequest>> AsyncUpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::activity::UpdateRequest>>(AsyncUpdateActivityStreamRaw(context, response, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::activity::ActivityReply>> AsyncFindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::activity::ActivityReply>>(AsyncFindOneActivityStreamRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::activity::UpdateRequest>> PrepareAsyncUpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriterInterface< ::activity::UpdateRequest>>(PrepareAsyncUpdateActivityStreamRaw(context, response, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::activity::ActivityReply>> PrepareAsyncFindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderInterface< ::activity::ActivityReply>>(PrepareAsyncFindOneActivityStreamRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>> CreateActivityBidiStream(::grpc::ClientContext* context) {
       return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>>(CreateActivityBidiStreamRaw(context));
@@ -105,6 +105,24 @@ class Activity final {
     }
     std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>> PrepareAsyncCreateActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>>(PrepareAsyncCreateActivityBidiStreamRaw(context, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>> UpdateActivityBidiStream(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>>(UpdateActivityBidiStreamRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>> AsyncUpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>>(AsyncUpdateActivityBidiStreamRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>> PrepareAsyncUpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>>(PrepareAsyncUpdateActivityBidiStreamRaw(context, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>> RemoveActivityBidiStream(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>>(RemoveActivityBidiStreamRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>> AsyncRemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>>(AsyncRemoveActivityBidiStreamRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>> PrepareAsyncRemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>>(PrepareAsyncRemoveActivityBidiStreamRaw(context, cq));
     }
     class async_interface {
      public:
@@ -121,8 +139,10 @@ class Activity final {
       virtual void RemoveActivity(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void QueryActivity(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::PaginationRequest,::activity::ActivityReply>* reactor) = 0;
       virtual void FindAllActivityStream(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::grpc::ClientReadReactor< ::activity::ActivitiesReply>* reactor) = 0;
-      virtual void UpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::ClientWriteReactor< ::activity::UpdateRequest>* reactor) = 0;
+      virtual void FindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::grpc::ClientReadReactor< ::activity::ActivityReply>* reactor) = 0;
       virtual void CreateActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::CreateRequest,::activity::QueryReply>* reactor) = 0;
+      virtual void UpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::UpdateRequest,::activity::QueryReply>* reactor) = 0;
+      virtual void RemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::FindByIdRequest,::activity::QueryReply>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -144,12 +164,18 @@ class Activity final {
     virtual ::grpc::ClientReaderInterface< ::activity::ActivitiesReply>* FindAllActivityStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request) = 0;
     virtual ::grpc::ClientAsyncReaderInterface< ::activity::ActivitiesReply>* AsyncFindAllActivityStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncReaderInterface< ::activity::ActivitiesReply>* PrepareAsyncFindAllActivityStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientWriterInterface< ::activity::UpdateRequest>* UpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response) = 0;
-    virtual ::grpc::ClientAsyncWriterInterface< ::activity::UpdateRequest>* AsyncUpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
-    virtual ::grpc::ClientAsyncWriterInterface< ::activity::UpdateRequest>* PrepareAsyncUpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderInterface< ::activity::ActivityReply>* FindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::activity::ActivityReply>* AsyncFindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderInterface< ::activity::ActivityReply>* PrepareAsyncFindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>* CreateActivityBidiStreamRaw(::grpc::ClientContext* context) = 0;
     virtual ::grpc::ClientAsyncReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>* AsyncCreateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncReaderWriterInterface< ::activity::CreateRequest, ::activity::QueryReply>* PrepareAsyncCreateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>* UpdateActivityBidiStreamRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>* AsyncUpdateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::activity::UpdateRequest, ::activity::QueryReply>* PrepareAsyncUpdateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>* RemoveActivityBidiStreamRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>* AsyncRemoveActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::activity::FindByIdRequest, ::activity::QueryReply>* PrepareAsyncRemoveActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -207,14 +233,14 @@ class Activity final {
     std::unique_ptr< ::grpc::ClientAsyncReader< ::activity::ActivitiesReply>> PrepareAsyncFindAllActivityStream(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReader< ::activity::ActivitiesReply>>(PrepareAsyncFindAllActivityStreamRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientWriter< ::activity::UpdateRequest>> UpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response) {
-      return std::unique_ptr< ::grpc::ClientWriter< ::activity::UpdateRequest>>(UpdateActivityStreamRaw(context, response));
+    std::unique_ptr< ::grpc::ClientReader< ::activity::ActivityReply>> FindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request) {
+      return std::unique_ptr< ::grpc::ClientReader< ::activity::ActivityReply>>(FindOneActivityStreamRaw(context, request));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriter< ::activity::UpdateRequest>> AsyncUpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::activity::UpdateRequest>>(AsyncUpdateActivityStreamRaw(context, response, cq, tag));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::activity::ActivityReply>> AsyncFindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::activity::ActivityReply>>(AsyncFindOneActivityStreamRaw(context, request, cq, tag));
     }
-    std::unique_ptr< ::grpc::ClientAsyncWriter< ::activity::UpdateRequest>> PrepareAsyncUpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncWriter< ::activity::UpdateRequest>>(PrepareAsyncUpdateActivityStreamRaw(context, response, cq));
+    std::unique_ptr< ::grpc::ClientAsyncReader< ::activity::ActivityReply>> PrepareAsyncFindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReader< ::activity::ActivityReply>>(PrepareAsyncFindOneActivityStreamRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>> CreateActivityBidiStream(::grpc::ClientContext* context) {
       return std::unique_ptr< ::grpc::ClientReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>>(CreateActivityBidiStreamRaw(context));
@@ -224,6 +250,24 @@ class Activity final {
     }
     std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>> PrepareAsyncCreateActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>>(PrepareAsyncCreateActivityBidiStreamRaw(context, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>> UpdateActivityBidiStream(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>>(UpdateActivityBidiStreamRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>> AsyncUpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>>(AsyncUpdateActivityBidiStreamRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>> PrepareAsyncUpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>>(PrepareAsyncUpdateActivityBidiStreamRaw(context, cq));
+    }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>> RemoveActivityBidiStream(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>>(RemoveActivityBidiStreamRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>> AsyncRemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>>(AsyncRemoveActivityBidiStreamRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>> PrepareAsyncRemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>>(PrepareAsyncRemoveActivityBidiStreamRaw(context, cq));
     }
     class async final :
       public StubInterface::async_interface {
@@ -240,8 +284,10 @@ class Activity final {
       void RemoveActivity(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void QueryActivity(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::PaginationRequest,::activity::ActivityReply>* reactor) override;
       void FindAllActivityStream(::grpc::ClientContext* context, const ::activity::EmptyRequest* request, ::grpc::ClientReadReactor< ::activity::ActivitiesReply>* reactor) override;
-      void UpdateActivityStream(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::ClientWriteReactor< ::activity::UpdateRequest>* reactor) override;
+      void FindOneActivityStream(::grpc::ClientContext* context, const ::activity::FindByIdRequest* request, ::grpc::ClientReadReactor< ::activity::ActivityReply>* reactor) override;
       void CreateActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::CreateRequest,::activity::QueryReply>* reactor) override;
+      void UpdateActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::UpdateRequest,::activity::QueryReply>* reactor) override;
+      void RemoveActivityBidiStream(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::activity::FindByIdRequest,::activity::QueryReply>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -269,12 +315,18 @@ class Activity final {
     ::grpc::ClientReader< ::activity::ActivitiesReply>* FindAllActivityStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request) override;
     ::grpc::ClientAsyncReader< ::activity::ActivitiesReply>* AsyncFindAllActivityStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReader< ::activity::ActivitiesReply>* PrepareAsyncFindAllActivityStreamRaw(::grpc::ClientContext* context, const ::activity::EmptyRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientWriter< ::activity::UpdateRequest>* UpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response) override;
-    ::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* AsyncUpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq, void* tag) override;
-    ::grpc::ClientAsyncWriter< ::activity::UpdateRequest>* PrepareAsyncUpdateActivityStreamRaw(::grpc::ClientContext* context, ::activity::QueryReply* response, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReader< ::activity::ActivityReply>* FindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request) override;
+    ::grpc::ClientAsyncReader< ::activity::ActivityReply>* AsyncFindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReader< ::activity::ActivityReply>* PrepareAsyncFindOneActivityStreamRaw(::grpc::ClientContext* context, const ::activity::FindByIdRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* CreateActivityBidiStreamRaw(::grpc::ClientContext* context) override;
     ::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* AsyncCreateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncReaderWriter< ::activity::CreateRequest, ::activity::QueryReply>* PrepareAsyncCreateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>* UpdateActivityBidiStreamRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>* AsyncUpdateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::activity::UpdateRequest, ::activity::QueryReply>* PrepareAsyncUpdateActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>* RemoveActivityBidiStreamRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>* AsyncRemoveActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::activity::FindByIdRequest, ::activity::QueryReply>* PrepareAsyncRemoveActivityBidiStreamRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_FindAllActivity_;
     const ::grpc::internal::RpcMethod rpcmethod_FindOneActivity_;
     const ::grpc::internal::RpcMethod rpcmethod_CreateActivity_;
@@ -282,8 +334,10 @@ class Activity final {
     const ::grpc::internal::RpcMethod rpcmethod_RemoveActivity_;
     const ::grpc::internal::RpcMethod rpcmethod_QueryActivity_;
     const ::grpc::internal::RpcMethod rpcmethod_FindAllActivityStream_;
-    const ::grpc::internal::RpcMethod rpcmethod_UpdateActivityStream_;
+    const ::grpc::internal::RpcMethod rpcmethod_FindOneActivityStream_;
     const ::grpc::internal::RpcMethod rpcmethod_CreateActivityBidiStream_;
+    const ::grpc::internal::RpcMethod rpcmethod_UpdateActivityBidiStream_;
+    const ::grpc::internal::RpcMethod rpcmethod_RemoveActivityBidiStream_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -298,8 +352,10 @@ class Activity final {
     virtual ::grpc::Status RemoveActivity(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::activity::QueryReply* response);
     virtual ::grpc::Status QueryActivity(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::ActivityReply, ::activity::PaginationRequest>* stream);
     virtual ::grpc::Status FindAllActivityStream(::grpc::ServerContext* context, const ::activity::EmptyRequest* request, ::grpc::ServerWriter< ::activity::ActivitiesReply>* writer);
-    virtual ::grpc::Status UpdateActivityStream(::grpc::ServerContext* context, ::grpc::ServerReader< ::activity::UpdateRequest>* reader, ::activity::QueryReply* response);
+    virtual ::grpc::Status FindOneActivityStream(::grpc::ServerContext* context, const ::activity::FindByIdRequest* request, ::grpc::ServerWriter< ::activity::ActivityReply>* writer);
     virtual ::grpc::Status CreateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::CreateRequest>* stream);
+    virtual ::grpc::Status UpdateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* stream);
+    virtual ::grpc::Status RemoveActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_FindAllActivity : public BaseClass {
@@ -442,23 +498,23 @@ class Activity final {
     }
   };
   template <class BaseClass>
-  class WithAsyncMethod_UpdateActivityStream : public BaseClass {
+  class WithAsyncMethod_FindOneActivityStream : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_UpdateActivityStream() {
+    WithAsyncMethod_FindOneActivityStream() {
       ::grpc::Service::MarkMethodAsync(7);
     }
-    ~WithAsyncMethod_UpdateActivityStream() override {
+    ~WithAsyncMethod_FindOneActivityStream() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateActivityStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::activity::UpdateRequest>* /*reader*/, ::activity::QueryReply* /*response*/) override {
+    ::grpc::Status FindOneActivityStream(::grpc::ServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/, ::grpc::ServerWriter< ::activity::ActivityReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestUpdateActivityStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::activity::QueryReply, ::activity::UpdateRequest>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncClientStreaming(7, context, reader, new_call_cq, notification_cq, tag);
+    void RequestFindOneActivityStream(::grpc::ServerContext* context, ::activity::FindByIdRequest* request, ::grpc::ServerAsyncWriter< ::activity::ActivityReply>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(7, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -481,7 +537,47 @@ class Activity final {
       ::grpc::Service::RequestAsyncBidiStreaming(8, context, stream, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_FindAllActivity<WithAsyncMethod_FindOneActivity<WithAsyncMethod_CreateActivity<WithAsyncMethod_UpdateActivity<WithAsyncMethod_RemoveActivity<WithAsyncMethod_QueryActivity<WithAsyncMethod_FindAllActivityStream<WithAsyncMethod_UpdateActivityStream<WithAsyncMethod_CreateActivityBidiStream<Service > > > > > > > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_UpdateActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_UpdateActivityBidiStream() {
+      ::grpc::Service::MarkMethodAsync(9);
+    }
+    ~WithAsyncMethod_UpdateActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UpdateActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestUpdateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(9, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_RemoveActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_RemoveActivityBidiStream() {
+      ::grpc::Service::MarkMethodAsync(10);
+    }
+    ~WithAsyncMethod_RemoveActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RemoveActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRemoveActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(10, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_FindAllActivity<WithAsyncMethod_FindOneActivity<WithAsyncMethod_CreateActivity<WithAsyncMethod_UpdateActivity<WithAsyncMethod_RemoveActivity<WithAsyncMethod_QueryActivity<WithAsyncMethod_FindAllActivityStream<WithAsyncMethod_FindOneActivityStream<WithAsyncMethod_CreateActivityBidiStream<WithAsyncMethod_UpdateActivityBidiStream<WithAsyncMethod_RemoveActivityBidiStream<Service > > > > > > > > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_FindAllActivity : public BaseClass {
    private:
@@ -663,26 +759,26 @@ class Activity final {
       ::grpc::CallbackServerContext* /*context*/, const ::activity::EmptyRequest* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithCallbackMethod_UpdateActivityStream : public BaseClass {
+  class WithCallbackMethod_FindOneActivityStream : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithCallbackMethod_UpdateActivityStream() {
+    WithCallbackMethod_FindOneActivityStream() {
       ::grpc::Service::MarkMethodCallback(7,
-          new ::grpc::internal::CallbackClientStreamingHandler< ::activity::UpdateRequest, ::activity::QueryReply>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::activity::FindByIdRequest, ::activity::ActivityReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, ::activity::QueryReply* response) { return this->UpdateActivityStream(context, response); }));
+                   ::grpc::CallbackServerContext* context, const ::activity::FindByIdRequest* request) { return this->FindOneActivityStream(context, request); }));
     }
-    ~WithCallbackMethod_UpdateActivityStream() override {
+    ~WithCallbackMethod_FindOneActivityStream() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateActivityStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::activity::UpdateRequest>* /*reader*/, ::activity::QueryReply* /*response*/) override {
+    ::grpc::Status FindOneActivityStream(::grpc::ServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/, ::grpc::ServerWriter< ::activity::ActivityReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerReadReactor< ::activity::UpdateRequest>* UpdateActivityStream(
-      ::grpc::CallbackServerContext* /*context*/, ::activity::QueryReply* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::activity::ActivityReply>* FindOneActivityStream(
+      ::grpc::CallbackServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_CreateActivityBidiStream : public BaseClass {
@@ -707,7 +803,53 @@ class Activity final {
       ::grpc::CallbackServerContext* /*context*/)
       { return nullptr; }
   };
-  typedef WithCallbackMethod_FindAllActivity<WithCallbackMethod_FindOneActivity<WithCallbackMethod_CreateActivity<WithCallbackMethod_UpdateActivity<WithCallbackMethod_RemoveActivity<WithCallbackMethod_QueryActivity<WithCallbackMethod_FindAllActivityStream<WithCallbackMethod_UpdateActivityStream<WithCallbackMethod_CreateActivityBidiStream<Service > > > > > > > > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_UpdateActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_UpdateActivityBidiStream() {
+      ::grpc::Service::MarkMethodCallback(9,
+          new ::grpc::internal::CallbackBidiHandler< ::activity::UpdateRequest, ::activity::QueryReply>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->UpdateActivityBidiStream(context); }));
+    }
+    ~WithCallbackMethod_UpdateActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UpdateActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::activity::UpdateRequest, ::activity::QueryReply>* UpdateActivityBidiStream(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_RemoveActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_RemoveActivityBidiStream() {
+      ::grpc::Service::MarkMethodCallback(10,
+          new ::grpc::internal::CallbackBidiHandler< ::activity::FindByIdRequest, ::activity::QueryReply>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->RemoveActivityBidiStream(context); }));
+    }
+    ~WithCallbackMethod_RemoveActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RemoveActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::activity::FindByIdRequest, ::activity::QueryReply>* RemoveActivityBidiStream(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  typedef WithCallbackMethod_FindAllActivity<WithCallbackMethod_FindOneActivity<WithCallbackMethod_CreateActivity<WithCallbackMethod_UpdateActivity<WithCallbackMethod_RemoveActivity<WithCallbackMethod_QueryActivity<WithCallbackMethod_FindAllActivityStream<WithCallbackMethod_FindOneActivityStream<WithCallbackMethod_CreateActivityBidiStream<WithCallbackMethod_UpdateActivityBidiStream<WithCallbackMethod_RemoveActivityBidiStream<Service > > > > > > > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_FindAllActivity : public BaseClass {
@@ -829,18 +971,18 @@ class Activity final {
     }
   };
   template <class BaseClass>
-  class WithGenericMethod_UpdateActivityStream : public BaseClass {
+  class WithGenericMethod_FindOneActivityStream : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_UpdateActivityStream() {
+    WithGenericMethod_FindOneActivityStream() {
       ::grpc::Service::MarkMethodGeneric(7);
     }
-    ~WithGenericMethod_UpdateActivityStream() override {
+    ~WithGenericMethod_FindOneActivityStream() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateActivityStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::activity::UpdateRequest>* /*reader*/, ::activity::QueryReply* /*response*/) override {
+    ::grpc::Status FindOneActivityStream(::grpc::ServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/, ::grpc::ServerWriter< ::activity::ActivityReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -858,6 +1000,40 @@ class Activity final {
     }
     // disable synchronous version of this method
     ::grpc::Status CreateActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::CreateRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_UpdateActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_UpdateActivityBidiStream() {
+      ::grpc::Service::MarkMethodGeneric(9);
+    }
+    ~WithGenericMethod_UpdateActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UpdateActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_RemoveActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_RemoveActivityBidiStream() {
+      ::grpc::Service::MarkMethodGeneric(10);
+    }
+    ~WithGenericMethod_RemoveActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RemoveActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1003,23 +1179,23 @@ class Activity final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_UpdateActivityStream : public BaseClass {
+  class WithRawMethod_FindOneActivityStream : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_UpdateActivityStream() {
+    WithRawMethod_FindOneActivityStream() {
       ::grpc::Service::MarkMethodRaw(7);
     }
-    ~WithRawMethod_UpdateActivityStream() override {
+    ~WithRawMethod_FindOneActivityStream() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateActivityStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::activity::UpdateRequest>* /*reader*/, ::activity::QueryReply* /*response*/) override {
+    ::grpc::Status FindOneActivityStream(::grpc::ServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/, ::grpc::ServerWriter< ::activity::ActivityReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestUpdateActivityStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReader< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* reader, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncClientStreaming(7, context, reader, new_call_cq, notification_cq, tag);
+    void RequestFindOneActivityStream(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncWriter< ::grpc::ByteBuffer>* writer, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncServerStreaming(7, context, request, writer, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1040,6 +1216,46 @@ class Activity final {
     }
     void RequestCreateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncBidiStreaming(8, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_UpdateActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_UpdateActivityBidiStream() {
+      ::grpc::Service::MarkMethodRaw(9);
+    }
+    ~WithRawMethod_UpdateActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UpdateActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestUpdateActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(9, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_RemoveActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_RemoveActivityBidiStream() {
+      ::grpc::Service::MarkMethodRaw(10);
+    }
+    ~WithRawMethod_RemoveActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RemoveActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRemoveActivityBidiStream(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(10, context, stream, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1198,26 +1414,26 @@ class Activity final {
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_UpdateActivityStream : public BaseClass {
+  class WithRawCallbackMethod_FindOneActivityStream : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawCallbackMethod_UpdateActivityStream() {
+    WithRawCallbackMethod_FindOneActivityStream() {
       ::grpc::Service::MarkMethodRawCallback(7,
-          new ::grpc::internal::CallbackClientStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+          new ::grpc::internal::CallbackServerStreamingHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
-                   ::grpc::CallbackServerContext* context, ::grpc::ByteBuffer* response) { return this->UpdateActivityStream(context, response); }));
+                   ::grpc::CallbackServerContext* context, const::grpc::ByteBuffer* request) { return this->FindOneActivityStream(context, request); }));
     }
-    ~WithRawCallbackMethod_UpdateActivityStream() override {
+    ~WithRawCallbackMethod_FindOneActivityStream() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status UpdateActivityStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReader< ::activity::UpdateRequest>* /*reader*/, ::activity::QueryReply* /*response*/) override {
+    ::grpc::Status FindOneActivityStream(::grpc::ServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/, ::grpc::ServerWriter< ::activity::ActivityReply>* /*writer*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    virtual ::grpc::ServerReadReactor< ::grpc::ByteBuffer>* UpdateActivityStream(
-      ::grpc::CallbackServerContext* /*context*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+    virtual ::grpc::ServerWriteReactor< ::grpc::ByteBuffer>* FindOneActivityStream(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithRawCallbackMethod_CreateActivityBidiStream : public BaseClass {
@@ -1239,6 +1455,52 @@ class Activity final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* CreateActivityBidiStream(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_UpdateActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_UpdateActivityBidiStream() {
+      ::grpc::Service::MarkMethodRawCallback(9,
+          new ::grpc::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->UpdateActivityBidiStream(context); }));
+    }
+    ~WithRawCallbackMethod_UpdateActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status UpdateActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::UpdateRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* UpdateActivityBidiStream(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_RemoveActivityBidiStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_RemoveActivityBidiStream() {
+      ::grpc::Service::MarkMethodRawCallback(10,
+          new ::grpc::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->RemoveActivityBidiStream(context); }));
+    }
+    ~WithRawCallbackMethod_RemoveActivityBidiStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RemoveActivityBidiStream(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::activity::QueryReply, ::activity::FindByIdRequest>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* RemoveActivityBidiStream(
       ::grpc::CallbackServerContext* /*context*/)
       { return nullptr; }
   };
@@ -1405,8 +1667,35 @@ class Activity final {
     // replace default version of method with split streamed
     virtual ::grpc::Status StreamedFindAllActivityStream(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::activity::EmptyRequest,::activity::ActivitiesReply>* server_split_streamer) = 0;
   };
-  typedef WithSplitStreamingMethod_FindAllActivityStream<Service > SplitStreamedService;
-  typedef WithStreamedUnaryMethod_FindAllActivity<WithStreamedUnaryMethod_FindOneActivity<WithStreamedUnaryMethod_CreateActivity<WithStreamedUnaryMethod_UpdateActivity<WithStreamedUnaryMethod_RemoveActivity<WithSplitStreamingMethod_FindAllActivityStream<Service > > > > > > StreamedService;
+  template <class BaseClass>
+  class WithSplitStreamingMethod_FindOneActivityStream : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithSplitStreamingMethod_FindOneActivityStream() {
+      ::grpc::Service::MarkMethodStreamed(7,
+        new ::grpc::internal::SplitServerStreamingHandler<
+          ::activity::FindByIdRequest, ::activity::ActivityReply>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerSplitStreamer<
+                     ::activity::FindByIdRequest, ::activity::ActivityReply>* streamer) {
+                       return this->StreamedFindOneActivityStream(context,
+                         streamer);
+                  }));
+    }
+    ~WithSplitStreamingMethod_FindOneActivityStream() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status FindOneActivityStream(::grpc::ServerContext* /*context*/, const ::activity::FindByIdRequest* /*request*/, ::grpc::ServerWriter< ::activity::ActivityReply>* /*writer*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with split streamed
+    virtual ::grpc::Status StreamedFindOneActivityStream(::grpc::ServerContext* context, ::grpc::ServerSplitStreamer< ::activity::FindByIdRequest,::activity::ActivityReply>* server_split_streamer) = 0;
+  };
+  typedef WithSplitStreamingMethod_FindAllActivityStream<WithSplitStreamingMethod_FindOneActivityStream<Service > > SplitStreamedService;
+  typedef WithStreamedUnaryMethod_FindAllActivity<WithStreamedUnaryMethod_FindOneActivity<WithStreamedUnaryMethod_CreateActivity<WithStreamedUnaryMethod_UpdateActivity<WithStreamedUnaryMethod_RemoveActivity<WithSplitStreamingMethod_FindAllActivityStream<WithSplitStreamingMethod_FindOneActivityStream<Service > > > > > > > StreamedService;
 };
 
 }  // namespace activity

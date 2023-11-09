@@ -15,10 +15,11 @@ namespace microservice
         Status CreateActivity(ServerContext* context, const activity::CreateRequest* request, activity::QueryReply* response) override;
         Status UpdateActivity(ServerContext* context, const activity::UpdateRequest* request, activity::QueryReply* response) override;
         Status RemoveActivity(ServerContext* context, const activity::FindByIdRequest* request, activity::QueryReply* response) override;
-        Status QueryActivity(ServerContext* context, ServerReaderWriter< activity::ActivityReply, activity::PaginationRequest>* stream) override;
         Status FindAllActivityStream(ServerContext* context, const activity::EmptyRequest* request, ServerWriter< activity::ActivitiesReply>* writer) override;
-        Status UpdateActivityStream(ServerContext* context, ServerReader< activity::UpdateRequest>* reader, activity::QueryReply* response) override;
+        Status FindOneActivityStream(ServerContext* context, const activity::FindByIdRequest* request, ServerWriter< activity::ActivityReply>* writer) override;
+        Status UpdateActivityBidiStream(ServerContext* context, ServerReaderWriter<activity::QueryReply, activity::UpdateRequest> *stream) override;
         Status CreateActivityBidiStream(ServerContext* context, ServerReaderWriter< activity::QueryReply, activity::CreateRequest>* stream) override;
+        Status RemoveActivityBidiStream(ServerContext* context, ServerReaderWriter< activity::QueryReply, activity::FindByIdRequest>* stream);
     private:
         activity::ActivityReply m_reply;
         activity::ActivitiesReply m_replies;
