@@ -12,7 +12,7 @@ namespace microservice
 		if (products.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
 
-		std::ranges::for_each(products, [=](Products product)
+		std::ranges::for_each(products.begin(), products.end(), [this, reply](Products product)
 		{
 			m_reply.set_id(product.id);
             m_reply.set_price(product.price);
@@ -115,7 +115,7 @@ namespace microservice
 		if (products.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
 
-		std::ranges::for_each(products, [this](Products product)
+		std::ranges::for_each(products.begin(), products.end(), [this](Products product)
 		{
 			m_reply.set_id(product.id);
             m_reply.set_price(product.price);
@@ -135,7 +135,7 @@ namespace microservice
 
 				products = storage.get_all<Products>();
 				m_replies.clear_products();
-				std::ranges::for_each(products, [this](Products product)
+				std::ranges::for_each(products.begin(), products.end(), [this](Products product)
 				{
 					m_reply.set_id(product.id);
 					m_reply.set_price(product.price);

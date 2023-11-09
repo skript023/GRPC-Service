@@ -12,7 +12,7 @@ namespace microservice
 		if (activities.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
 
-		std::ranges::for_each(activities, [=](Activities activity)
+		std::ranges::for_each(activities.begin(), activities.end(), [this, response](Activities activity)
         {
             m_reply.set_id(activity.id);
             m_reply.set_name(activity.name);
@@ -125,7 +125,7 @@ namespace microservice
 		if (activities.empty())
 			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
 
-		std::ranges::for_each(activities, [this](Activities activity)
+		std::ranges::for_each(activities.begin(), activities.end(), [this](Activities activity)
 		{
 			m_reply.set_id(activity.id);
             m_reply.set_name(activity.name);
@@ -145,7 +145,7 @@ namespace microservice
 
 				activities = storage.get_all<Activities>();
 				m_replies.clear_activities();
-				std::ranges::for_each(activities, [this](Activities activity)
+				std::ranges::for_each(activities.begin(), activities.end(), [this](Activities activity)
 				{
 					m_reply.set_id(activity.id);
                     m_reply.set_name(activity.name);
