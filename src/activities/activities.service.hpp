@@ -21,5 +21,11 @@ namespace microservice
         Status CreateActivityBidiStream(ServerContext* context, ServerReaderWriter< activity::QueryReply, activity::CreateRequest>* stream) override;
     private:
         activity::ActivityReply m_reply;
+        activity::ActivitiesReply m_replies;
+    private:
+        std::mutex m_mutex;
+        std::condition_variable m_condition;
+        bool m_stream;
+        bool m_on_change;
     };
 }

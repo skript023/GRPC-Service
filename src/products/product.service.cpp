@@ -119,9 +119,7 @@ namespace microservice
 			m_replies.mutable_products()->Add(std::move(m_reply));
 		});
 
-		m_stream = reply->Write(m_replies);
-
-		while (m_stream)
+		while (reply->Write(m_replies))
 		{
 			
 			{
@@ -141,7 +139,6 @@ namespace microservice
 					m_replies.mutable_products()->Add(std::move(m_reply));
 				});
 				
-				m_stream = reply->Write(m_replies);
 				m_on_change = false;
 
 				lock.unlock();
