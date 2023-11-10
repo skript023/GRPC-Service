@@ -26,13 +26,10 @@ namespace microservice
 
         Status CreateProductBidiStream(ServerContext* context, ServerReaderWriter<product::QueryReply, product::CreateRequest>* stream) override;
     private:
-        bool on_changed(product_table_t previousState, product_table_t currentState);
-    private:
-        bool m_on_change = false;
-        std::string m_string;
-        std::atomic<bool> m_stream;
         product::ProductReply m_reply;
         product::ProductsReply m_replies;
+    private:
+        bool m_on_change = false;
         std::mutex m_mutex;
         std::condition_variable m_condition;
     };

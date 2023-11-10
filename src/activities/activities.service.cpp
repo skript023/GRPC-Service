@@ -144,6 +144,7 @@ namespace microservice
 				m_condition.wait(lock, [this] { return m_on_change; });
 
 				activities = storage.get_all<Activities>();
+
 				m_replies.clear_activities();
 				std::ranges::for_each(activities.begin(), activities.end(), [this](Activities activity)
 				{
@@ -215,24 +216,27 @@ namespace microservice
 
 				m_condition.wait(lock, [request] { return &request; });
 				
-				auto activity = storage.get_pointer<Activities>(request.id());
+				if (auto activity = storage.get_pointer<Activities>(request.id()))
+				{
+					activity->name = request.name();
+					activity->start_date = request.start_date();
+					activity->end_date = request.end_date();
+					activity->status = request.status();
 
-                if (!activity)
-                {
-                    return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to update data, not found");
-                }
+					storage.update(*activity);
 
-				activity->name = request.name();
-				activity->start_date = request.start_date();
-				activity->end_date = request.end_date();
-				activity->status = request.status();
+					reply.set_message(fmt::format("{} has successfully updated", request.name()));
+					reply.set_success(true);
 
-				storage.update(*activity);
+					stream->Write(reply);
+				}
+				else
+				{
+					reply.set_message(fmt::format("unable to update {} to empty data", request.name()));
+					reply.set_success(false);
 
-				reply.set_message(fmt::format("{} has successfully added", request.name()));
-				reply.set_success(true);
-
-				stream->Write(reply);
+					stream->Write(reply);
+				}
 
 				m_on_change = true;
 

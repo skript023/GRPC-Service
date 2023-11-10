@@ -10,7 +10,7 @@ namespace microservice
 	{
 		auto products = g_database->storage().get_all<Products>();
 		if (products.empty())
-			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
+			return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");;
 
 		std::ranges::for_each(products.begin(), products.end(), [this, reply](Products product)
 		{
@@ -28,7 +28,7 @@ namespace microservice
 	{
 		auto product = g_database->storage().get<Products>(request->id());
 		if (product.name.empty())
-			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");
+			return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Data not found");
 
 		reply->set_id(product.id);
 		reply->set_price(product.price);
@@ -39,7 +39,7 @@ namespace microservice
 	}
 	Status ProductService::CreateProduct(ServerContext* context, const CreateRequest* request, QueryReply* reply)
 	{
-		if (request->name().empty())
+		if (!request)
 		{
 			reply->set_message("Unable to create empty data");
 
@@ -64,13 +64,13 @@ namespace microservice
 	Status ProductService::UpdateProduct(ServerContext* context, const UpdateRequest* request, QueryReply* reply)
 	{
 		auto storage = g_database->storage(); 
-		auto product = g_database->storage().get_pointer<Products>(request->id());
+		auto product = storage.get_pointer<Products>(request->id());
 
 		if (!product)
 		{
-			reply->set_message("Unable to create empty data");
+			reply->set_message("Unable to update empty data");
 
-			return Status::CANCELLED;
+			return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to update empty data");
 		}
 
 		product->price = request->price();
@@ -113,7 +113,7 @@ namespace microservice
 		
 		
 		if (products.empty())
-			return Status(static_cast<grpc::StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
+			return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
 
 		std::ranges::for_each(products.begin(), products.end(), [this](Products product)
 		{
@@ -164,19 +164,30 @@ namespace microservice
 
 				m_condition.wait(lock, [request] { return &request; });
 				
-				auto product = storage.get<Products>(request.id());
-				product.price = request.price();
-				product.name = request.name();
-				product.description = request.description();
+				if (auto product = storage.get_pointer<Products>(request.id()))
+				{
+					product->price = request.price();
+					product->name = request.name();
+					product->description = request.description();
 
-				storage.update(product);
-				m_on_change = true;
+					storage.update(*product);
+
+					m_on_change = true;
+				}
+				else
+				{
+					return Status(static_cast<StatusCode>(GRPC_STATUS_NOT_FOUND), "Unable to stream due to data not found");
+				}
 
 				lock.unlock();
 			}
 
 			m_condition.notify_one();
 		}
+
+		response->set_message(fmt::format("{} has updated", request.name()));
+		response->set_success(true);
+
 		return Status::OK;
 	}
 	Status ProductService::CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream)
@@ -219,28 +230,5 @@ namespace microservice
 		}
 
 		return Status::OK;
-	}
-	bool ProductService::on_changed(product_table_t previousState, product_table_t currentState)
-	{
-		if (currentState.size() > previousState.size())
-		{
-			previousState = g_database->storage().get_all<Products>();
-			return true;
-		}
-
-		if (previousState.size() > currentState.size())
-		{
-			return true;
-		}
-
-		for (size_t i = 0; i < previousState.size() || i < currentState.size(); i++)
-		{
-			if (previousState[i].name != currentState[i].name)
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 }

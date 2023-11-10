@@ -18,8 +18,8 @@ namespace microservice
         Status FindAllActivityStream(ServerContext* context, const activity::EmptyRequest* request, ServerWriter< activity::ActivitiesReply>* writer) override;
         Status FindOneActivityStream(ServerContext* context, const activity::FindByIdRequest* request, ServerWriter< activity::ActivityReply>* writer) override;
         Status UpdateActivityBidiStream(ServerContext* context, ServerReaderWriter<activity::QueryReply, activity::UpdateRequest> *stream) override;
-        Status CreateActivityBidiStream(ServerContext* context, ServerReaderWriter< activity::QueryReply, activity::CreateRequest>* stream) override;
-        Status RemoveActivityBidiStream(ServerContext* context, ServerReaderWriter< activity::QueryReply, activity::FindByIdRequest>* stream);
+        Status CreateActivityBidiStream(ServerContext* context, ServerReaderWriter<activity::QueryReply, activity::CreateRequest>* stream) override;
+        Status RemoveActivityBidiStream(ServerContext* context, ServerReaderWriter<activity::QueryReply, activity::FindByIdRequest>* stream);
     private:
         activity::ActivityReply m_reply;
         activity::ActivitiesReply m_replies;
@@ -27,6 +27,6 @@ namespace microservice
         std::mutex m_mutex;
         std::condition_variable m_condition;
         bool m_stream;
-        bool m_on_change;
+        bool m_on_change = false;
     };
 }
