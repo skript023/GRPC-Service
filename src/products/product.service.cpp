@@ -193,6 +193,7 @@ namespace microservice
 	Status ProductService::CreateProductBidiStream(ServerContext* context, ServerReaderWriter<QueryReply, CreateRequest>* stream)
 	{
 		auto storage = g_database->storage();
+
 		CreateRequest request;
 		QueryReply reply;
 		Products product;
