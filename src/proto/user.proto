@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package user;
+
+message UserReply {
+    int32 id = 1;
+    string name = 2;
+}
+
+message QueryReply {
+    string message = 1;
+    bool success = 2;
+}
+
+message UsersReply {
+    repeated UserReply Users = 1;
+}
+
+message CreateRequest {
+    string name = 1;
+}
+
+message UpdateRequest {
+    int32 id = 1;
+    string name = 2;
+}
+
+message FindByIdRequest {
+    int32 id = 1;
+}
+
+message PaginationRequest {
+    int32 page = 1;
+    int32 skip = 2;
+}
+
+message EmptyRequest {}
+
+service User {
+    rpc FindAllUser (EmptyRequest) returns (UsersReply) {}
+    rpc FindAllUserServerStream (EmptyRequest) returns (stream UsersReply) {}
+    rpc FindOneUser (FindByIdRequest) returns (UserReply) {}
+    rpc FindOneUserBidistream (stream FindByIdRequest) returns (stream UserReply) {}
+    rpc CreateUser (CreateRequest) returns (QueryReply) {}
+    rpc UpdateUser (UpdateRequest) returns (QueryReply) {}
+    rpc RemoveUser (FindByIdRequest) returns (QueryReply) {}
+    rpc QueryUser (stream PaginationRequest) returns (stream UserReply) {}
+}

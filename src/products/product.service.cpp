@@ -2,6 +2,19 @@
 
 namespace microservice
 {
+    using product::Product;
+
+    using product::ProductReply;
+    using product::QueryReply;
+    using product::ProductsReply;
+
+    using product::FindByIdRequest;
+    using product::EmptyRequest;
+    using product::UpdateRequest;
+    using product::CreateRequest;
+    using product::ProductsReply;
+    using grpc::ServerAsyncWriter;
+
     product_service::product_service(Product::AsyncService* service, ServerCompletionQueue* cq) :
         m_service(service), m_completed_queue(cq), m_responder(&m_context), m_status(CREATE)
     {
@@ -29,7 +42,7 @@ namespace microservice
     }
     product_service* product_service::find_all_begin()
     {
-        m_service->RequestFindAllProduct(&m_context, &m_request, &m_responder, m_completed_queue, m_completed_queue, this);
+        m_service->RequestFindAllProductServerStream(&m_context, &m_request, &m_responder, m_completed_queue, m_completed_queue, this);
 
         return this;
     }
